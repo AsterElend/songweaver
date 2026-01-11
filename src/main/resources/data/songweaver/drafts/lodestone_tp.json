@@ -1,0 +1,17 @@
+{
+  "pattern": ["E", "F", "B"],
+  "draft": "songweaver:lodestone_teleport",
+  "requirements": [
+    {
+      "type": "item",
+      "item": "minecraft:ender_pearl",
+      "count": 1
+    }
+  ],
+  "drawbacks": [
+    {
+      "type": "damage",
+      "percent": 0.10
+    }
+  ]
+}

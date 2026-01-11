@@ -1,0 +1,17 @@
+{
+  "pattern": ["E", "E", "E", "G"],
+  "draft": "songweaver:effect",
+  "requirements": [{
+    "type": "advancement",
+    "id": "minecraft:story/obtain_armor"
+  },
+    {
+      "type": "advancement",
+      "id": "minecraft:nether/brew_potion"
+    }],
+  "data": {
+    "effect": "minecraft:resistance",
+    "duration": 200,
+    "amplifier": 1
+  }
+}

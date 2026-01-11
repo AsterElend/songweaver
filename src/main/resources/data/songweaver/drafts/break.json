@@ -1,0 +1,8 @@
+{
+  "pattern": ["E","C","E", "D"],
+  "draft": "songweaver:break_block",
+  "requirements": [{
+    "type": "distaff_tier",
+    "tier": "IRON"
+  }]
+}

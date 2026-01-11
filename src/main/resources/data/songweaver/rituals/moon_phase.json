@@ -1,0 +1,27 @@
+{
+  "pattern": ["C", "D", "E", "F", "G"],
+  "ritual": "songweaver:advance_moon",
+
+  "duration": 1,
+  "interval": 1,
+
+  "ingredients": [
+    {
+      "item": "minecraft:iron_block",
+      "count": 1
+    },
+    {
+      "item": "minecraft:nether_star",
+      "count": 1
+    }
+  ],
+
+  "drawbacks": [
+    {
+      "type": "effect",
+      "effect": "songweaver:song_silence",
+      "ticks": 200,
+      "amplifier": 1
+    }
+  ]
+}

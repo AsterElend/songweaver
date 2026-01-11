@@ -1,0 +1,13 @@
+{
+  "pattern": ["C", "D", "G"],
+  "draft": "songweaver:silk_break",
+  "requirements": [
+    {
+      "type": "advancement",
+      "id": "minecraft:story/enchant_item"
+    },
+    {
+      "type": "distaff_tier",
+      "tier": "IRON"
+    }]
+}

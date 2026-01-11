@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "aster.songweaver.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"DistaffIntercept"
+
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

@@ -1,0 +1,13 @@
+{
+  "pattern": ["E", "G", "E"],
+  "draft": "songweaver:effect",
+  "requirements": [{
+    "type": "advancement",
+    "id": "minecraft:nether/brew_potion"
+  }],
+  "data": {
+    "effect": "minecraft:regeneration",
+    "duration": 200,
+    "amplifier": 1
+  }
+}

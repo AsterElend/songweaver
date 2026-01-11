@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "songweaver:distaff_basic",
+    "songweaver:distaff_iron",
+    "songweaver:distaff_diamond",
+    "songweaver:distaff_netherite",
+    "songweaver:distaff_astral"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "pattern": ["C", "E", "G"],
+  "draft": "songweaver:fortune_break",
+
+  "requirements": [
+    {
+      "type": "advancement",
+      "id": "minecraft:story/enchant_item"
+    },
+    {
+      "type": "distaff_tier",
+      "tier": "DIAMOND"
+    }
+  ]
+}
