@@ -4,7 +4,6 @@ import aster.songweaver.system.cast.SongServerCasting;
 import aster.songweaver.system.definition.Note;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,7 +11,6 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerItemCooldownManager;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -44,7 +42,7 @@ public class SpindleItem extends Item {
             return TypedActionResult.pass(stack);
         }
 
-        if (!SpindleUtil.hasNotes(stack)) {
+        if (SpindleUtil.notHasNotes(stack)) {
             return TypedActionResult.pass(stack);
         }
 
@@ -69,9 +67,9 @@ public class SpindleItem extends Item {
 
         private static final String NOTES_KEY = "Notes";
 
-        public static boolean hasNotes(ItemStack stack) {
-            return stack.hasNbt()
-                    && stack.getNbt().contains(NOTES_KEY);
+        public static boolean notHasNotes(ItemStack stack) {
+            return !stack.hasNbt()
+                    || !stack.getNbt().contains(NOTES_KEY);
         }
 
         public static void storeNotes(ItemStack stack,
@@ -86,7 +84,7 @@ public class SpindleItem extends Item {
         }
 
         public static List<Note> readNotes(ItemStack stack) {
-            if (!hasNotes(stack)) return List.of();
+            if (notHasNotes(stack)) return List.of();
 
             NbtList list = stack.getNbt().getList(
                     NOTES_KEY,

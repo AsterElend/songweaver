@@ -18,7 +18,7 @@ public class DistaffIntercept {
 
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player == null) return;
-        if (!DistaffHelper.isHoldingDistaff()) return;
+        if (DistaffHelper.isNotHoldingDistaff()) return;
 
         KeyBinding self = (KeyBinding)(Object)this;
 

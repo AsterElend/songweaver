@@ -15,7 +15,7 @@ public class SongHud {
     }
 
     private static void render(DrawContext ctx, float tickDelta) {
-        if (!DistaffHelper.isHoldingDistaff()) return;
+        if (DistaffHelper.isNotHoldingDistaff()) return;
 
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player == null) return;

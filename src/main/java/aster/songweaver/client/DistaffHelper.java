@@ -10,12 +10,12 @@ import net.minecraft.sound.SoundEvents;
 
 public class DistaffHelper {
 
-    public static boolean isHoldingDistaff() {
+    public static boolean isNotHoldingDistaff() {
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null) return false;
+        if (client.player == null) return true;
 
         ItemStack stack = client.player.getMainHandStack();
-        return stack.isIn(LoomTags.DISTAFFS);
+        return !stack.isIn(LoomTags.DISTAFFS);
     }
 
     public static void playNote(MinecraftClient client, Note note) {

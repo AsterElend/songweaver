@@ -5,8 +5,6 @@ import aster.songweaver.system.definition.Ritual;
 import com.google.gson.JsonObject;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.dimension.DimensionTypes;
 import org.jetbrains.annotations.Nullable;
 
 import static aster.songweaver.system.cast.SongServerCasting.sendFailure;

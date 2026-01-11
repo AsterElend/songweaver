@@ -8,7 +8,7 @@ public class BufferReset {
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
             if (minecraftClient.player == null) return;
 
-            if (!DistaffHelper.isHoldingDistaff()){
+            if (DistaffHelper.isNotHoldingDistaff()){
                 InputBuffer.clear();
             }
         });

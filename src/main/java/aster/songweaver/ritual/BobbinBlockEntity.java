@@ -23,9 +23,6 @@ public class BobbinBlockEntity extends BlockEntity {
         return stack;
     }
 
-    public boolean isEmpty() {
-        return stack.isEmpty();
-    }
 
     public int removeItems(int amount){
         if (stack.isEmpty()) return 0;

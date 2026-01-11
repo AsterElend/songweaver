@@ -30,7 +30,4 @@ public class DimensionRequirement implements Requirement {
         return world.getRegistryKey() == dimension ? null : CastFailure.WRONG_DIMENSION;
     }
 
-    public static DimensionRequirement fromJson(JsonObject obj) {
-        return new DimensionRequirement(obj.get("id").getAsString());
-    }
 }

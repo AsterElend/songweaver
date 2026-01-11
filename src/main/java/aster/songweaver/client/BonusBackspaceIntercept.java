@@ -9,7 +9,7 @@ public class BonusBackspaceIntercept {
     public static void init() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.player == null) return;
-            if (!DistaffHelper.isHoldingDistaff()) {
+            if (DistaffHelper.isNotHoldingDistaff()) {
                 wasDown = false;
                 return;
             }

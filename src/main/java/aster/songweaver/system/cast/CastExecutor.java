@@ -54,7 +54,7 @@ public final class CastExecutor {
         ItemStack offhand = caster.getOffHandStack();
 
         if (offhand.getItem() instanceof SpindleItem
-                && !SpindleItem.SpindleUtil.hasNotes(offhand)) {
+                && SpindleItem.SpindleUtil.notHasNotes(offhand)) {
 
             SpindleItem.SpindleUtil.storeNotes(offhand, spell.pattern().notes());
 

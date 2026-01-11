@@ -2,7 +2,8 @@ package aster.songweaver.system;
 
 import aster.songweaver.Songweaver;
 import aster.songweaver.system.definition.*;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
@@ -15,8 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static aster.songweaver.system.JsonParserUtil.*;
-import static com.ibm.icu.impl.Utility.parsePattern;
+import static aster.songweaver.system.JsonParserUtil.parseDrawbacks;
+import static aster.songweaver.system.JsonParserUtil.parseRequirements;
 
 public class DraftReloadListener implements SimpleSynchronousResourceReloadListener {
 
