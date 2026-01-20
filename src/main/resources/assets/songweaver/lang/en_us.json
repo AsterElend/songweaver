@@ -1,0 +1,8 @@
+{
+"songweaver.clientconfig.title": "Songweaver Client Config Settings",
+"songweaver.clientconfig.rendering": "Songweaver Rendering",
+  "songweaver.clientconfig.rendering.uncapRenderer": "Uncap Bobbin Item Renderer",
+  "songweaver.clientconfig.rendering.uncapRenderer.tooltip": "WARNING: Very resource intensive. make sure you know what you are doing.",
+
+  "death.attack.fray": "%1$s unraveled"
+}

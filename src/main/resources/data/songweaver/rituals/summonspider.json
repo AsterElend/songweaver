@@ -1,0 +1,20 @@
+{
+  "pattern": ["C", "C", "C", "C"],
+  "ritual": "songweaver:summoning",
+
+  "duration": 1,
+  "interval": 1,
+
+  "ingredients": [
+    {
+      "item": "minecraft:string",
+      "count": 1
+    },
+    {
+      "item": "minecraft:stick",
+      "count": 1
+    }
+  ],
+  "data": {"entity": "minecraft:spider"}
+
+}

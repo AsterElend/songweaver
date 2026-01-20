@@ -1,6 +1,6 @@
 package aster.songweaver.client;
 
-import aster.songweaver.system.definition.Note;
+import aster.songweaver.system.spell.definition.Note;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;

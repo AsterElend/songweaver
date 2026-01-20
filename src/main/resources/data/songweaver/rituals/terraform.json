@@ -1,0 +1,15 @@
+{
+  "pattern": [
+    "E",
+    "F",
+    "F",
+    "C"
+  ],
+
+  "ritual": "songweaver:terraform",
+  "ingredients": [
+    {"item":  "minecraft:iron_shovel",
+    "count":  4}
+  ]
+
+}

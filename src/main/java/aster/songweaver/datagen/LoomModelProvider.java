@@ -23,6 +23,7 @@ public class LoomModelProvider extends FabricModelProvider {
         itemModelGenerator.register(LoomItems.DISTAFF_IRON, Models.HANDHELD_ROD);
         itemModelGenerator.register(LoomItems.DISTAFF_DIAMOND, Models.HANDHELD_ROD);
         itemModelGenerator.register(LoomItems.DISTAFF_NETHERITE, Models.HANDHELD_ROD);
+        itemModelGenerator.register(LoomItems.PATTERN_BOOK, Models.GENERATED);
 
     }
 }

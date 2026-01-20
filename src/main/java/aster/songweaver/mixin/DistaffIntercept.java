@@ -1,6 +1,6 @@
 package aster.songweaver.mixin;
 
-import aster.songweaver.system.definition.Note;
+import aster.songweaver.system.spell.definition.Note;
 import aster.songweaver.client.DistaffHelper;
 import aster.songweaver.client.InputBuffer;
 import net.minecraft.client.MinecraftClient;

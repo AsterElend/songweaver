@@ -1,18 +1,16 @@
 package aster.songweaver.system;
 
-import aster.songweaver.system.definition.*;
-import aster.songweaver.system.drawback.ConsumeItemDrawback;
-import aster.songweaver.system.drawback.DamageDrawback;
-import aster.songweaver.system.drawback.EffectDrawback;
-import aster.songweaver.system.requirement.AdvancementRequirement;
-import aster.songweaver.system.requirement.DimensionRequirement;
-import aster.songweaver.system.requirement.ItemRequirement;
-import aster.songweaver.system.requirement.TierRequirement;
+import aster.songweaver.system.spell.definition.*;
+import aster.songweaver.system.spell.drawback.ConsumeItemDrawback;
+import aster.songweaver.system.spell.drawback.DamageDrawback;
+import aster.songweaver.system.spell.drawback.EffectDrawback;
+import aster.songweaver.system.spell.requirement.*;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
+import vazkii.patchouli.api.PatchouliAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +61,11 @@ public class JsonParserUtil {
                         new DimensionRequirement(
                                 (obj.get("dimension").getAsString())
 
+                        )
+                );
+                case "structure" -> list.add(
+                        new StructureRequirement(
+                                PatchouliAPI.get().getMultiblock(new Identifier(obj.get("structure").getAsString()))
                         )
                 );
 

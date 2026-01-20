@@ -1,10 +1,11 @@
 package aster.songweaver.system.cast;
 
-import aster.songweaver.ritual.RitualControllerBlockEntity;
+import aster.songweaver.registry.LoomMiscRegistry;
+import aster.songweaver.system.ritual.RitualControllerBlockEntity;
 import aster.songweaver.system.RitualReloadListener;
-import aster.songweaver.system.definition.CastFailure;
-import aster.songweaver.system.definition.Note;
-import aster.songweaver.system.definition.RitualDefinition;
+import aster.songweaver.system.spell.definition.CastFailure;
+import aster.songweaver.system.spell.definition.Note;
+import aster.songweaver.system.spell.definition.RitualDefinition;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
@@ -28,6 +29,14 @@ public class SongServerCasting {
                 (server, player, handler, buf, responseSender) -> {
 
                     List<Note> notes = readNotes(buf);
+
+                    if (player.hasStatusEffect(LoomMiscRegistry.SONG_SILENCE)) {
+                        SongServerCasting.sendFailure(
+                                player,
+                                CastFailure.SILENCED
+                        );
+                        return;
+                    }
 
                     server.execute(() -> {
 

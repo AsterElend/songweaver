@@ -1,7 +1,7 @@
 package aster.songweaver.system;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.system.definition.*;
+import aster.songweaver.system.spell.definition.*;
 import com.google.gson.*;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.item.Item;
@@ -67,6 +67,13 @@ public class RitualReloadListener implements SimpleSynchronousResourceReloadList
                         pattern, ritualId, ingredients, requirements, drawbacks, data, duration, tickInterval
                 );
 
+                if (RITUALS.containsKey(pattern)) {
+                    Songweaver.LOGGER.warn(
+                            "Duplicate ritual pattern detected for {} (overwriting)",
+                            ritualId
+                    );
+                }
+
                 RITUALS.put(pattern, ritual);
 
 
@@ -78,12 +85,13 @@ public class RitualReloadListener implements SimpleSynchronousResourceReloadList
                 );
             }
 
-            Songweaver.LOGGER.info(
-                    "Loaded {} Songweaver rituals",
-                    RITUALS.size()
-            );
+
         }
 
+        Songweaver.LOGGER.info(
+                "Loaded {} Songweaver rituals",
+                RITUALS.size()
+        );
     }
 
     public static RitualDefinition matchForRitual(List<Note> notes) {

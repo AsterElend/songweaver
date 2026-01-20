@@ -1,6 +1,6 @@
 package aster.songweaver.client;
 
-import aster.songweaver.system.definition.Note;
+import aster.songweaver.system.spell.definition.Note;
 
 import java.util.ArrayList;
 import java.util.List;

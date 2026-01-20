@@ -1,8 +1,9 @@
 package aster.songweaver.registry;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.items.Distaff;
-import aster.songweaver.items.SpindleItem;
+import aster.songweaver.registry.items.Distaff;
+import aster.songweaver.registry.items.PatternBookItem;
+import aster.songweaver.registry.items.SpindleItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -16,6 +17,7 @@ public class LoomItems {
     public static final Item DISTAFF_NETHERITE = registerItem("distaff_netherite", new Distaff(new FabricItemSettings().maxCount(1)));
     public static final Item DISTAFF_ASTRAL = registerItem("distaff_astral", new Distaff(new FabricItemSettings().maxCount(1)));
     public static final Item SPINDLE = registerItem("spindle", new SpindleItem(new FabricItemSettings().maxCount(1)));
+    public static final Item PATTERN_BOOK = registerItem("book_of_patterns", new PatternBookItem(new FabricItemSettings().maxCount(1)));
 
 
 

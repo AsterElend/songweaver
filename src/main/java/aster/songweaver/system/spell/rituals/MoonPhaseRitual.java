@@ -1,7 +1,8 @@
 package aster.songweaver.system.spell.rituals;
 
-import aster.songweaver.system.definition.CastFailure;
-import aster.songweaver.system.definition.Ritual;
+import aster.songweaver.system.ritual.RitualControllerBlockEntity;
+import aster.songweaver.system.spell.definition.CastFailure;
+import aster.songweaver.system.spell.definition.Ritual;
 import com.google.gson.JsonObject;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -11,7 +12,7 @@ import static aster.songweaver.system.cast.SongServerCasting.sendFailure;
 
 public class MoonPhaseRitual implements Ritual {
     @Override
-    public void ritualCast(ServerWorld world, ServerPlayerEntity caster, @Nullable JsonObject data) {
+    public void ritualCast(ServerWorld world, ServerPlayerEntity caster, RitualControllerBlockEntity loom, @Nullable JsonObject data) {
 
         if (!world.getDimension().hasSkyLight() || world.getDimension().ultrawarm()) {
             sendFailure(caster, CastFailure.WRONG_DIMENSION);

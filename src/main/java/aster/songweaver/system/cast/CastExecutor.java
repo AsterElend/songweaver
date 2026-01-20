@@ -2,11 +2,11 @@ package aster.songweaver.system.cast;
 
 
 import aster.songweaver.system.DraftReloadListener;
-import aster.songweaver.system.definition.*;
-import aster.songweaver.items.SpindleItem;
+import aster.songweaver.system.ParticleHelper;
+import aster.songweaver.system.spell.definition.*;
+import aster.songweaver.registry.items.SpindleItem;
 import aster.songweaver.registry.DraftRegistry;
-import aster.songweaver.registry.LoomMiscRegistry;
-import aster.songweaver.system.definition.Draft;
+import aster.songweaver.system.spell.definition.Draft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -19,13 +19,20 @@ public final class CastExecutor {
     private CastExecutor() {}
 
     public static void cast(ServerPlayerEntity player, List<Note> notes){
-        if (player.hasStatusEffect(LoomMiscRegistry.SONG_SILENCE)) {
-            SongServerCasting.sendFailure(
-                    player,
-                    CastFailure.SILENCED
+        ItemStack offhand = player.getOffHandStack();
+
+        if (offhand.getItem() instanceof SpindleItem) {
+
+            SpindleItem.SpindleUtil.storeNotes(offhand, notes);
+
+            player.sendMessage(
+                    Text.literal("The spindle quietly takes up the song."),
+                    true
             );
-            return;
+
+            return; //  DO NOT CAST
         }
+
 
         DraftDefinition spell =
                 DraftReloadListener.matchForDraft(notes);
@@ -51,25 +58,12 @@ public final class CastExecutor {
 
 
         // Spindle interception
-        ItemStack offhand = caster.getOffHandStack();
 
-        if (offhand.getItem() instanceof SpindleItem
-                && SpindleItem.SpindleUtil.notHasNotes(offhand)) {
-
-            SpindleItem.SpindleUtil.storeNotes(offhand, spell.pattern().notes());
-
-            caster.sendMessage(
-                    Text.literal("The spindle quietly takes up the song."),
-                    true
-            );
-
-            return; //  DO NOT CAST
-        }
 
 
         // Requirements phase
         for (Requirement req : spell.requirements()) {
-            CastFailure failure = req.check(caster);
+            CastFailure failure = req.check(caster, null);
             if (failure != null) {
                 SongServerCasting.sendFailure(
                         caster,
@@ -81,13 +75,6 @@ public final class CastExecutor {
 
         // Draft resolution
         Draft draft = DraftRegistry.get(spell.draftId());
-        if (draft == null) {
-            SongServerCasting.sendFailure(
-                    caster,
-                    CastFailure.UNKNOWN_SONG
-            );
-            return;
-        }
 
         // Draft execution
         draft.cast(world, caster, spell.data());
@@ -99,6 +86,15 @@ public final class CastExecutor {
                 caster.getPos(),
                 spell.pattern().notes()
         );
+
+        int length = spell.pattern().notes().size();
+
+        for (int i = 0; i < length + 1; i++){
+            ParticleHelper.spawnRandomNoteParticle(world, caster.getBlockPos());
+
+        }
+
+
 
 
         // Drawbacks

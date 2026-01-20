@@ -1,7 +1,7 @@
 package aster.songweaver.system;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.system.definition.*;
+import aster.songweaver.system.spell.definition.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
@@ -69,6 +69,14 @@ public class DraftReloadListener implements SimpleSynchronousResourceReloadListe
                         data
 
                 );
+
+                if (SPELLS.containsKey(pattern)) {
+                    Songweaver.LOGGER.warn(
+                            "Duplicate ritual pattern detected for {} (overwriting)",
+                            draft
+                    );
+                }
+
 
                 SPELLS.put(pattern, spell);
 

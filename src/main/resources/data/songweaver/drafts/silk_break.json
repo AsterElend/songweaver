@@ -1,6 +1,6 @@
 {
   "pattern": ["C", "D", "G"],
-  "draft": "songweaver:silk_break",
+  "draft": "songweaver:enchant_break",
   "requirements": [
     {
       "type": "advancement",
@@ -9,5 +9,8 @@
     {
       "type": "distaff_tier",
       "tier": "IRON"
-    }]
+    }],
+  "data":{
+    "enchantment": "minecraft:silk_touch"
+  }
 }

@@ -1,5 +1,6 @@
-// 1.20.1	2026-01-07T17:09:57.7336943	Song Weaver/Model Definitions
-298bf3347a6de57467ee6e08cd8c51f9c41ccc02 assets\songweaver\models\item\distaff_basic.json
+// 1.20.1	2026-01-15T16:17:27.7248777	Song Weaver/Model Definitions
 d7aa21a1246e22e76dff24c61a9af3ac0c0cafdf assets\songweaver\models\item\distaff_iron.json
+298bf3347a6de57467ee6e08cd8c51f9c41ccc02 assets\songweaver\models\item\distaff_basic.json
 ddbf2f8f9bb93e47ee1ae324d646a870d29c9a5b assets\songweaver\models\item\distaff_netherite.json
+ff7a3d6d25d1a6b3c2bb4f06621366bef9d19499 assets\songweaver\models\item\pattern_book.json
 152e751d2f1c7abad7fbf823b94aa17191c5e412 assets\songweaver\models\item\distaff_diamond.json

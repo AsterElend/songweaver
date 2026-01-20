@@ -1,0 +1,8 @@
+{
+  "pattern": ["C", "A", "B", "B"],
+  "draft": "songweaver:pseudo_harvest",
+  "data": {
+    "entity": "minecraft:cow",
+    "cooldown": 2000
+  }
+}

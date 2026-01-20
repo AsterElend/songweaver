@@ -1,12 +1,11 @@
 package aster.songweaver.registry;
 
-import aster.songweaver.system.definition.Draft;
-import aster.songweaver.system.spell.potion.DistillDraft;
-import aster.songweaver.system.spell.potion.EffectDraft;
-import aster.songweaver.system.spell.LodestoneTPDraft;
-import aster.songweaver.system.spell.mining.BreakBlockDraft;
-import aster.songweaver.system.spell.mining.FortuneBreakDraft;
-import aster.songweaver.system.spell.mining.SilkBreakDraft;
+import aster.songweaver.system.spell.definition.Draft;
+import aster.songweaver.system.spell.drafts.*;
+import aster.songweaver.system.spell.drafts.DistillDraft;
+import aster.songweaver.system.spell.drafts.EffectDraft;
+import aster.songweaver.system.spell.drafts.BreakBlockDraft;
+import aster.songweaver.system.spell.drafts.EnchantedBreakDraft;
 import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
@@ -19,12 +18,17 @@ public class DraftRegistry {
 
 
         register(new Identifier("songweaver", "break_block"), new BreakBlockDraft());
-        register(new Identifier("songweaver", "silk_break"), new SilkBreakDraft());
-        register(new Identifier("songweaver", "fortune_break"), new FortuneBreakDraft());
-
+        register(new Identifier("songweaver", "enchant_break"), new EnchantedBreakDraft());
         register (new Identifier("songweaver", "effect"), new EffectDraft());
         register (new Identifier("songweaver", "lodestone_teleport"), new LodestoneTPDraft());
         register (new Identifier("songweaver", "distill_effects"), new DistillDraft());
+        register (new Identifier("songweaver", "give"), new GiveItemDraft());
+        register (new Identifier("songweaver", "infusion"), new InfusionDraft());
+        register (new Identifier("songweaver", "firework"), new FireworkDraft());
+        register (new Identifier("songweaver", "pseudo_harvest"), new PseudoHarvestDraft());
+
+
+
 
 
     }

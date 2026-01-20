@@ -1,0 +1,20 @@
+{
+  "name": "Test Entry",
+  "icon": "minecraft:writable_book",
+  "category": "songweaver:test_category",
+  "pages": [
+    {
+      "type": "patchouli:multiblock",
+      "multiblock_id": "songweaver:loom_hall",
+      "name": "HALL OF THE GRAND LOOM",
+      "text": "I am still considering trying lavender."
+    },
+    {
+      "type": "patchouli:link",
+      "title": "Configuration",
+      "text": "Click here to open the configuration screen.",
+      "url": "modmenu://config/songweaver",
+      "link_text": "Open Config"
+    }
+  ]
+}

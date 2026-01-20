@@ -1,6 +1,6 @@
 package aster.songweaver.system.cast;
 
-import aster.songweaver.system.definition.Note;
+import aster.songweaver.system.spell.definition.Note;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -23,7 +23,7 @@ public class CastPlayback {
 
         for (int i = 0; i < notes.size(); i++) {
             Note note = notes.get(i);
-            int delay = i * 2; // 2 ticks between notes
+            int delay = i * 4; // 2 ticks between notes
 
             world.getServer().execute(() -> {
                 if (world.getTime() >= startTick + delay) {

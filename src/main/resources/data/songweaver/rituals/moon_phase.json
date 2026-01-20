@@ -20,8 +20,8 @@
     {
       "type": "effect",
       "effect": "songweaver:song_silence",
-      "ticks": 200,
-      "amplifier": 1
+      "ticks": 2000,
+      "amplifier": 0
     }
   ]
 }

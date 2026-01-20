@@ -1,0 +1,17 @@
+{
+  "pattern": ["A", "A", "C_HIGH", "C_HIGH"],
+  "ritual": "songweaver:effect_ritual",
+  "duration": 1,
+  "interval": 1,
+  "ingredients": [
+    {
+      "item": "minecraft:wither_rose",
+      "count": 4
+    }
+  ],
+  "data": {
+    "duration": 200,
+    "effect": "minecraft:wither",
+    "radius": 16
+  }
+}

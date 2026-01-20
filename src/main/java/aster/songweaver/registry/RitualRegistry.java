@@ -1,7 +1,10 @@
 package aster.songweaver.registry;
 
-import aster.songweaver.system.definition.Ritual;
+import aster.songweaver.system.spell.definition.Ritual;
+import aster.songweaver.system.spell.rituals.EffectRitual;
 import aster.songweaver.system.spell.rituals.MoonPhaseRitual;
+import aster.songweaver.system.spell.rituals.SummoningRitual;
+import aster.songweaver.system.spell.rituals.TerraformRitual;
 import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
@@ -12,6 +15,9 @@ public class RitualRegistry {
 
     public static void init() {
         register(new Identifier("songweaver", "advance_moon"), new MoonPhaseRitual());
+        register(new Identifier("songweaver", "summoning"), new SummoningRitual());
+        register(new Identifier("songweaver", "effect_ritual"), new EffectRitual());
+        register(new Identifier("songweaver", "terraform"), new TerraformRitual());
 
 
 

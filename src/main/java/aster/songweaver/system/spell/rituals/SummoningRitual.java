@@ -1,0 +1,65 @@
+package aster.songweaver.system.spell.rituals;
+
+import aster.songweaver.system.ParticleHelper;
+import aster.songweaver.system.ritual.RitualControllerBlockEntity;
+import aster.songweaver.system.spell.definition.Ritual;
+import com.google.gson.JsonObject;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registries;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Nullable;
+
+public class SummoningRitual implements Ritual {
+    @Override
+    public void ritualCast(ServerWorld world, ServerPlayerEntity caster, RitualControllerBlockEntity loom, @Nullable JsonObject data) {
+        if (data == null) {
+            caster.sendMessage(
+                    Text.literal("Summoning ritual requires data."),
+                    true
+            );
+            return;
+        }
+
+        BlockPos pos = loom.getPos();
+
+        double x = pos.getX() + 0.5;
+        double y = pos.getY() + 1.0; // just above the block
+        double z = pos.getZ() + 0.5;
+
+        Vec3d spawnPos = new Vec3d(x, y, z);
+
+        spawnEntityFromString(world, data.get("entity").getAsString(), spawnPos);
+        ParticleHelper.spawnParticleBurst(world, pos, ParticleTypes.SOUL, 100, 3);
+
+
+    }
+
+
+
+    public static void spawnEntityFromString(ServerWorld world, String entityId, Vec3d pos) {
+        Identifier id = new Identifier(entityId);
+        EntityType<?> type = Registries.ENTITY_TYPE.get(id);
+
+        if (type == null) {
+            System.out.println("Unknown entity type: " + entityId);
+            return;
+        }
+
+        Entity entity = type.create(world);
+        if (entity == null) {
+            System.out.println("Failed to create entity: " + entityId);
+            return;
+        }
+
+        entity.refreshPositionAndAngles(pos.x, pos.y, pos.z, 0f, 0f);
+        world.spawnEntity(entity);
+    }
+
+}
