@@ -1,8 +1,7 @@
 package aster.songweaver.client;
 
 
-import aster.songweaver.Songweaver;
-import aster.songweaver.system.ritual.BobbinBlockEntity;
+import aster.songweaver.registry.physical.ritual.BobbinBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -13,7 +12,6 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 

@@ -1,8 +1,11 @@
 {
-"songweaver.clientconfig.title": "Songweaver Client Config Settings",
-"songweaver.clientconfig.rendering": "Songweaver Rendering",
-  "songweaver.clientconfig.rendering.uncapRenderer": "Uncap Bobbin Item Renderer",
-  "songweaver.clientconfig.rendering.uncapRenderer.tooltip": "WARNING: Very resource intensive. make sure you know what you are doing.",
+
+  "itemgroup.songweaver.creative_tab": "Songweaver",
+  "item.songweaver.distaff_basic": "Distaff",
+  "item.songweaver.distaff_iron": "Reinforced Distaff",
+  "item.songweaver.distaff_diamond": "Glimmering Distaff",
+  "item.songweaver.distaff_netherite": "Solar Distaff",
+  "item.songweaver.distaff_astral": "Astral Distaff",
 
   "death.attack.fray": "%1$s unraveled"
 }

@@ -1,6 +1,11 @@
-// 1.20.1	2026-01-15T16:17:27.7248777	Song Weaver/Model Definitions
-d7aa21a1246e22e76dff24c61a9af3ac0c0cafdf assets\songweaver\models\item\distaff_iron.json
+// 1.20.1	2026-01-24T16:59:56.3584736	Song Weaver/Model Definitions
+ad62c11565e03d1495aa38e56fcef6c059409451 assets\songweaver\blockstates\starstone.json
 298bf3347a6de57467ee6e08cd8c51f9c41ccc02 assets\songweaver\models\item\distaff_basic.json
+d7aa21a1246e22e76dff24c61a9af3ac0c0cafdf assets\songweaver\models\item\distaff_iron.json
 ddbf2f8f9bb93e47ee1ae324d646a870d29c9a5b assets\songweaver\models\item\distaff_netherite.json
-ff7a3d6d25d1a6b3c2bb4f06621366bef9d19499 assets\songweaver\models\item\pattern_book.json
+0bb83495e166e68ca5f9c19eebda800d35942b37 assets\songweaver\models\item\starstone.json
+d36461a40afb9b77710bb661cc27dbf444b5a104 assets\songweaver\models\item\khipu.json
+6aeaddce6311127e5b55e120a6b1fee9f273cb70 assets\songweaver\models\item\sheet_music.json
+b182e9c7f2d4db8a81ad23e70c63f305cb81afd9 assets\songweaver\models\item\book_of_patterns.json
 152e751d2f1c7abad7fbf823b94aa17191c5e412 assets\songweaver\models\item\distaff_diamond.json
+14646b0b115a458df40185b367ffbc8486ce4733 assets\songweaver\models\block\starstone.json

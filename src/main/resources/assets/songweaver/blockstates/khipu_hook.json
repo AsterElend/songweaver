@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "songweaver:block/khipu_hook" },
+    "facing=south": { "model": "songweaver:block/khipu_hook", "y": 180 },
+    "facing=west":  { "model": "songweaver:block/khipu_hook", "y": 270 },
+    "facing=east":  { "model": "songweaver:block/khipu_hook", "y": 90 }
+  }
+}

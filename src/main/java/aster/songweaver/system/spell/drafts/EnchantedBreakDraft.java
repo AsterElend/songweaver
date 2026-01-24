@@ -1,8 +1,9 @@
 package aster.songweaver.system.spell.drafts;
 
 import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.CastFailure;
+import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.spell.definition.Draft;
+import aster.songweaver.util.SpellUtil;
 import com.google.gson.JsonObject;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantment;
@@ -21,7 +22,7 @@ public class EnchantedBreakDraft implements Draft {
     public void cast(ServerWorld world, ServerPlayerEntity caster, @Nullable JsonObject data) {
 
         if (data == null){
-            SongServerCasting.sendFailure(caster, CastFailure.MALFORMED_JSON);
+            SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
             return;
         }
 
@@ -31,7 +32,7 @@ public class EnchantedBreakDraft implements Draft {
         Enchantment magic = Registries.ENCHANTMENT.get(enchantId);
 
         if (magic == null){
-            SongServerCasting.sendFailure(caster, CastFailure.MALFORMED_JSON);
+            SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
             return;
         }
 
@@ -55,7 +56,7 @@ public class EnchantedBreakDraft implements Draft {
         ItemStack magicTool = new ItemStack(caster.getMainHandStack().getItem());
         magicTool.addEnchantment(magic, level);
 
-        DraftUtil.breakBlockLikePlayer(world, caster, pos, magicTool);
+        SpellUtil.breakBlockLikePlayer(world, caster, pos, magicTool);
     }
 
 }

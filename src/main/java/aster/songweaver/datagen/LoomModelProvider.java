@@ -1,6 +1,7 @@
 package aster.songweaver.datagen;
 
-import aster.songweaver.registry.LoomItems;
+import aster.songweaver.registry.physical.LoomItems;
+import aster.songweaver.registry.physical.LoomMiscRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
@@ -14,6 +15,7 @@ public class LoomModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        blockStateModelGenerator.registerSimpleCubeAll(LoomMiscRegistry.STARSTONE);
 
     }
 
@@ -24,6 +26,8 @@ public class LoomModelProvider extends FabricModelProvider {
         itemModelGenerator.register(LoomItems.DISTAFF_DIAMOND, Models.HANDHELD_ROD);
         itemModelGenerator.register(LoomItems.DISTAFF_NETHERITE, Models.HANDHELD_ROD);
         itemModelGenerator.register(LoomItems.PATTERN_BOOK, Models.GENERATED);
+        itemModelGenerator.register(LoomItems.SHEET_MUSIC, Models.GENERATED);
+        itemModelGenerator.register(LoomItems.KHIPU, Models.GENERATED);
 
     }
 }

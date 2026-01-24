@@ -1,13 +1,16 @@
 package aster.songweaver.system.cast;
 
-import aster.songweaver.registry.LoomMiscRegistry;
-import aster.songweaver.system.ritual.RitualControllerBlockEntity;
-import aster.songweaver.system.RitualReloadListener;
-import aster.songweaver.system.spell.definition.CastFailure;
+import aster.songweaver.registry.LoomTags;
+import aster.songweaver.registry.NoteHolderItem;
+import aster.songweaver.registry.physical.LoomMiscRegistry;
+import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
+import aster.songweaver.system.spell.loaders.RitualReloadListener;
+import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.spell.definition.Note;
 import aster.songweaver.system.spell.definition.RitualDefinition;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -31,24 +34,35 @@ public class SongServerCasting {
                     List<Note> notes = readNotes(buf);
 
                     if (player.hasStatusEffect(LoomMiscRegistry.SONG_SILENCE)) {
-                        SongServerCasting.sendFailure(
+                        SongServerCasting.sendFeedback(
                                 player,
-                                CastFailure.SILENCED
+                                CastFeedback.SILENCED
                         );
                         return;
                     }
 
                     server.execute(() -> {
 
-                        RitualControllerBlockEntity controller =
-                                RitualControllerBlockEntity.findNearby(player);
+                        ItemStack offhand = player.getOffHandStack();
+
+                        if (offhand.isIn(LoomTags.INTERCEPT_ITEMS) ) {
+
+                            NoteHolderItem.NotestoreUtil.storeNotes(offhand, notes);
+
+                            SongServerCasting.sendFeedback(player, CastFeedback.NOTE_INTERCEPT);
+
+                            return; //  DO NOT CAST
+                        }
+
+                        GrandLoomBlockEntity controller =
+                                GrandLoomBlockEntity.findNearby(player);
 
                         if (controller != null) {
 
                             if (controller.hasActiveRitual()) {
-                                SongServerCasting.sendFailure(
+                                SongServerCasting.sendFeedback(
                                         player,
-                                        CastFailure.RITUAL_BUSY
+                                        CastFeedback.RITUAL_BUSY
                                 );
                                 return;
                             }
@@ -60,10 +74,14 @@ public class SongServerCasting {
                                 controller.tryStartRitual(player, ritual);
                                 return; // correctly exits on server thread
                             }
+
+
                         }
 
+
+
                         // Fall through to normal casting
-                        CastExecutor.cast(player, notes);
+                        DraftExecutor.cast(player, notes);
                     });
                 }
         );
@@ -82,8 +100,8 @@ public class SongServerCasting {
     }
 
     // keep this public – executor will use it
-    public static void sendFailure(ServerPlayerEntity player,
-                                   CastFailure reason) {
+    public static void sendFeedback(ServerPlayerEntity player,
+                                    CastFeedback reason) {
 
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeEnumConstant(reason);

@@ -1,6 +1,7 @@
 package aster.songweaver.system.spell.drafts;
 
 import aster.songweaver.system.spell.definition.Draft;
+import aster.songweaver.util.SpellUtil;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -18,7 +19,7 @@ import java.util.Collection;
 public class DistillDraft implements Draft {
     @Override
     public void cast(ServerWorld world, ServerPlayerEntity caster, @Nullable JsonObject data) {
-        LivingEntity target = DraftUtil.resolveTarget(caster, 16.0, false );
+        LivingEntity target = SpellUtil.resolveTarget(caster, 16.0, false );
 
         if (target == null) {
             caster.sendMessage(

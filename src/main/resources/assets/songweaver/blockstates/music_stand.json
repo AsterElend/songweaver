@@ -1,0 +1,33 @@
+{
+  "variants": {
+    "half=lower,facing=north": {
+      "model": "songweaver:block/music_stand",
+      "y": 0
+    },
+    "half=lower,facing=east": {
+      "model": "songweaver:block/music_stand",
+      "y": 90
+    },
+    "half=lower,facing=south": {
+      "model": "songweaver:block/music_stand",
+      "y": 180
+    },
+    "half=lower,facing=west": {
+      "model": "songweaver:block/music_stand",
+      "y": 270
+    },
+
+    "half=upper,facing=north": {
+      "model": "songweaver:block/music_stand_upper"
+    },
+    "half=upper,facing=east": {
+      "model": "songweaver:block/music_stand_upper"
+    },
+    "half=upper,facing=south": {
+      "model": "songweaver:block/music_stand_upper"
+    },
+    "half=upper,facing=west": {
+      "model": "songweaver:block/music_stand_upper"
+    }
+  }
+}

@@ -1,16 +1,11 @@
 package aster.songweaver.registry;
 
 import aster.songweaver.Songweaver;
-import net.minecraft.block.BlockState;
+import aster.songweaver.registry.physical.LoomMiscRegistry;
 import net.minecraft.block.Blocks;
-import net.minecraft.predicate.block.BlockStatePredicate;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.util.Identifier;
 import vazkii.patchouli.api.IMultiblock;
 import vazkii.patchouli.api.PatchouliAPI;
-import vazkii.patchouli.common.multiblock.MultiblockRegistry;
-
-import java.util.function.Predicate;
 
 
 public class LoomMultiblocks {

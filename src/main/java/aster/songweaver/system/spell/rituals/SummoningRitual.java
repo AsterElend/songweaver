@@ -1,8 +1,9 @@
 package aster.songweaver.system.spell.rituals;
 
-import aster.songweaver.system.ParticleHelper;
-import aster.songweaver.system.ritual.RitualControllerBlockEntity;
+import aster.songweaver.util.ParticleHelper;
+import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
 import aster.songweaver.system.spell.definition.Ritual;
+import aster.songweaver.util.SpellUtil;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -18,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class SummoningRitual implements Ritual {
     @Override
-    public void ritualCast(ServerWorld world, ServerPlayerEntity caster, RitualControllerBlockEntity loom, @Nullable JsonObject data) {
+    public void ritualCast(ServerWorld world, ServerPlayerEntity caster, GrandLoomBlockEntity loom, @Nullable JsonObject data) {
         if (data == null) {
             caster.sendMessage(
                     Text.literal("Summoning ritual requires data."),
@@ -27,17 +28,30 @@ public class SummoningRitual implements Ritual {
             return;
         }
 
-        BlockPos pos = loom.getPos();
+        BlockPos khipuPos = SpellUtil.getKhipuPosOrLoomPosIfAbsent(loom);
+        String entity = data.get("entity").getAsString();
 
+
+        if (khipuPos != null){
+            getSummonPosAndThenSummon(world, entity, khipuPos);
+        } else {
+            getSummonPosAndThenSummon(world, entity, loom.getPos());
+        }
+
+
+
+    }
+
+
+    public static void getSummonPosAndThenSummon(ServerWorld world, String entity, BlockPos pos){
         double x = pos.getX() + 0.5;
         double y = pos.getY() + 1.0; // just above the block
         double z = pos.getZ() + 0.5;
 
-        Vec3d spawnPos = new Vec3d(x, y, z);
+        Vec3d summonPos = new Vec3d(x, y, z);
 
-        spawnEntityFromString(world, data.get("entity").getAsString(), spawnPos);
+        spawnEntityFromString(world, entity, summonPos);
         ParticleHelper.spawnParticleBurst(world, pos, ParticleTypes.SOUL, 100, 3);
-
 
     }
 

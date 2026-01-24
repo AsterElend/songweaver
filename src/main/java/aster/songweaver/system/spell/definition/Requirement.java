@@ -1,9 +1,9 @@
 package aster.songweaver.system.spell.definition;
 
-import aster.songweaver.system.ritual.RitualControllerBlockEntity;
+import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
 
 public interface Requirement {
-    CastFailure check(ServerPlayerEntity caster, @Nullable RitualControllerBlockEntity controller);
+    CastFeedback check(ServerPlayerEntity caster, @Nullable GrandLoomBlockEntity controller, boolean ritual);
 }

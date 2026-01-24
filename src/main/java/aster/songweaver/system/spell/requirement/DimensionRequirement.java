@@ -1,7 +1,7 @@
 package aster.songweaver.system.spell.requirement;
 
-import aster.songweaver.system.ritual.RitualControllerBlockEntity;
-import aster.songweaver.system.spell.definition.CastFailure;
+import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
+import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.spell.definition.Requirement;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -22,14 +22,17 @@ public class DimensionRequirement implements Requirement {
     }
 
     @Override
-    public CastFailure check(ServerPlayerEntity caster, @Nullable RitualControllerBlockEntity controller) {
+    public CastFeedback check(ServerPlayerEntity caster, @Nullable GrandLoomBlockEntity controller, boolean ritual) {
+        if (ritual){
+            return checkDimension((ServerWorld) controller.getWorld());
+        }
 
         return checkDimension(caster.getServerWorld());
 
     }
 
-    private CastFailure checkDimension(ServerWorld world) {
-        return world.getRegistryKey() == dimension ? null : CastFailure.WRONG_DIMENSION;
+    private CastFeedback checkDimension(ServerWorld world) {
+        return world.getRegistryKey() == dimension ? null : CastFeedback.WRONG_DIMENSION;
     }
 
 }

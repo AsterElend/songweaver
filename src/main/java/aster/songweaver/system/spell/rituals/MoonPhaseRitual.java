@@ -1,21 +1,21 @@
 package aster.songweaver.system.spell.rituals;
 
-import aster.songweaver.system.ritual.RitualControllerBlockEntity;
-import aster.songweaver.system.spell.definition.CastFailure;
+import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
+import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.spell.definition.Ritual;
 import com.google.gson.JsonObject;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.Nullable;
 
-import static aster.songweaver.system.cast.SongServerCasting.sendFailure;
+import static aster.songweaver.system.cast.SongServerCasting.sendFeedback;
 
 public class MoonPhaseRitual implements Ritual {
     @Override
-    public void ritualCast(ServerWorld world, ServerPlayerEntity caster, RitualControllerBlockEntity loom, @Nullable JsonObject data) {
-
+    public void ritualCast(ServerWorld world, ServerPlayerEntity caster, GrandLoomBlockEntity loom, @Nullable JsonObject data) {
+//ignore the khipu; irrelevant
         if (!world.getDimension().hasSkyLight() || world.getDimension().ultrawarm()) {
-            sendFailure(caster, CastFailure.WRONG_DIMENSION);
+            sendFeedback(caster, CastFeedback.WRONG_DIMENSION);
 
         } else {
             advanceMoonPhase(world, 1);

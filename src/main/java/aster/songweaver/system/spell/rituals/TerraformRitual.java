@@ -1,9 +1,9 @@
 package aster.songweaver.system.spell.rituals;
 
-import aster.songweaver.registry.LoomMultiblocks;
 import aster.songweaver.registry.LoomTags;
-import aster.songweaver.system.ritual.RitualControllerBlockEntity;
+import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
 import aster.songweaver.system.spell.definition.Ritual;
+import aster.songweaver.util.SpellUtil;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,9 +18,18 @@ import org.jetbrains.annotations.Nullable;
 public class TerraformRitual implements Ritual {
 
     @Override
-    public void ritualCast(ServerWorld world, ServerPlayerEntity caster, RitualControllerBlockEntity loom, @Nullable JsonObject data) {
+    public void ritualCast(ServerWorld world, ServerPlayerEntity caster, GrandLoomBlockEntity loom, @Nullable JsonObject data) {
+        BlockPos overridePos = SpellUtil.getKhipuPosOrLoomPosIfAbsent(loom);
+
+        if (overridePos != null){
+            vaporiseHemisphere(world, overridePos, 16, Direction.UP, LoomTags.TERRAFORM_WHITELIST);
+            return;
+        }
+
+
 
         vaporiseHemisphere(world, loom.getPos(), 16, Direction.UP, LoomTags.TERRAFORM_WHITELIST);
+        return;
 
     }
 

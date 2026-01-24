@@ -1,8 +1,8 @@
 package aster.songweaver;
 
 import aster.songweaver.client.*;
-import aster.songweaver.registry.LoomMiscRegistry;
-import aster.songweaver.system.spell.definition.CastFailure;
+import aster.songweaver.registry.physical.LoomMiscRegistry;
+import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.cast.SongServerCasting;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -24,6 +24,8 @@ public class SongweaverClient implements ClientModInitializer {
 
 
         BlockEntityRendererFactories.register(LoomMiscRegistry.BOBBIN_ENTITY, BobbinBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(LoomMiscRegistry.MUSIC_STAND_ENTITY, MusicStandRenderer::new);
+        BlockEntityRendererFactories.register(LoomMiscRegistry.KHIPU_HOOK_ENTITY, KhipuHookBlockEntityRenderer::new);
 
 
 
@@ -33,12 +35,12 @@ public class SongweaverClient implements ClientModInitializer {
                 SongServerCasting.CAST_FAILURE_PACKET,
                 (client, handler, buf, responseSender) -> {
 
-                    CastFailure reason = buf.readEnumConstant(CastFailure.class);
+                    CastFeedback reason = buf.readEnumConstant(CastFeedback.class);
 
                     client.execute(() -> {
                         if (client.player != null) {
                             client.player.sendMessage(
-                                    Text.literal(reason.message()).formatted(Formatting.RED),
+                                    Text.literal(reason.message(false)).formatted(Formatting.RED),
                                     true
                             );
                         }

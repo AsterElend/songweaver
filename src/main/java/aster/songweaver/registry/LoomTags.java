@@ -25,6 +25,19 @@ public static final TagKey<Block> TERRAFORM_WHITELIST =
                     new Identifier("songweaver", "terraform_whitelist")
             );
 
+public static final TagKey<Item> INTERCEPT_ITEMS =
+            TagKey.of(
+                    RegistryKeys.ITEM,
+                    new Identifier("songweaver", "intercept_items")
+            );
+
+public static final TagKey<Item> CASTING_ITEMS =
+            TagKey.of(
+                    RegistryKeys.ITEM,
+                    new Identifier("songweaver", "casting_items")
+            );
+
+
 
 
 }

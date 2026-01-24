@@ -1,7 +1,7 @@
 package aster.songweaver.system.spell.requirement;
 
-import aster.songweaver.system.ritual.RitualControllerBlockEntity;
-import aster.songweaver.system.spell.definition.CastFailure;
+import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
+import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.spell.definition.Requirement;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,7 +20,7 @@ public class ItemRequirement implements Requirement {
     }
 
     @Override
-    public CastFailure check(ServerPlayerEntity caster, @Nullable RitualControllerBlockEntity controller) {
+    public CastFeedback check(ServerPlayerEntity caster, @Nullable GrandLoomBlockEntity controller, boolean ritual) {
         int found = 0;
 
         for (ItemStack stack : caster.getInventory().main) {
@@ -30,7 +30,7 @@ public class ItemRequirement implements Requirement {
             }
         }
 
-        return CastFailure.NO_COMPONENTS;
+        return CastFeedback.NO_COMPONENTS;
     }
 
 }

@@ -1,6 +1,6 @@
 package aster.songweaver.datagen;
 
-import aster.songweaver.registry.LoomItems;
+import aster.songweaver.registry.physical.LoomItems;
 import aster.songweaver.registry.LoomTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -18,7 +18,8 @@ public class LoomTagGen extends FabricTagProvider<Item> {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup lookup) {
         getOrCreateTagBuilder(LoomTags.DISTAFFS).add(LoomItems.DISTAFF_BASIC, LoomItems.DISTAFF_IRON, LoomItems.DISTAFF_DIAMOND, LoomItems.DISTAFF_NETHERITE, LoomItems.DISTAFF_ASTRAL);
-
+        getOrCreateTagBuilder(LoomTags.INTERCEPT_ITEMS).add(LoomItems.SPINDLE, LoomItems.SHEET_MUSIC);
+        getOrCreateTagBuilder(LoomTags.CASTING_ITEMS).addTag(LoomTags.DISTAFFS).add(LoomItems.SPINDLE);
     }
 }
 

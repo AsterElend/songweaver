@@ -1,6 +1,6 @@
 {
   "pattern": ["A", "A", "C_HIGH", "C_HIGH"],
-  "ritual": "songweaver:effect_ritual",
+  "ritual": "songweaver:effect",
   "duration": 1,
   "interval": 1,
   "ingredients": [

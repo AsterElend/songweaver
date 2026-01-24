@@ -1,9 +1,10 @@
 package aster.songweaver.system.spell.requirement;
 
-import aster.songweaver.system.ritual.RitualControllerBlockEntity;
-import aster.songweaver.system.spell.definition.CastFailure;
+import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
+import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.spell.definition.Requirement;
 import aster.songweaver.system.spell.definition.Tier;
+import aster.songweaver.util.TierCheckHelper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,11 +17,16 @@ public class TierRequirement implements Requirement {
     }
 
     @Override
-    public CastFailure check(ServerPlayerEntity caster, @Nullable RitualControllerBlockEntity controller) {
-        Tier held = TierCheckHelper.getHeldTier(caster);
+    public CastFeedback check(ServerPlayerEntity caster, @Nullable GrandLoomBlockEntity controller, boolean ritual) {
+        Tier held;
+
+        if (ritual){
+             held = controller.stockpiledTier;
+        } else {
+         held = TierCheckHelper.getHeldTier(caster);}
 
         if (held == null || !held.meets(required)) {
-            return CastFailure.INSUFFICIENT_POWER;
+            return CastFeedback.INSUFFICIENT_POWER;
         }
 
         return null;

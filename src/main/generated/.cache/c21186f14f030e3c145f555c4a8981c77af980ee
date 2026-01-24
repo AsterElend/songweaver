@@ -1,2 +1,4 @@
-// 1.20.1	2026-01-15T16:17:27.7258772	Song Weaver/Tags for minecraft:item
+// 1.20.1	2026-01-24T16:59:56.3594757	Song Weaver/Tags for minecraft:item
+e5caccd19e2f63517ff85cc687f241e9b5f968ea data\songweaver\tags\items\casting_items.json
 6728dabe854d2c3fbf8f5e0b4d935704f4e4fcba data\songweaver\tags\items\distaffs.json
+bf5079ad022cbe78c7ff720e7cfdf581369073d2 data\songweaver\tags\items\intercept_items.json

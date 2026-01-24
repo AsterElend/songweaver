@@ -1,9 +1,8 @@
 package aster.songweaver.system.spell.requirement;
 
-import aster.songweaver.system.ritual.RitualControllerBlockEntity;
-import aster.songweaver.system.spell.definition.CastFailure;
+import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
+import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.spell.definition.Requirement;
-import aster.songweaver.system.spell.definition.Tier;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
@@ -21,10 +20,10 @@ public class StructureRequirement implements Requirement {
 
 
     @Override
-    public CastFailure check(ServerPlayerEntity caster, @Nullable RitualControllerBlockEntity controller) {
+    public CastFeedback check(ServerPlayerEntity caster, @Nullable GrandLoomBlockEntity controller, boolean ritual) {
 
         if (controller == null) {
-            return CastFailure.RITUAL_DRAFT_MISMATCH;
+            return CastFeedback.RITUAL_DRAFT_MISMATCH;
         }
 
 
@@ -37,7 +36,7 @@ public class StructureRequirement implements Requirement {
         boolean valid = rotation != null && structure.validate(controller.getWorld(), anchorpos, rotation);
 
         if (!valid){
-            return CastFailure.INVALID_STRUCTURE;
+            return CastFeedback.INVALID_STRUCTURE;
         }
         return null;
 
