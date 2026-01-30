@@ -6,23 +6,16 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
 public class VoxelShapeUtil {
-    public static VoxelShape rotate(VoxelShape shape, Direction to) {
+    public static VoxelShape rotate(VoxelShape shape, Direction from, Direction to) {
         VoxelShape[] buffer = new VoxelShape[]{shape, VoxelShapes.empty()};
 
-        int times = switch (to) {
-            case EAST -> 1;
-            case SOUTH -> 2;
-            case WEST -> 3;
-            default -> 0;
-        };
-
+        int times = (to.getHorizontal() - from.getHorizontal() + 4) % 4;
         for (int i = 0; i < times; i++) {
             buffer[0].forEachBox((minX, minY, minZ, maxX, maxY, maxZ) -> {
-                buffer[1] = VoxelShapes.union(
-                        buffer[1],
-                        Block.createCuboidShape(
-                                16 - maxZ, minY, minX,
-                                16 - minZ, maxY, maxX
+                buffer[1] = VoxelShapes.union(buffer[1],
+                        VoxelShapes.cuboid(
+                                1 - maxZ, minY, minX,
+                                1 - minZ, maxY, maxX
                         )
                 );
             });
@@ -32,4 +25,6 @@ public class VoxelShapeUtil {
 
         return buffer[0];
     }
+
+
 }

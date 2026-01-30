@@ -1,5 +1,6 @@
 package aster.songweaver.util;
 
+import aster.songweaver.Songweaver;
 import aster.songweaver.system.spell.definition.*;
 import aster.songweaver.system.spell.drawback.ConsumeItemDrawback;
 import aster.songweaver.system.spell.drawback.DamageDrawback;
@@ -8,6 +9,7 @@ import aster.songweaver.system.spell.requirement.*;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import vazkii.patchouli.api.PatchouliAPI;
@@ -123,4 +125,31 @@ public class JsonParserUtil {
         return json.getAsJsonObject("data");
 
     }
+
+    public static boolean shouldLoad(JsonObject json) {
+        if (!json.has("modLoaded")) {
+            return true;
+        }
+
+        var loader = FabricLoader.getInstance();
+        var element = json.get("modLoaded");
+
+        if (element.isJsonPrimitive()) {
+            return loader.isModLoaded(element.getAsString());
+        }
+
+        if (element.isJsonArray()) {
+            for (var e : element.getAsJsonArray()) {
+                if (!loader.isModLoaded(e.getAsString())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        return true;
+    }
+
+
+
 }

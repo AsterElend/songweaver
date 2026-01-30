@@ -1,0 +1,7 @@
+{
+  "pattern": ["E", "E", "G", "G"],
+  "draft": "songweaver:halo",
+  "data": {
+    "op": "push"
+  }
+}

@@ -22,7 +22,7 @@ import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-
+@SuppressWarnings("deprecation")
 public class KhipuHookBlock extends HorizontalFacingBlock implements BlockEntityProvider {
 
 
@@ -165,8 +165,8 @@ public class KhipuHookBlock extends HorizontalFacingBlock implements BlockEntity
 
     private static final VoxelShape NORTH_SHAPE =
             Block.createCuboidShape(
-                    6.0, 2.0, 14.0,
-                    10.0, 10.0, 16.0
+                    6.0, 4.0, 14.0,
+                    10.0, 12.0, 16.0
             );
 
     private static final Map<Direction, VoxelShape> SHAPES =

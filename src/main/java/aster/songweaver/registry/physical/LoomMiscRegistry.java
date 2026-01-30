@@ -2,11 +2,18 @@ package aster.songweaver.registry.physical;
 
 import aster.songweaver.registry.SilenceEffect;
 import aster.songweaver.registry.physical.ritual.*;
+import aster.songweaver.cca.HaloComponent;
+import dev.onyxstudios.cca.api.v3.component.ComponentKey;
+import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.effect.StatusEffect;
@@ -21,6 +28,8 @@ import net.minecraft.world.World;
 import static aster.songweaver.Songweaver.MOD_ID;
 
 public class LoomMiscRegistry {
+
+
 
     public static final StatusEffect SONG_SILENCE =
             Registry.register(
@@ -47,7 +56,17 @@ public class LoomMiscRegistry {
 public static final Block RITUAL_CONTROLLER = registerBlock("grand_loom", new GrandLoomBlock(FabricBlockSettings.copyOf(Blocks.WARPED_PLANKS)));
 public static final Block MUSIC_STAND = registerBlock("music_stand", new MusicStandBlock(FabricBlockSettings.copyOf(Blocks.WARPED_PLANKS)));
 public static final Block KHIPU_HOOK = registerBlock("khipu_hook", new KhipuHookBlock(FabricBlockSettings.copyOf(Blocks.TRIPWIRE_HOOK)));
+public static final Block LIGHT_ORB = registerBlock("light_orb", new LightOrbBlock(FabricBlockSettings.copyOf(Blocks.LIGHT).luminance(15).breakInstantly()));
 
+public static final EntityType<LightOrbProjectileEntity> LIGHT_ORB_PROJECTILE = Registry.register(
+        Registries.ENTITY_TYPE,
+        new Identifier("songweaver:light_orb_projectile"),
+        FabricEntityTypeBuilder
+                .create(SpawnGroup.MISC, LightOrbProjectileEntity::new)
+                .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+                .trackRangeBlocks(4)
+                .build()
+);
 
 
 

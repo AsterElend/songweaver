@@ -27,7 +27,12 @@ public class RitualReloadListener implements SimpleSynchronousResourceReloadList
     public static final Identifier ID =
             new Identifier("songweaver", "rituals");
 
-    private static final Map<PatternKey, RitualDefinition> RITUALS = new HashMap<>();
+    private static final Map<PatternKey, LoadedRitual> RITUALS = new HashMap<>();
+
+    public static Map<PatternKey, LoadedRitual> getRituals() {
+        return Map.copyOf(RITUALS);
+    }
+
 
     @Override
     public Identifier getFabricId() {
@@ -54,6 +59,14 @@ public class RitualReloadListener implements SimpleSynchronousResourceReloadList
                 );
                 JsonObject json = gson.fromJson(reader, JsonObject.class);
 
+                if (!shouldLoad(json)) {
+                    Songweaver.LOGGER.debug(
+                            "Skipping ritual {} because required mod is not loaded",
+                            id
+                    );
+                    continue;
+                }
+
                 PatternKey pattern = JsonParserUtil.parsePattern(json);
                 Identifier ritualId = parseRitual(json);
                 List<ItemStack> ingredients = parseIngredients(json);
@@ -75,7 +88,7 @@ public class RitualReloadListener implements SimpleSynchronousResourceReloadList
                     );
                 }
 
-                RITUALS.put(pattern, ritual);
+                RITUALS.put(pattern, new LoadedRitual(id, ritual));
 
 
             } catch (Exception e){
@@ -96,7 +109,8 @@ public class RitualReloadListener implements SimpleSynchronousResourceReloadList
     }
 
     public static RitualDefinition matchForRitual(List<Note> notes) {
-        return RITUALS.get(PatternKey.of(notes));
+        LoadedRitual loaded = RITUALS.get(PatternKey.of(notes));
+        return loaded != null ? loaded.ritual() : null;
     }
 
     private static List<ItemStack> parseIngredients(JsonObject json) {

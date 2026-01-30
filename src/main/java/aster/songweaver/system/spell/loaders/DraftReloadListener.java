@@ -17,15 +17,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static aster.songweaver.util.JsonParserUtil.parseDrawbacks;
-import static aster.songweaver.util.JsonParserUtil.parseRequirements;
+import static aster.songweaver.util.JsonParserUtil.*;
 
 public class DraftReloadListener implements SimpleSynchronousResourceReloadListener {
 
     public static final Identifier ID =
             new Identifier("songweaver", "drafts");
 
-    private static final Map<PatternKey, DraftDefinition> SPELLS = new HashMap<>();
+    private static final Map<PatternKey, LoadedDraft> SPELLS = new HashMap<>();
+
+    public static Map<PatternKey, LoadedDraft> getDrafts() {
+        return Map.copyOf(SPELLS);
+    }
+
 
     @Override
     public Identifier getFabricId() {
@@ -55,6 +59,22 @@ public class DraftReloadListener implements SimpleSynchronousResourceReloadListe
 
                 JsonObject json = gson.fromJson(reader, JsonObject.class);
 
+
+
+                if (json == null) {
+                    Songweaver.LOGGER.warn("Draft {} returned null JSON, skipping", id);
+                    continue;
+                }
+
+
+                if (!shouldLoad(json)) {
+                    Songweaver.LOGGER.debug(
+                            "Skipping draft {} because required mod is not loaded",
+                            id
+                    );
+                    continue;
+                }
+
                 PatternKey pattern = JsonParserUtil.parsePattern(json);
                 Identifier draft = parseDraft(json);
                 List<Requirement> requirements = parseRequirements(json);
@@ -79,7 +99,7 @@ public class DraftReloadListener implements SimpleSynchronousResourceReloadListe
                 }
 
 
-                SPELLS.put(pattern, spell);
+                SPELLS.put(pattern, new LoadedDraft(id, spell));
 
             } catch (Exception e) {
                 Songweaver.LOGGER.error(
@@ -97,8 +117,10 @@ public class DraftReloadListener implements SimpleSynchronousResourceReloadListe
     }
 
     public static DraftDefinition matchForDraft(List<Note> notes) {
-        return SPELLS.get(PatternKey.of(notes));
+        LoadedDraft loaded = SPELLS.get(PatternKey.of(notes));
+        return loaded != null ? loaded.draft() : null;
     }
+
 
 
     public static Identifier parseDraft(JsonObject json) {

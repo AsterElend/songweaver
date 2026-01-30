@@ -1,0 +1,7 @@
+{
+  "pattern": ["E", "E", "G", "C"],
+  "draft": "songweaver:halo",
+  "data": {
+    "op": "purge"
+  }
+}

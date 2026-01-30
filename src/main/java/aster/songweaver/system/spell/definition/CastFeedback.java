@@ -14,7 +14,10 @@ public enum CastFeedback {
     NO_TARGET("There is none to hear your song"),
     NOTE_INTERCEPT("The notes are quietly taken up"),
     NO_STAND("No stored song"),
-    MALFORMED_JSON("This is a json error! Please check the datapack.");
+    MALFORMED_JSON("This is a json error! Please check the datapack."),
+    SHOOT_THE_MOON("Time disagrees with you."),
+    WRONG_INPUT("It vibrates, but does nothing"),
+    EMPTY_HALO("No reference.");
 
     private final String message;
 

@@ -7,4 +7,10 @@ public record PatternKey(List<Note> notes) {
         // Defensive copy + immutability
         return new PatternKey(List.copyOf(notes));
     }
+
+    // in PatternKey
+    public List<Note> notes() {
+        return notes;
+    }
+
 }

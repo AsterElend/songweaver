@@ -1,0 +1,7 @@
+{
+  "pattern": ["E", "E", "G", "C_HIGH"],
+  "draft": "songweaver:halo",
+  "data": {
+    "op": "pop"
+  }
+}

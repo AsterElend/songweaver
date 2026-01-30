@@ -13,15 +13,13 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-public class MusicStandRenderer
-        implements BlockEntityRenderer<MusicStandBlockEntity> {
+
+public class MusicStandRenderer implements BlockEntityRenderer<MusicStandBlockEntity> {
 
     private final ItemRenderer itemRenderer;
 
@@ -38,7 +36,7 @@ public class MusicStandRenderer
             int light,
             int overlay
     ) {
-        ItemStack stack = stand.getStack();
+        ItemStack stack = stand.getStack(0);
         if (stack.isEmpty()) return;
 
         World world = stand.getWorld();
@@ -49,52 +47,28 @@ public class MusicStandRenderer
 
         matrices.push();
 
-        /*
-         * === 1. Move to block center ===
-         */
+        // === 1. Move to block center ===
         matrices.translate(0.5, 0.0, 0.5);
 
-        /*
-         * === 2. Rotate to match block facing ===
-         * Blockstate rotations rotate the MODEL,
-         * but NOT the BlockEntityRenderer.
-         */
+        // === 2. Rotate to match block facing ===
         matrices.multiply(
-                RotationAxis.POSITIVE_Y.rotationDegrees(
-                        -facing.asRotation()
-                )
+                RotationAxis.POSITIVE_Y.rotationDegrees(-facing.asRotation())
         );
 
-        /*
-         * === 3. Move item onto the music plate ===
-         *
-         * Based on your model:
-         * - Plate center is ~Z = +0.30
-         * - Plate height is ~Y = 1.30
-         */
-        matrices.translate(
-                0.0,    // X: centered
-                1.30,   // Y: height above ground
-                0.30    // Z: forward onto plate
-        );
+        // === 3. Move item onto the music plate (center of shelf) ===
+        // Based on your Blockbench model: shelf is roughly Y = 1.30, Z = 0.35
+        matrices.translate(0.0, 1.30, 0.35);
 
-        /*
-         * === 4. Tilt item to match stand angle ===
-         * Your plate is rotated ~22.5° on Z in Blockbench
-         */
+        // === 4. Tilt item to match plate angle (~22.5°) ===
         matrices.multiply(
                 RotationAxis.POSITIVE_X.rotationDegrees(-22.5f)
         );
 
-        /*
-         * === 5. Scale item ===
-         * FIXED transform assumes ~1 block = 1 unit
-         */
+        // === 5. Scale item down to fit ===
         matrices.scale(0.75f, 0.75f, 0.75f);
 
-        /*
-         * === 6. Render ===
-         */
+        // === 6. Render the item ===
+        int seed = (int) stand.getPos().asLong(); // optional: or use stand.getWorld().getRandom().nextInt()
         itemRenderer.renderItem(
                 stack,
                 ModelTransformationMode.FIXED,
@@ -103,15 +77,15 @@ public class MusicStandRenderer
                 matrices,
                 vertexConsumers,
                 world,
-                (int) stand.getPos().asLong()
+                seed
         );
 
-        renderNotes(stand, matrices, vertexConsumers, light);
 
+        // === 7. Render notes above the shelf ===
+        renderNotes(stand, matrices, vertexConsumers, light);
 
         matrices.pop();
     }
-
 
     private void renderNotes(
             MusicStandBlockEntity stand,
@@ -129,26 +103,28 @@ public class MusicStandRenderer
 
         matrices.push();
 
-        // Above the plate
-        matrices.translate(0.0, 1.55, 0.0);
+        // === Move to center of shelf and slightly above ===
+        matrices.translate(0.5, 1.55, 0.5); // center X/Z, Y slightly above shelf
 
-        // Gentle bob
+        // Gentle vertical bob
         matrices.translate(0.0, MathHelper.sin(time * 0.05f) * 0.05f, 0.0);
 
-        // Face the player
+        // Rotate to face the player
         matrices.multiply(
                 MinecraftClient.getInstance().getEntityRenderDispatcher().getRotation()
         );
 
-        // Small & ethereal
-        matrices.scale(-0.02f, -0.02f, 0.02f);
+        // Scale down for ethereal floating text
+        matrices.scale(1f, 1f, 1f);
 
-        float xOffset = -textRenderer.getWidth(notes.get(0).name()) / 2f;
+
+        // Space notes evenly
+        float spacing = 12f;
+        float offset = (notes.size() - 1) * spacing / 2f;
 
         for (int i = 0; i < notes.size(); i++) {
             Note note = notes.get(i);
-
-            float x = (i - (notes.size() - 1) / 2f) * 12f;
+            float x = i * spacing - offset;
 
             textRenderer.draw(
                     note.name(),
@@ -167,4 +143,8 @@ public class MusicStandRenderer
         matrices.pop();
     }
 
+    @Override
+    public boolean rendersOutsideBoundingBox(MusicStandBlockEntity entity) {
+        return true;
+    }
 }

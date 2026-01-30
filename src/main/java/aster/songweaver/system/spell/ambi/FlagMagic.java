@@ -1,4 +1,4 @@
-package aster.songweaver.system.spell.drafts;
+package aster.songweaver.system.spell.ambi;
 
 import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
 import aster.songweaver.system.cast.SongServerCasting;

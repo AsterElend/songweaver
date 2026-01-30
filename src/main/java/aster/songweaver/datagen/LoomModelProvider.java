@@ -16,6 +16,7 @@ public class LoomModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerSimpleCubeAll(LoomMiscRegistry.STARSTONE);
+        blockStateModelGenerator.registerSimpleCubeAll(LoomMiscRegistry.TRANSIT_RELAY);
 
     }
 

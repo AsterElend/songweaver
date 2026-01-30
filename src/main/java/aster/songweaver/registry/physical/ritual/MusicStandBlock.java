@@ -15,30 +15,42 @@ import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @SuppressWarnings("deprecation")
 public class MusicStandBlock extends BlockWithEntity {
 
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
 
-    // Base + lower pole
-    private static final VoxelShape LOWER_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(3, 0, 3, 13, 2, 13), // base
-            Block.createCuboidShape(7, 2, 9, 9, 16, 9)   // lower pole
+    // NORTH-facing canonical shape
+    private static final VoxelShape NORTH_SHAPE = VoxelShapes.union(
+            Block.createCuboidShape(3, 0, 3, 13, 2, 13),   // base
+            Block.createCuboidShape(7, 2, 7, 9, 25, 9),    // pole
+            Block.createCuboidShape(2, 20, 3, 14, 21, 5),  // ledge
+            Block.createCuboidShape(2, 20, 5, 14, 30, 7)   // plate
     );
 
-    // Upper pole + sheet
-    private static final VoxelShape UPPER_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(7, 0, 7, 9, 14, 9),   // upper pole (height 14 relative to upper block)
-            Block.createCuboidShape(9, 4, 2, 11, 14, 14)  // sheet part (relative to upper block)
-    );
+    private static final Map<Direction, VoxelShape> SHAPES =
+            Arrays.stream(Direction.Type.HORIZONTAL.stream().toArray(Direction[]::new))
+                    .collect(Collectors.toMap(
+                            d -> d,
+                            d -> VoxelShapeUtil.rotate(NORTH_SHAPE, Direction.NORTH, d)
+                    ));
+
+
 
 
     public MusicStandBlock(Settings settings) {
@@ -81,27 +93,31 @@ public class MusicStandBlock extends BlockWithEntity {
     public ActionResult onUse(BlockState state, World world, BlockPos pos,
                               PlayerEntity player, Hand hand, BlockHitResult hit) {
 
-        // Redirect clicks on upper block to lower block
-        if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-            pos = pos.down();
+        if (state.get(HALF) == DoubleBlockHalf.LOWER) {
+            pos = pos.up();
             state = world.getBlockState(pos);
         }
 
         BlockEntity be = world.getBlockEntity(pos);
-        if (!(be instanceof MusicStandBlockEntity stand)) return ActionResult.PASS;
+        if (!(be instanceof MusicStandBlockEntity stand)) {
+            return ActionResult.PASS;
+        }
+
+        // Same logic as before...
+
 
         ItemStack held = player.getStackInHand(hand);
 
         if (!world.isClient) {
             // insert
-            if (!held.isEmpty() && stand.getStack().isEmpty()) {
-                stand.setStack(held.split(1));
+            if (!held.isEmpty() && stand.getStack(0).isEmpty()) {
+                stand.setStack(0, held.split(1));
                 return ActionResult.CONSUME;
             }
 
             // extract
-            if (held.isEmpty() && !stand.getStack().isEmpty()) {
-                player.setStackInHand(hand, stand.removeStack());
+            if (held.isEmpty() && !stand.getStack(0).isEmpty()) {
+                player.setStackInHand(hand, stand.removeStack(0));
                 return ActionResult.CONSUME;
             }
         }
@@ -112,54 +128,71 @@ public class MusicStandBlock extends BlockWithEntity {
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!world.isClient) {
-            // Always break the lower block
-            if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-                pos = pos.down();
-                state = world.getBlockState(pos);
+            BlockPos upperPos = state.get(HALF) == DoubleBlockHalf.UPPER
+                    ? pos
+                    : pos.up();
+
+            BlockEntity be = world.getBlockEntity(upperPos);
+            if (be instanceof MusicStandBlockEntity stand) {
+                ItemScatterer.spawn(world, upperPos, stand);
             }
 
-            if (state.isOf(this)) {
-                world.breakBlock(pos, true, player);
-            }
+            world.breakBlock(upperPos, false);
+            world.breakBlock(upperPos.down(), false);
         }
 
         super.onBreak(world, pos, state, player);
     }
 
-    @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world,
-                                        BlockPos pos, ShapeContext context) {
-        return state.get(HALF) == DoubleBlockHalf.UPPER
-                ? VoxelShapes.empty() // Upper block is non-solid
-                : LOWER_SHAPE;
+    private static VoxelShape offsetDown(VoxelShape shape, double yOffset) {
+        return shape.offset(0, -yOffset, 0);
     }
+
+
+    @Override
+    public VoxelShape getCollisionShape(
+            BlockState state,
+            BlockView world,
+            BlockPos pos,
+            ShapeContext context
+    ) {
+        if (state.get(HALF) == DoubleBlockHalf.UPPER) {
+            return VoxelShapes.empty(); // 👈 no collision
+        }
+
+        return SHAPES.get(state.get(FACING));
+    }
+
+
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world,
                                       BlockPos pos, ShapeContext context) {
+
+        VoxelShape shape = SHAPES.get(state.get(FACING)); // canonical north-oriented shape
+
         if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-            // Rotate the upper shape according to FACING
-            return VoxelShapeUtil.rotate(UPPER_SHAPE, state.get(FACING));
+            // Shift the shape down by 1 so it visually matches the lower block
+            return offsetDown(shape, 1.0);
         }
-        // Lower shape stays unrotated if symmetric; rotate if asymmetric
-        return LOWER_SHAPE;
+
+        return shape; // lower block: normal
     }
-
-
 
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        // Only create a BE for the lower block
-        return state.get(HALF) == DoubleBlockHalf.LOWER
+        return state.get(HALF) == DoubleBlockHalf.UPPER
                 ? new MusicStandBlockEntity(pos, state)
                 : null;
     }
+
 
     @Override
     public BlockRenderType getRenderType(BlockState state){
         return BlockRenderType.MODEL;
     }
+
 
 
 

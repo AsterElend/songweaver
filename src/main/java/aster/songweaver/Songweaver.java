@@ -14,6 +14,7 @@ import aster.songweaver.system.cast.SongServerCasting;
 import aster.songweaver.util.SpellUtil;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -97,7 +98,10 @@ public class Songweaver implements ModInitializer {
 		});
 
 
-
+		CommandRegistrationCallback.EVENT.register(
+				(dispatcher, registryAccess, environment) ->
+						SongweaverCommands.register(dispatcher)
+		);
 
 
 

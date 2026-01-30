@@ -1,4 +1,4 @@
-package aster.songweaver.system.spell.drafts;
+package aster.songweaver.system.spell.ambi;
 
 import aster.songweaver.registry.physical.LoomMiscRegistry;
 import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
@@ -8,8 +8,6 @@ import aster.songweaver.system.spell.definition.Draft;
 import aster.songweaver.system.spell.definition.Ritual;
 import aster.songweaver.util.ParticleHelper;
 import aster.songweaver.util.SpellUtil;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -20,13 +18,10 @@ import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 

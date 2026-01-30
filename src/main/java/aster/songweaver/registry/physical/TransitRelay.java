@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
+@SuppressWarnings("deprecation")
 public class TransitRelay extends Block {
 
     public TransitRelay(Settings settings) {
@@ -40,6 +40,17 @@ public class TransitRelay extends Block {
                 .getWorld(RegistryKey.of(RegistryKeys.WORLD, new Identifier("songweaver", "high_wilderness")));
 
         if (targetWorld == null) return;
+        if (player.getServerWorld() == targetWorld){
+            ServerWorld overworld = player.getServer().getWorld(World.OVERWORLD);
+            player.teleport(
+                    overworld,
+                    player.getX(),
+                    80,
+                    player.getZ(),
+                    player.getYaw(),
+                    player.getPitch() );
+            return;
+        }
 
         player.teleport(
                 targetWorld,

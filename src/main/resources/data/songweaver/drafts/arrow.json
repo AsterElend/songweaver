@@ -1,0 +1,8 @@
+{
+  "pattern": ["C_HIGH", "A", "G", "G"],
+  "draft": "songweaver:blunderbuss",
+  "data": {
+    "projectile": "minecraft:arrow",
+    "canPickUp": false
+  }
+}
