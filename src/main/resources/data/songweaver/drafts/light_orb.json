@@ -4,5 +4,10 @@
   "data": {
     "projectile": "songweaver:light_orb_projectile",
     "canPickUp": false
-  }
+  },
+  "requirements": [{
+    "type": "item",
+    "item": "minecraft:torch",
+    "count": 1
+  }]
 }

@@ -1,4 +1,14 @@
 {
   "pattern": ["A", "C", "E", "C"],
-  "draft": "songweaver:distill_effects"
+  "draft": "songweaver:distill_effects",
+  "requirements": [{
+    "type": "item",
+    "item": "minecraft:blaze_powder",
+    "count": 1
+  }],
+  "drawbacks": [{
+    "type": "consume_item",
+    "item": "minecraft:blaze_powder",
+    "count": 1
+  }]
 }

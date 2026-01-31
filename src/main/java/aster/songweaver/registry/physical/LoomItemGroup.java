@@ -38,7 +38,7 @@ public class LoomItemGroup {
                         entries.add(LoomItems.SHEET_MUSIC);
                         entries.add(LoomItems.KHIPU_HOOK_ITEM);
                         entries.add(LoomItems.KHIPU);
-
+                        entries.add(LoomItems.BAGUETTE_MAGIQUE);
                     }).build());
 
 

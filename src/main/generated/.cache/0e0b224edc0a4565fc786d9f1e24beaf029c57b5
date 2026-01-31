@@ -1,14 +1,15 @@
-// 1.20.1	2026-01-24T17:21:39.9910708	Song Weaver/Model Definitions
-d7aa21a1246e22e76dff24c61a9af3ac0c0cafdf assets\songweaver\models\item\distaff_iron.json
+// 1.20.1	2026-01-30T20:05:49.4373611	Song Weaver/Model Definitions
 0bb83495e166e68ca5f9c19eebda800d35942b37 assets\songweaver\models\item\starstone.json
-576d79f71beeade3d5b8c6baa97c93d213abe954 assets\songweaver\models\block\transit_relay.json
 6aeaddce6311127e5b55e120a6b1fee9f273cb70 assets\songweaver\models\item\sheet_music.json
+14646b0b115a458df40185b367ffbc8486ce4733 assets\songweaver\models\block\starstone.json
 b182e9c7f2d4db8a81ad23e70c63f305cb81afd9 assets\songweaver\models\item\book_of_patterns.json
-152e751d2f1c7abad7fbf823b94aa17191c5e412 assets\songweaver\models\item\distaff_diamond.json
-298bf3347a6de57467ee6e08cd8c51f9c41ccc02 assets\songweaver\models\item\distaff_basic.json
-ad62c11565e03d1495aa38e56fcef6c059409451 assets\songweaver\blockstates\starstone.json
-ddbf2f8f9bb93e47ee1ae324d646a870d29c9a5b assets\songweaver\models\item\distaff_netherite.json
-13b7ce62d96edf857b35bac3c4d5b20617bf9a65 assets\songweaver\blockstates\transit_relay.json
+b84d8c42ab3ee16f95f52ae8125d6ed5207b84ce assets\songweaver\models\item\spindle.json
 832c36f89091adc0fad490018b6caf71932af23b assets\songweaver\models\item\transit_relay.json
 d36461a40afb9b77710bb661cc27dbf444b5a104 assets\songweaver\models\item\khipu.json
-14646b0b115a458df40185b367ffbc8486ce4733 assets\songweaver\models\block\starstone.json
+d7aa21a1246e22e76dff24c61a9af3ac0c0cafdf assets\songweaver\models\item\distaff_iron.json
+ad62c11565e03d1495aa38e56fcef6c059409451 assets\songweaver\blockstates\starstone.json
+152e751d2f1c7abad7fbf823b94aa17191c5e412 assets\songweaver\models\item\distaff_diamond.json
+13b7ce62d96edf857b35bac3c4d5b20617bf9a65 assets\songweaver\blockstates\transit_relay.json
+576d79f71beeade3d5b8c6baa97c93d213abe954 assets\songweaver\models\block\transit_relay.json
+298bf3347a6de57467ee6e08cd8c51f9c41ccc02 assets\songweaver\models\item\distaff_basic.json
+ddbf2f8f9bb93e47ee1ae324d646a870d29c9a5b assets\songweaver\models\item\distaff_netherite.json

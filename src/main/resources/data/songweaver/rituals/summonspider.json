@@ -8,11 +8,11 @@
   "ingredients": [
     {
       "item": "minecraft:string",
-      "count": 1
+      "count": 2
     },
     {
-      "item": "minecraft:stick",
-      "count": 1
+      "item": "minecraft:amethyst_shard",
+      "count": 16
     }
   ],
   "data": {"entity": "minecraft:spider"}

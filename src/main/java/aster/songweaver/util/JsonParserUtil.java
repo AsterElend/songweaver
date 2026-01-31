@@ -56,7 +56,7 @@ public class JsonParserUtil {
                 case "item" -> list.add(
                         new ItemRequirement(
                                 new Identifier(obj.get("item").getAsString()),
-                                obj.get("count").getAsInt()
+                                obj.has("count") ? obj.get("count").getAsInt(): 1
                         )
                 );
                 case "dimension" -> list.add(
@@ -98,7 +98,7 @@ public class JsonParserUtil {
                 case "consume_item" -> list.add(
                         new ConsumeItemDrawback(
                                 new Identifier(obj.get("item").getAsString()),
-                                obj.get("count").getAsInt()
+                                obj.has("count") ? obj.get("count").getAsInt(): 1
                         )
                 );
                 case "effect" -> list.add(

@@ -1,0 +1,8 @@
+{
+  "pattern":["C_HIGH", "C_HIGH", "C_HIGH", "C", "C"],
+  "draft": "songweaver:infusion",
+  "data":{
+    "input": "minecraft:lectern",
+    "output": "songweaver:music_stand"
+  }
+}

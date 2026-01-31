@@ -1,18 +1,23 @@
 {
   "pattern": ["C", "D", "E", "F", "G"],
   "ritual": "songweaver:advance_moon",
+  "modLoaded": "spectrum",
 
   "duration": 1,
   "interval": 1,
 
   "ingredients": [
     {
-      "item": "minecraft:iron_block",
-      "count": 1
+      "item": "spectrum:topaz_shard",
+      "count": 16
     },
     {
-      "item": "minecraft:nether_star",
-      "count": 1
+      "item": "spectrum:citrine_shard",
+      "count": 16
+    },
+    {
+      "item": "minecraft:amethyst_shard",
+      "count": 16
     }
   ],
 
@@ -20,8 +25,11 @@
     {
       "type": "effect",
       "effect": "songweaver:song_silence",
-      "ticks": 2000,
+      "ticks": 20000,
       "amplifier": 0
     }
-  ]
+  ],
+  "data": {
+    "phases": "onyx"
+  }
 }

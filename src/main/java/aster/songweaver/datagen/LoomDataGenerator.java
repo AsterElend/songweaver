@@ -12,6 +12,8 @@ public class LoomDataGenerator implements DataGeneratorEntrypoint {
 
 		pack.addProvider(LoomModelProvider::new);
 		pack.addProvider(LoomTagGen::new);
+		pack.addProvider(RecipeGenerator::new);
+		pack.addProvider(LoomBlockLootProvider::new);
 
 
 	}

@@ -4,5 +4,10 @@
   "data": {
     "projectile": "minecraft:arrow",
     "canPickUp": false
-  }
+  },
+  "drawbacks": [{
+    "type": "effect",
+    "effect": "songweaver:song_silence",
+    "ticks": 200
+  }]
 }

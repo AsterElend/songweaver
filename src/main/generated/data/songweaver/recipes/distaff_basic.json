@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "minecraft:stick"
+    },
+    "B": {
+      "item": "minecraft:note_block"
+    }
+  },
+  "pattern": [
+    "  A",
+    " AB",
+    "A  "
+  ],
+  "result": {
+    "item": "songweaver:distaff_basic"
+  },
+  "show_notification": true
+}

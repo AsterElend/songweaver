@@ -8,10 +8,13 @@
     {
       "type": "advancement",
       "id": "minecraft:nether/brew_potion"
-    }],
+    },{"type": "item",
+    "item":  "minecraft:ancient_debris",
+    "count":  "1"}],
   "data": {
     "effect": "minecraft:resistance",
     "duration": 200,
     "amplifier": 1
   }
+
 }

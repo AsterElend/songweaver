@@ -5,13 +5,19 @@ import aster.songweaver.registry.NoteHolderItem;
 
 import aster.songweaver.registry.physical.LoomMiscRegistry;
 import aster.songweaver.system.spell.definition.Note;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.block.entity.BlockEntity;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -60,5 +66,32 @@ public class MusicStandBlockEntity extends BlockEntity implements ImplementedInv
         Inventories.readNbt(nbt, items);
     }
 
+    @Override
+    public void markDirty() {
+        super.markDirty();
+        if (world != null && !world.isClient) {
+            world.updateListeners(
+                    pos,
+                    getCachedState(),
+                    getCachedState(),
+                    Block.NOTIFY_ALL
+            );
 
+            ServerWorld worldSer = (ServerWorld) world;
+
+            worldSer.getChunkManager().markForUpdate(pos);
+        }
+    }
+
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
 }

@@ -7,5 +7,17 @@
   "item.songweaver.distaff_netherite": "Solar Distaff",
   "item.songweaver.distaff_astral": "Astral Distaff",
 
-  "death.attack.fray": "%1$s unraveled"
+  "death.attack.fray": "%1$s unraveled",
+  "item.songweaver.book_of_patterns": "Book of Patterns",
+  "item.songweaver.spindle": "Spindle",
+  "block.songweaver.transit_relay": "Transit Relay",
+  "block.songweaver.music_stand": "Music Stand",
+  "block.songweaver.grand_loom": "Grand Loom",
+  "block.songweaver.khipu_hook": "Khipu Hook",
+  "item.songweaver.sheet_music": "Sheet Music",
+  "block.songweaver.light_orb": "Light Orb",
+  "item.songweaver.khipu": "Khipu",
+  "item.songweaver.baguette_magique": "Baguette Magique",
+  "block.songweaver.bobbin": "Bobbin"
+
 }

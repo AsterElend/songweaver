@@ -1,0 +1,8 @@
+{
+  "pattern":["C_HIGH", "C_HIGH", "C_HIGH", "B", "A"],
+  "draft": "songweaver:infusion",
+  "data":{
+    "input": "minecraft:tripwire_hook",
+    "output": "songweaver:khipu_hook"
+  }
+}

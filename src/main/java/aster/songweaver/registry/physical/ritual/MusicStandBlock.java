@@ -193,7 +193,21 @@ public class MusicStandBlock extends BlockWithEntity {
         return BlockRenderType.MODEL;
     }
 
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos,
+                                BlockState newState, boolean moved) {
 
+        if (!state.isOf(newState.getBlock())) {
+            BlockEntity be = world.getBlockEntity(pos);
+
+            if (be instanceof MusicStandBlockEntity inventory) {
+                ItemScatterer.spawn(world, pos, inventory);
+                world.updateComparators(pos, this);
+            }
+        }
+
+        super.onStateReplaced(state, world, pos, newState, moved);
+    }
 
 
 }

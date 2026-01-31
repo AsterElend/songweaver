@@ -31,7 +31,7 @@ public class KhipuHookBlockEntityRenderer
 
         if (!hook.hasItem()) return;
 
-        ItemStack stack = hook.getItem();
+        ItemStack stack = hook.getStack(0);
 
         matrices.push();
 

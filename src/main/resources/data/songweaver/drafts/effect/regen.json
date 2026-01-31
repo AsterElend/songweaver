@@ -4,7 +4,11 @@
   "requirements": [{
     "type": "advancement",
     "id": "minecraft:nether/brew_potion"
-  }],
+  },
+    {
+      "type": "item",
+      "item": "minecraft:glistering_melon_slice"
+    }],
   "data": {
     "effect": "minecraft:regeneration",
     "duration": 200,

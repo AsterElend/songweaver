@@ -1,0 +1,11 @@
+{
+  "pattern": ["C", "A", "B", "B", "A", "G", "E"],
+  "ritual": "songweaver:crafting",
+  "ingredients": [{
+    "item": "minecraft:stick",
+    "count": 64
+  }],
+  "data":{
+    "item": "songweaver:spindle"
+  }
+}

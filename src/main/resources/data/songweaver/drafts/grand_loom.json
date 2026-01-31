@@ -1,0 +1,18 @@
+{
+  "pattern":["C_HIGH", "C_HIGH", "C_HIGH", "F", "F"],
+  "draft": "songweaver:infusion",
+  "data":{
+    "input": "minecraft:loom",
+    "output": "songweaver:grand_loom"
+  },
+  "requirements": [{
+    "type": "item",
+    "item": "songweaver:distaff_basic",
+    "count": 2
+  }],
+  "drawbacks": [{
+    "type": "consume_item",
+    "item": "songweaver:distaff_basic",
+    "count": 2
+  }]
+}

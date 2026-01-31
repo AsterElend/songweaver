@@ -1,0 +1,12 @@
+{
+  "pattern": ["B", "A", "B", "B", "A", "G", "E"],
+  "ingredients": [{
+    "item": "minecraft:string",
+    "count": 16
+  }],
+  "ritual": "songweaver:crafting",
+  "data":{
+    "item": "songweaver:khipu"
+  }
+
+}

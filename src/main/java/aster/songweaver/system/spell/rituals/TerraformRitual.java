@@ -20,16 +20,22 @@ public class TerraformRitual implements Ritual {
     @Override
     public void ritualCast(ServerWorld world, ServerPlayerEntity caster, GrandLoomBlockEntity loom, @Nullable JsonObject data) {
         BlockPos overridePos = SpellUtil.getKhipuPosOrLoomPosIfAbsent(loom);
+        int radius;
+        if (data == null || !data.has("radius")){
+            radius = 16;
+        } else {
+            radius = data.get("radius").getAsInt();
+        }
+
 
         if (overridePos != null){
-            vaporiseHemisphere(world, overridePos, 16, Direction.UP, LoomTags.TERRAFORM_WHITELIST);
+            vaporiseHemisphere(world, overridePos, radius, Direction.UP, LoomTags.TERRAFORM_WHITELIST);
             return;
         }
 
 
 
-        vaporiseHemisphere(world, loom.getPos(), 16, Direction.UP, LoomTags.TERRAFORM_WHITELIST);
-        return;
+        vaporiseHemisphere(world, loom.getPos(), radius, Direction.UP, LoomTags.TERRAFORM_WHITELIST);
 
     }
 

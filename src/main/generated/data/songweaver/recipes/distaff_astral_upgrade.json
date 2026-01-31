@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:nether_star"
+  },
+  "base": {
+    "item": "songweaver:distaff_netherite"
+  },
+  "result": {
+    "item": "songweaver:distaff_astral"
+  },
+  "template": []
+}

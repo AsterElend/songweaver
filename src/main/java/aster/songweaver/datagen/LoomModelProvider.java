@@ -29,6 +29,7 @@ public class LoomModelProvider extends FabricModelProvider {
         itemModelGenerator.register(LoomItems.PATTERN_BOOK, Models.GENERATED);
         itemModelGenerator.register(LoomItems.SHEET_MUSIC, Models.GENERATED);
         itemModelGenerator.register(LoomItems.KHIPU, Models.GENERATED);
+        itemModelGenerator.register(LoomItems.SPINDLE, Models.GENERATED);
 
     }
 }

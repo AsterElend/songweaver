@@ -4,6 +4,6 @@
   "data": {
     "entities": [ "minecraft:cow", "minecraft:horse", "minecraft:donkey", "minecraft:mule"
       ],
-    "cooldown": 2000
+    "cooldown": 20000
   }
 }
