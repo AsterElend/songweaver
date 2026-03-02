@@ -39,6 +39,7 @@ public class LoomItemGroup {
                         entries.add(LoomItems.KHIPU_HOOK_ITEM);
                         entries.add(LoomItems.KHIPU);
                         entries.add(LoomItems.BAGUETTE_MAGIQUE);
+                        entries.add(LoomItems.VOIDSTONE_ITEM);
                     }).build());
 
 

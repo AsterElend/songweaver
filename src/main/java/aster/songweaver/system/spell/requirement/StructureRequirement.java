@@ -10,7 +10,8 @@ import net.minecraft.util.math.Vec3i;
 import org.jetbrains.annotations.Nullable;
 import vazkii.patchouli.api.IMultiblock;
 
-public class StructureRequirement implements Requirement {
+public class
+StructureRequirement implements Requirement {
 
     private final IMultiblock structure;
 

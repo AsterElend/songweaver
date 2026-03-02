@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:overworld",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "songweaver:rolling_hills",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "songweaver:rolling_voidstone"
+    }
+  }
+}

@@ -44,6 +44,7 @@ public class LoomItems {
     );
 
     public static final Item TRANSIT_ITEM = registerBlockItem("transit_relay", TRANSIT_RELAY);
+    public static final Item VOIDSTONE_ITEM = registerBlockItem("voidstone", VOIDSTONE);
 
     public static final Item SHEET_MUSIC = registerItem("sheet_music", new NoteHolderItem(new FabricItemSettings().maxCount(1)));
 

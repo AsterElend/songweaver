@@ -13,22 +13,24 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
-
 public class HaloComponent implements AutoSyncedComponent {
 
     private final PlayerEntity player;
 
-    public HaloComponent(PlayerEntity player){
+    // Always initialize to default 16 empty slots
+    private final DefaultedList<ItemStack> stacks = DefaultedList.ofSize(16, ItemStack.EMPTY);
+
+    public HaloComponent(PlayerEntity player) {
         this.player = player;
     }
 
-    private final DefaultedList<ItemStack> stacks =
-            DefaultedList.ofSize(16, ItemStack.EMPTY);
-
-    public DefaultedList<ItemStack> getStacks(){
+    public DefaultedList<ItemStack> getStacks() {
         return stacks;
     }
+
     public void push(ItemStack stack) {
+        if (stack.isEmpty()) return;
+
         for (int i = 0; i < stacks.size(); i++) {
             if (stacks.get(i).isEmpty()) {
                 stacks.set(i, stack.copyWithCount(1));
@@ -38,7 +40,6 @@ public class HaloComponent implements AutoSyncedComponent {
         }
     }
 
-
     public ItemStack pop(@Nullable Item preferred) {
         if (preferred != null) {
             for (int i = stacks.size() - 1; i >= 0; i--) {
@@ -47,10 +48,8 @@ public class HaloComponent implements AutoSyncedComponent {
                     stacks.set(i, ItemStack.EMPTY);
                     SongweaverComponents.HALO.sync(player);
                     return s;
-
                 }
             }
-
         }
 
         // fallback: last added
@@ -62,19 +61,26 @@ public class HaloComponent implements AutoSyncedComponent {
                 return s;
             }
         }
+
         SongweaverComponents.HALO.sync(player);
         return ItemStack.EMPTY;
     }
 
     public void purge() {
         Collections.fill(stacks, ItemStack.EMPTY);
-
         SongweaverComponents.HALO.sync(player);
     }
 
     @Override
     public void readFromNbt(NbtCompound nbt) {
+        // Always start fresh
         Collections.fill(stacks, ItemStack.EMPTY);
+
+        // Check if the tag exists (old worlds might not have it)
+        if (!nbt.contains("Halo", NbtElement.LIST_TYPE)) {
+            // Old world, nothing to read → default stacks remain
+            return;
+        }
 
         NbtList list = nbt.getList("Halo", NbtElement.COMPOUND_TYPE);
 
@@ -82,12 +88,11 @@ public class HaloComponent implements AutoSyncedComponent {
             NbtCompound entry = list.getCompound(i);
             int slot = entry.getByte("Slot") & 255;
 
-            if (slot < stacks.size()) {
+            if (slot >= 0 && slot < stacks.size()) {
                 stacks.set(slot, ItemStack.fromNbt(entry));
             }
         }
     }
-
 
     @Override
     public void writeToNbt(NbtCompound nbt) {
@@ -105,6 +110,5 @@ public class HaloComponent implements AutoSyncedComponent {
 
         nbt.put("Halo", list);
     }
-
 }
 

@@ -2,8 +2,8 @@
 	"schemaVersion": 1,
 	"id": "songweaver",
 	"version": "${version}",
-	"name": "Song Weaver",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Songweaver",
+	"description": "Magic by music and weaving. Heavily inspired by Loom.",
 	"authors": [
 		"Me!"
 	],

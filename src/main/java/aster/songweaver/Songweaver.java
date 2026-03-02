@@ -1,24 +1,26 @@
 package aster.songweaver;
 
 
-import aster.songweaver.client.InputBuffer;
-import aster.songweaver.registry.*;
-
-import aster.songweaver.registry.physical.Distaff;
+import aster.songweaver.cca.HaloComponent;
+import aster.songweaver.cca.SongweaverComponents;
+import aster.songweaver.registry.LoomMultiblocks;
+import aster.songweaver.registry.MagicRegistry;
 import aster.songweaver.registry.physical.LoomItemGroup;
 import aster.songweaver.registry.physical.LoomItems;
 import aster.songweaver.registry.physical.LoomMiscRegistry;
+import aster.songweaver.system.cast.SongServerCasting;
 import aster.songweaver.system.spell.loaders.DraftReloadListener;
 import aster.songweaver.system.spell.loaders.RitualReloadListener;
-import aster.songweaver.system.cast.SongServerCasting;
 import aster.songweaver.util.SpellUtil;
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.resource.ResourceType;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -64,6 +66,8 @@ public class Songweaver implements ModInitializer {
 		LoomItemGroup.init();
 
 
+
+
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 			if (!world.isClient) {
 				return ActionResult.PASS;
@@ -102,6 +106,25 @@ public class Songweaver implements ModInitializer {
 				(dispatcher, registryAccess, environment) ->
 						SongweaverCommands.register(dispatcher)
 		);
+
+		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+			ServerPlayerEntity player = handler.player;
+
+			// Get the Halo component for this player
+			HaloComponent halo = SongweaverComponents.HALO.get(player);
+
+			// Check if the component has uninitialized/default stacks
+			boolean needsInit = halo.getStacks().stream().allMatch(ItemStack::isEmpty);
+
+			if (needsInit) {
+				// Initialize default stacks (empty inventory)
+				// This is mostly just defensive; readFromNbt already handles missing data
+				halo.purge();
+
+				// Sync with the client so the player sees it immediately
+				SongweaverComponents.HALO.sync(player);
+			}
+		});
 
 
 

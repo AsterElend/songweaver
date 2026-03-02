@@ -36,6 +36,7 @@ public class TransitRelay extends Block {
     }
 
     private void teleport(ServerPlayerEntity player) {
+
         ServerWorld targetWorld = player.getServer()
                 .getWorld(RegistryKey.of(RegistryKeys.WORLD, new Identifier("songweaver", "high_wilderness")));
 

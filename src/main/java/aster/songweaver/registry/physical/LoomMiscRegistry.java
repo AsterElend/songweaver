@@ -52,6 +52,7 @@ public class LoomMiscRegistry {
 
     public static final Block BOBBIN = registerBlock("bobbin", new BobbinBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)));
     public static final Block STARSTONE = registerBlock("starstone", new Block(FabricBlockSettings.copyOf(Blocks.BEDROCK)));
+    public static final Block VOIDSTONE = registerBlock("voidstone", new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE)));
     public static final Block TRANSIT_RELAY = registerBlock("transit_relay", new TransitRelay(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
 public static final Block RITUAL_CONTROLLER = registerBlock("grand_loom", new GrandLoomBlock(FabricBlockSettings.copyOf(Blocks.WARPED_PLANKS)));
 public static final Block MUSIC_STAND = registerBlock("music_stand", new MusicStandBlock(FabricBlockSettings.copyOf(Blocks.WARPED_PLANKS)));
