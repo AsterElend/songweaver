@@ -1,16 +1,10 @@
 package aster.songweaver.registry.physical;
 
+import aster.songweaver.Songweaver;
 import aster.songweaver.registry.SilenceEffect;
-import aster.songweaver.registry.physical.ritual.*;
-import aster.songweaver.cca.HaloComponent;
-import dev.onyxstudios.cca.api.v3.component.ComponentKey;
-import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import aster.songweaver.registry.world.ArbitraryGeodeFeature;
+import aster.songweaver.registry.world.ArbitraryGeodeFeatureConfig;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -23,9 +17,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-
-
-import static aster.songweaver.Songweaver.MOD_ID;
+import net.minecraft.world.gen.feature.Feature;
 
 public class LoomMiscRegistry {
 
@@ -48,69 +40,21 @@ public class LoomMiscRegistry {
         );
     }
 
+    public static final EntityType<LightOrbProjectileEntity> LIGHT_ORB_PROJECTILE = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier("songweaver:light_orb_projectile"),
+            FabricEntityTypeBuilder
+                    .create(SpawnGroup.MISC, LightOrbProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+                    .trackRangeBlocks(4)
+                    .build()
+    );
 
-
-    public static final Block BOBBIN = registerBlock("bobbin", new BobbinBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)));
-    public static final Block STARSTONE = registerBlock("starstone", new Block(FabricBlockSettings.copyOf(Blocks.BEDROCK)));
-    public static final Block VOIDSTONE = registerBlock("voidstone", new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE)));
-    public static final Block TRANSIT_RELAY = registerBlock("transit_relay", new TransitRelay(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
-public static final Block RITUAL_CONTROLLER = registerBlock("grand_loom", new GrandLoomBlock(FabricBlockSettings.copyOf(Blocks.WARPED_PLANKS)));
-public static final Block MUSIC_STAND = registerBlock("music_stand", new MusicStandBlock(FabricBlockSettings.copyOf(Blocks.WARPED_PLANKS)));
-public static final Block KHIPU_HOOK = registerBlock("khipu_hook", new KhipuHookBlock(FabricBlockSettings.copyOf(Blocks.TRIPWIRE_HOOK)));
-public static final Block LIGHT_ORB = registerBlock("light_orb", new LightOrbBlock(FabricBlockSettings.copyOf(Blocks.LIGHT).luminance(15).breakInstantly()));
-
-public static final EntityType<LightOrbProjectileEntity> LIGHT_ORB_PROJECTILE = Registry.register(
-        Registries.ENTITY_TYPE,
-        new Identifier("songweaver:light_orb_projectile"),
-        FabricEntityTypeBuilder
-                .create(SpawnGroup.MISC, LightOrbProjectileEntity::new)
-                .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
-                .trackRangeBlocks(4)
-                .build()
-);
-
-
-
-    public static final BlockEntityType<BobbinBlockEntity> BOBBIN_ENTITY =
-            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "bobbin_entity"),
-                    FabricBlockEntityTypeBuilder.create(BobbinBlockEntity::new,
-                            LoomMiscRegistry.BOBBIN).build(null));
-
-
-    public static final BlockEntityType<GrandLoomBlockEntity> RITUAL_ENTITY =
-            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "ritual_entity"),
-                    FabricBlockEntityTypeBuilder.create(GrandLoomBlockEntity::new,
-                            LoomMiscRegistry.RITUAL_CONTROLLER).build(null));
-
-
-
-
-    public static final BlockEntityType<MusicStandBlockEntity> MUSIC_STAND_ENTITY =
-            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "music_stand_entity"),
-                    FabricBlockEntityTypeBuilder.create(MusicStandBlockEntity::new,
-                            LoomMiscRegistry.MUSIC_STAND).build(null));
-
-
-
-    public static final BlockEntityType<KhipuHookBlockEntity> KHIPU_HOOK_ENTITY =
-            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "khipu_entity"),
-                    FabricBlockEntityTypeBuilder.create(KhipuHookBlockEntity::new,
-                            LoomMiscRegistry.KHIPU_HOOK).build(null));
-
-
-
-
-
-
-
-    public static Block registerBlock(String path, Block block){
-        return Registry.register(Registries.BLOCK, new Identifier("songweaver", path), block);
-    }
-
-
-
-
-
+    public static final Feature<ArbitraryGeodeFeatureConfig> ARBITRARY_GEODE = Registry.register(
+            Registries.FEATURE,
+            Songweaver.locate("arbitrary_geode"),
+            new ArbitraryGeodeFeature()
+    );
 
 
     public static void init() {

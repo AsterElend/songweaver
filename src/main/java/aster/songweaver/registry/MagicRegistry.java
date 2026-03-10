@@ -23,6 +23,7 @@ public class MagicRegistry {
         registerRitual(new Identifier("songweaver", "summoning"), new SummoningRitual());
         registerRitual(new Identifier("songweaver", "crafting"), new CraftingRitual());
         registerRitual(new Identifier("songweaver", "terraform"), new TerraformRitual());
+        registerRitual(new Identifier("songweaver", "geode"), new GeodeRitual());
 
 
 

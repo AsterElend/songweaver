@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "songweaver:block/stripped_fractal_log_top",
+    "side": "songweaver:block/stripped_fractal_log"
+  }
+}

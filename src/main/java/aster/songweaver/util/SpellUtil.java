@@ -3,10 +3,9 @@ package aster.songweaver.util;
 import aster.songweaver.client.InputBuffer;
 import aster.songweaver.registry.LoomTags;
 import aster.songweaver.registry.NoteHolderItem;
-import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
-import aster.songweaver.registry.physical.ritual.KhipuHookBlockEntity;
+import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
+import aster.songweaver.registry.physical.be.KhipuHookBlockEntity;
 import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.spell.definition.Note;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -31,6 +30,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.WorldEvents;
 import org.jetbrains.annotations.Nullable;
 
@@ -203,5 +203,25 @@ public class SpellUtil {
         return allowedTargets;
 
     }
+
+    @Nullable
+    public static Vec3d findSafeLanding(ServerWorld world, BlockPos base) {
+
+        for (int yOffset = 1; yOffset <= 3; yOffset++) {
+            BlockPos pos = base.up(yOffset);
+
+            if (world.getBlockState(pos).isAir()
+                    && world.getBlockState(pos.up()).isAir()) {
+
+                return Vec3d.ofBottomCenter(pos);
+            }
+        }
+
+        return null;
+    }
+
+
+
+
 
 }

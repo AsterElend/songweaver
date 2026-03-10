@@ -1,7 +1,7 @@
 package aster.songweaver.client;
 
-import aster.songweaver.registry.physical.ritual.MusicStandBlock;
-import aster.songweaver.registry.physical.ritual.MusicStandBlockEntity;
+import aster.songweaver.registry.physical.block.MusicStandBlock;
+import aster.songweaver.registry.physical.be.MusicStandBlockEntity;
 import aster.songweaver.system.spell.definition.Note;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;

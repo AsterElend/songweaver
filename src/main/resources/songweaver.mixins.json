@@ -3,6 +3,7 @@
   "package": "aster.songweaver.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BanishExperimentalMixin",
     "DistaffIntercept"
   ],
   "injectors": {

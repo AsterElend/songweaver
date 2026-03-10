@@ -1,6 +1,8 @@
 package aster.songweaver.registry.physical;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -23,23 +25,13 @@ public class LoomItemGroup {
                     .displayName(Text.translatable("itemgroup.songweaver.creative_tab"))
                     .icon(() -> new ItemStack(LoomItems.PATTERN_BOOK))
                     .entries((displayContext, entries) -> {
-                        entries.add(LoomItems.PATTERN_BOOK);
-                        entries.add(LoomItems.DISTAFF_BASIC);
-                        entries.add(LoomItems.DISTAFF_IRON);
-                        entries.add(LoomItems.DISTAFF_DIAMOND);
-                        entries.add(LoomItems.DISTAFF_NETHERITE);
-                        entries.add(LoomItems.DISTAFF_ASTRAL);
-                        entries.add(LoomItems.BOBBIN_ITEM);
-                        entries.add(LoomItems.CONTROLLER_ITEM);
-                        entries.add(LoomItems.SPINDLE);
-                        entries.add(LoomItems.STARSTONE_ITEM);
-                        entries.add(LoomItems.TRANSIT_ITEM);
-                        entries.add(LoomItems.MUSIC_STAND_ITEM);
-                        entries.add(LoomItems.SHEET_MUSIC);
-                        entries.add(LoomItems.KHIPU_HOOK_ITEM);
-                        entries.add(LoomItems.KHIPU);
-                        entries.add(LoomItems.BAGUETTE_MAGIQUE);
-                        entries.add(LoomItems.VOIDSTONE_ITEM);
+                        for (Item item : LoomItems.LOOM_ITEMS){
+                            entries.add(item);
+                        }
+                        for (Block block: LoomBlockStuff.LOOM_BLOCKS){
+                            entries.add(block);
+                        }
+
                     }).build());
 
 

@@ -1,0 +1,30 @@
+{
+  "pattern": ["G", "E", "A", "D", "E"],
+  "ritual": "songweaver:geode",
+  "duration": 1,
+  "interval": 1,
+
+  "ingredients": [
+    {
+      "item": "minecraft:smooth_basalt",
+      "count": 128
+    },
+    {
+      "item": "minecraft:calcite",
+      "count": 128
+    }
+  ],
+
+  "drawbacks": [
+    {
+      "type": "effect",
+      "effect": "songweaver:song_silence",
+      "ticks": 20000,
+      "amplifier": 0
+    }
+  ],
+  "data": {
+    "inner": "minecraft:amethyst_block",
+    "budding": "minecraft:budding_amethyst"
+  }
+}

@@ -3,7 +3,7 @@ package aster.songweaver.system.cast;
 import aster.songweaver.registry.LoomTags;
 import aster.songweaver.registry.NoteHolderItem;
 import aster.songweaver.registry.physical.LoomMiscRegistry;
-import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
+import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
 import aster.songweaver.system.spell.loaders.RitualReloadListener;
 import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.spell.definition.Note;

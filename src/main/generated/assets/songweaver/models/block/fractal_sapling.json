@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "songweaver:block/fractal_sapling"
+  }
+}

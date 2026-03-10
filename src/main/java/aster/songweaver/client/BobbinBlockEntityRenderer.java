@@ -1,7 +1,7 @@
 package aster.songweaver.client;
 
 
-import aster.songweaver.registry.physical.ritual.BobbinBlockEntity;
+import aster.songweaver.registry.physical.be.BobbinBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

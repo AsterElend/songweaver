@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "songweaver:block/fractal_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "songweaver:block/fractal_wood"
+    },
+    "axis=z": {
+      "model": "songweaver:block/fractal_wood",
+      "x": 90
+    }
+  }
+}

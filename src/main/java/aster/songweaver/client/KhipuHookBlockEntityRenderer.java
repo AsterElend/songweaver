@@ -1,7 +1,7 @@
 package aster.songweaver.client;
 
-import aster.songweaver.registry.physical.ritual.KhipuHookBlock;
-import aster.songweaver.registry.physical.ritual.KhipuHookBlockEntity;
+import aster.songweaver.registry.physical.block.KhipuHookBlock;
+import aster.songweaver.registry.physical.be.KhipuHookBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

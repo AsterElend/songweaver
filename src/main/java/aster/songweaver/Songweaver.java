@@ -3,11 +3,17 @@ package aster.songweaver;
 
 import aster.songweaver.cca.HaloComponent;
 import aster.songweaver.cca.SongweaverComponents;
+import aster.songweaver.registry.DimensionStuff;
 import aster.songweaver.registry.LoomMultiblocks;
 import aster.songweaver.registry.MagicRegistry;
+import aster.songweaver.registry.physical.LoomBlockStuff;
 import aster.songweaver.registry.physical.LoomItemGroup;
 import aster.songweaver.registry.physical.LoomItems;
 import aster.songweaver.registry.physical.LoomMiscRegistry;
+import aster.songweaver.registry.world.LoomConfiguredFeatures;
+import aster.songweaver.registry.world.trees.LoomFoliagePlacers;
+import aster.songweaver.registry.world.trees.LoomTrunkPlacers;
+import aster.songweaver.system.LoomRuleTests;
 import aster.songweaver.system.cast.SongServerCasting;
 import aster.songweaver.system.spell.loaders.DraftReloadListener;
 import aster.songweaver.system.spell.loaders.RitualReloadListener;
@@ -19,6 +25,7 @@ import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
@@ -46,11 +53,15 @@ public class Songweaver implements ModInitializer {
 		// Proceed with mild caution.
 
 
+
 		LOGGER.info("Hello Fabric world!");
 		LoomItems.registerItems();
 
 		MagicRegistry.init();
 		LoomMiscRegistry.init();
+		LoomBlockStuff.init();
+		LoomTrunkPlacers.init();
+		LoomFoliagePlacers.init();
 
 
 		SongServerCasting.registerServer();
@@ -61,12 +72,14 @@ public class Songweaver implements ModInitializer {
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA)
 				.registerReloadListener(new RitualReloadListener());
 
+
 		LoomMultiblocks.init();
 
 		LoomItemGroup.init();
 
+		DimensionStuff.init();
 
-
+		LoomRuleTests.register();
 
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 			if (!world.isClient) {

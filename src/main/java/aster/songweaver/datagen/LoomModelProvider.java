@@ -1,5 +1,6 @@
 package aster.songweaver.datagen;
 
+import aster.songweaver.registry.physical.LoomBlockStuff;
 import aster.songweaver.registry.physical.LoomItems;
 import aster.songweaver.registry.physical.LoomMiscRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -14,23 +15,31 @@ public class LoomModelProvider extends FabricModelProvider {
     }
 
     @Override
-    public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        blockStateModelGenerator.registerSimpleCubeAll(LoomMiscRegistry.STARSTONE);
-        blockStateModelGenerator.registerSimpleCubeAll(LoomMiscRegistry.VOIDSTONE);
-        blockStateModelGenerator.registerSimpleCubeAll(LoomMiscRegistry.TRANSIT_RELAY);
+    public void generateBlockStateModels(BlockStateModelGenerator Bgenerator) {
+        Bgenerator.registerSimpleCubeAll(LoomBlockStuff.STARSTONE);
+        Bgenerator.registerSimpleCubeAll(LoomBlockStuff.VOIDSTONE);
+        Bgenerator.registerSimpleCubeAll(LoomBlockStuff.TRANSIT_RELAY);
+        Bgenerator.registerSimpleCubeAll(LoomBlockStuff.FRACTAL_PLANKS);
+        Bgenerator.registerSimpleCubeAll(LoomBlockStuff.FRACTAL_LEAVES);
+        Bgenerator.registerLog(LoomBlockStuff.FRACTAL_LOG).log(LoomBlockStuff.FRACTAL_LOG).wood(LoomBlockStuff.FRACTAL_WOOD);
+        Bgenerator.registerLog(LoomBlockStuff.STRIPPED_FRACTAL_LOG).log(LoomBlockStuff.STRIPPED_FRACTAL_LOG).wood(LoomBlockStuff.STRIPPED_FRACTAL_WOOD);
+        Bgenerator.registerTintableCross(LoomBlockStuff.FRACTAL_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
+
 
     }
 
     @Override
-    public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        itemModelGenerator.register(LoomItems.DISTAFF_BASIC, Models.HANDHELD_ROD);
-        itemModelGenerator.register(LoomItems.DISTAFF_IRON, Models.HANDHELD_ROD);
-        itemModelGenerator.register(LoomItems.DISTAFF_DIAMOND, Models.HANDHELD_ROD);
-        itemModelGenerator.register(LoomItems.DISTAFF_NETHERITE, Models.HANDHELD_ROD);
-        itemModelGenerator.register(LoomItems.PATTERN_BOOK, Models.GENERATED);
-        itemModelGenerator.register(LoomItems.SHEET_MUSIC, Models.GENERATED);
-        itemModelGenerator.register(LoomItems.KHIPU, Models.GENERATED);
-        itemModelGenerator.register(LoomItems.SPINDLE, Models.GENERATED);
+    public void generateItemModels(ItemModelGenerator Igenerator) {
+        Igenerator.register(LoomItems.DISTAFF_BASIC, Models.HANDHELD_ROD);
+        Igenerator.register(LoomItems.DISTAFF_IRON, Models.HANDHELD_ROD);
+        Igenerator.register(LoomItems.DISTAFF_DIAMOND, Models.HANDHELD_ROD);
+        Igenerator.register(LoomItems.DISTAFF_NETHERITE, Models.HANDHELD_ROD);
+        Igenerator.register(LoomItems.PATTERN_BOOK, Models.GENERATED);
+        Igenerator.register(LoomItems.SHEET_MUSIC, Models.GENERATED);
+        Igenerator.register(LoomItems.KHIPU, Models.GENERATED);
+        Igenerator.register(LoomItems.SPINDLE, Models.GENERATED);
+        Igenerator.register(LoomItems.BAGUETTE_MAGIQUE, Models.HANDHELD_ROD);
+
 
     }
 }

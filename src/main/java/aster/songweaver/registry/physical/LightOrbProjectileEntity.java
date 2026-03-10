@@ -21,7 +21,7 @@ public class LightOrbProjectileEntity extends ThrownEntity {
 
             // Only place if air
             if (this.getWorld().isAir(placePos)) {
-                this.getWorld().setBlockState(placePos, LoomMiscRegistry.LIGHT_ORB.getDefaultState(), 3);
+                this.getWorld().setBlockState(placePos, LoomBlockStuff.LIGHT_ORB.getDefaultState(), 3);
             }
 
             this.remove(RemovalReason.KILLED);

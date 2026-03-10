@@ -2,18 +2,19 @@ package aster.songweaver.registry.physical;
 
 import aster.songweaver.Songweaver;
 import aster.songweaver.registry.NoteHolderItem;
+import aster.songweaver.registry.physical.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-import static aster.songweaver.Songweaver.MOD_ID;
-import static aster.songweaver.registry.physical.LoomMiscRegistry.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoomItems {
+    public static List<Item> LOOM_ITEMS = new ArrayList<>();
+
     public static final Item DISTAFF_BASIC = registerItem("distaff_basic", new Distaff(new FabricItemSettings().maxCount(1)));
     public static final Item DISTAFF_IRON = registerItem("distaff_iron", new Distaff(new FabricItemSettings().maxCount(1)));
     public static final Item DISTAFF_DIAMOND = registerItem("distaff_diamond", new Distaff(new FabricItemSettings().maxCount(1)));
@@ -23,33 +24,14 @@ public class LoomItems {
     public static final Item SPINDLE = registerItem("spindle", new SpindleItem(new FabricItemSettings().maxCount(1)));
     public static final Item PATTERN_BOOK = registerItem("book_of_patterns", new PatternBookItem(new FabricItemSettings().maxCount(1)));
     public static final Item KHIPU = registerItem("khipu", new KhipuItem(new FabricItemSettings().maxCount(1)));
+    public static final Item TREE_TESTING_AXE = registerItem("testing_axe", new TreeTestingAxe(new FabricItemSettings().maxCount(1)));
 
 
-    public static final Item BOBBIN_ITEM = Registry.register(
-            Registries.ITEM,
-            new Identifier(MOD_ID, "bobbin"),
-            new BlockItem(BOBBIN, new FabricItemSettings())
-    );
 
-   public static final Item CONTROLLER_ITEM = Registry.register(
-            Registries.ITEM,
-            new Identifier(MOD_ID, "grand_loom"),
-            new BlockItem(RITUAL_CONTROLLER, new FabricItemSettings())
-    );
-
- public static final Item STARSTONE_ITEM = Registry.register(
-            Registries.ITEM,
-            new Identifier(MOD_ID, "starstone"),
-            new BlockItem(STARSTONE, new FabricItemSettings())
-    );
-
-    public static final Item TRANSIT_ITEM = registerBlockItem("transit_relay", TRANSIT_RELAY);
-    public static final Item VOIDSTONE_ITEM = registerBlockItem("voidstone", VOIDSTONE);
 
     public static final Item SHEET_MUSIC = registerItem("sheet_music", new NoteHolderItem(new FabricItemSettings().maxCount(1)));
 
-    public static final Item MUSIC_STAND_ITEM = registerBlockItem("music_stand", MUSIC_STAND);
-    public static final Item KHIPU_HOOK_ITEM = registerBlockItem("khipu_hook", KHIPU_HOOK);
+
 
 
 
@@ -60,9 +42,7 @@ public class LoomItems {
     }
 
     public static Item registerItem(String name, Item item) {
+        LOOM_ITEMS.add(item);
         return Registry.register(Registries.ITEM, new Identifier(Songweaver.MOD_ID, name), item); }
 
-    public static Item registerBlockItem(String name, Block block){
-        return Registry.register(Registries.ITEM, new Identifier("songweaver", name), new BlockItem(block, new FabricItemSettings()));
-    }
 }

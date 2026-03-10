@@ -1,6 +1,6 @@
 package aster.songweaver.system.spell.requirement;
 
-import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
+import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
 import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.spell.definition.Requirement;
 import net.minecraft.advancement.Advancement;

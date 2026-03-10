@@ -2,6 +2,7 @@ package aster.songweaver;
 
 import aster.songweaver.client.*;
 import aster.songweaver.registry.physical.LightOrbProjectileEntity;
+import aster.songweaver.registry.physical.LoomBlockStuff;
 import aster.songweaver.registry.physical.LoomMiscRegistry;
 import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.cast.SongServerCasting;
@@ -27,13 +28,16 @@ public class SongweaverClient implements ClientModInitializer {
         SongHud.init();
         BonusBackspaceIntercept.init();
 
-        BlockRenderLayerMap.INSTANCE.putBlock(LoomMiscRegistry.BOBBIN, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(LoomMiscRegistry.RITUAL_CONTROLLER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(LoomBlockStuff.BOBBIN, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(LoomBlockStuff.RITUAL_CONTROLLER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(LoomBlockStuff.FRACTAL_LEAVES, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(LoomBlockStuff.FRACTAL_SAPLING, RenderLayer.getCutout());
 
 
-        BlockEntityRendererFactories.register(LoomMiscRegistry.BOBBIN_ENTITY, BobbinBlockEntityRenderer::new);
-        BlockEntityRendererFactories.register(LoomMiscRegistry.MUSIC_STAND_ENTITY, MusicStandRenderer::new);
-        BlockEntityRendererFactories.register(LoomMiscRegistry.KHIPU_HOOK_ENTITY, KhipuHookBlockEntityRenderer::new);
+
+        BlockEntityRendererFactories.register(LoomBlockStuff.BOBBIN_ENTITY, BobbinBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(LoomBlockStuff.MUSIC_STAND_ENTITY, MusicStandRenderer::new);
+        BlockEntityRendererFactories.register(LoomBlockStuff.KHIPU_HOOK_ENTITY, KhipuHookBlockEntityRenderer::new);
 
         EntityRendererRegistry.register(LoomMiscRegistry.LIGHT_ORB_PROJECTILE, LightOrbProjectileRenderer::new);
 

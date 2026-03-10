@@ -1,6 +1,7 @@
 package aster.songweaver.registry;
 
 import aster.songweaver.Songweaver;
+import aster.songweaver.registry.physical.LoomBlockStuff;
 import aster.songweaver.registry.physical.LoomMiscRegistry;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.tag.BlockTags;
@@ -199,7 +200,7 @@ public class LoomMultiblocks {
                 'P', api.predicateMatcher(Blocks.POLISHED_DEEPSLATE, state -> state.isIn(LoomTags.POLISHED_STONE) ),
                 'L', api.predicateMatcher(Blocks.POLISHED_BASALT, state -> state.isIn(BlockTags.LOGS)|| state.isOf(Blocks.POLISHED_BASALT)),
                 'G', Blocks.GLOWSTONE,
-                'S', LoomMiscRegistry.RITUAL_CONTROLLER,
+                'S', LoomBlockStuff.RITUAL_CONTROLLER,
                 '0', api.predicateMatcher(Blocks.POLISHED_DEEPSLATE, state -> state.isIn(LoomTags.POLISHED_STONE))
         );
 

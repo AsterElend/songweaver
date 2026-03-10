@@ -1,6 +1,6 @@
 package aster.songweaver.system.spell.definition;
 
-import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
+import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
 

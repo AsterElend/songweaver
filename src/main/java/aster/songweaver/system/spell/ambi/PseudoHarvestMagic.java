@@ -1,7 +1,7 @@
 package aster.songweaver.system.spell.ambi;
 
 import aster.songweaver.registry.physical.LoomMiscRegistry;
-import aster.songweaver.registry.physical.ritual.GrandLoomBlockEntity;
+import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
 import aster.songweaver.system.cast.SongServerCasting;
 import aster.songweaver.system.spell.definition.CastFeedback;
 import aster.songweaver.system.spell.definition.Draft;

@@ -15,6 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 
+import static aster.songweaver.util.SpellUtil.findSafeLanding;
+
 public class LodestoneTPDraft implements Draft {
 
     @Override
@@ -88,21 +90,7 @@ public class LodestoneTPDraft implements Draft {
         return new Identifier(stack.getNbt().getString("LodestoneDimension"));
     }
 
-    @Nullable
-    private static Vec3d findSafeLanding(ServerWorld world, BlockPos base) {
 
-        for (int yOffset = 1; yOffset <= 3; yOffset++) {
-            BlockPos pos = base.up(yOffset);
-
-            if (world.getBlockState(pos).isAir()
-                    && world.getBlockState(pos.up()).isAir()) {
-
-                return Vec3d.ofBottomCenter(pos);
-            }
-        }
-
-        return null;
-    }
 
 
 
