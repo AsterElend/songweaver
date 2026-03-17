@@ -2,7 +2,7 @@ package aster.songweaver.util;
 
 import aster.songweaver.client.InputBuffer;
 import aster.songweaver.registry.LoomTags;
-import aster.songweaver.registry.NoteHolderItem;
+import aster.songweaver.api.NoteHolderItem;
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
 import aster.songweaver.registry.physical.be.KhipuHookBlockEntity;
 import aster.songweaver.system.cast.SongServerCasting;

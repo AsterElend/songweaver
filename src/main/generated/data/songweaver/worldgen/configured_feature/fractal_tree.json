@@ -9,7 +9,8 @@
       }
     },
     "foliage_placer": {
-      "type": "songweaver:fractal_leaves",
+      "type": "minecraft:blob_foliage_placer",
+      "height": 4,
       "offset": 1,
       "radius": 4
     },

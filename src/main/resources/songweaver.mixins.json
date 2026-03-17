@@ -3,8 +3,10 @@
   "package": "aster.songweaver.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "BanishExperimentalMixin",
-    "DistaffIntercept"
+    "DistaffIntercept",
+    "LightfootStepIntercept",
+    "LightfootTrampleIntercept",
+    "UnravelingClearPrevention"
   ],
   "injectors": {
     "defaultRequire": 1

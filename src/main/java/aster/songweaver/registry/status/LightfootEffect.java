@@ -1,14 +1,13 @@
-package aster.songweaver.registry;
+package aster.songweaver.registry.status;
 
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 
-public class SilenceEffect extends StatusEffect {
-    public SilenceEffect() {
+public class LightfootEffect extends StatusEffect {
+    public LightfootEffect(){
         super(
-                StatusEffectCategory.HARMFUL,
-                0x5A5A5A // muted gray
-        );
+        StatusEffectCategory.BENEFICIAL,
+        0xa7f4fc);
     }
 
     @Override

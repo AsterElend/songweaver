@@ -10,7 +10,6 @@ import aster.songweaver.registry.physical.LoomBlockStuff;
 import aster.songweaver.registry.physical.LoomItemGroup;
 import aster.songweaver.registry.physical.LoomItems;
 import aster.songweaver.registry.physical.LoomMiscRegistry;
-import aster.songweaver.registry.world.LoomConfiguredFeatures;
 import aster.songweaver.registry.world.trees.LoomFoliagePlacers;
 import aster.songweaver.registry.world.trees.LoomTrunkPlacers;
 import aster.songweaver.system.LoomRuleTests;
@@ -18,6 +17,9 @@ import aster.songweaver.system.cast.SongServerCasting;
 import aster.songweaver.system.spell.loaders.DraftReloadListener;
 import aster.songweaver.system.spell.loaders.RitualReloadListener;
 import aster.songweaver.util.SpellUtil;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -25,7 +27,7 @@ import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.Registry;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
@@ -33,6 +35,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class Songweaver implements ModInitializer {
 	public static final String MOD_ID = "songweaver";
@@ -138,6 +143,7 @@ public class Songweaver implements ModInitializer {
 				SongweaverComponents.HALO.sync(player);
 			}
 		});
+
 
 
 

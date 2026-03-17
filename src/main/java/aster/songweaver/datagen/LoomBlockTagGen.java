@@ -15,8 +15,8 @@ public class LoomBlockTagGen extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        getOrCreateTagBuilder(BlockTags.LOGS).add(LoomBlockStuff.FRACTAL_LOG);
-        getOrCreateTagBuilder(BlockTags.LEAVES).add(LoomBlockStuff.FRACTAL_LEAVES);
-        getOrCreateTagBuilder(BlockTags.SAPLINGS).add(LoomBlockStuff.FRACTAL_SAPLING);
+        getOrCreateTagBuilder(BlockTags.LOGS).add(LoomBlockStuff.FRACTAL_LOG).add(LoomBlockStuff.WATCHER_LOG);
+        getOrCreateTagBuilder(BlockTags.LEAVES).add(LoomBlockStuff.FRACTAL_LEAVES).add(LoomBlockStuff.WATCHER_LEAVES);
+        getOrCreateTagBuilder(BlockTags.SAPLINGS).add(LoomBlockStuff.FRACTAL_SAPLING).add(LoomBlockStuff.WATCHER_SAPLING);
     }
 }

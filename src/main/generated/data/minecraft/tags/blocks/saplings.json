@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "songweaver:fractal_sapling"
+    "songweaver:fractal_sapling",
+    "songweaver:watcher_sapling"
   ]
 }

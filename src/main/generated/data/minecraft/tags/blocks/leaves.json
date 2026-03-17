@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "songweaver:fractal_leaves"
+    "songweaver:fractal_leaves",
+    "songweaver:watcher_leaves"
   ]
 }

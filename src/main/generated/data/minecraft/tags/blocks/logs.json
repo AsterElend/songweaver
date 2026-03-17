@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "songweaver:fractal_log"
+    "songweaver:fractal_log",
+    "songweaver:watcher_log"
   ]
 }

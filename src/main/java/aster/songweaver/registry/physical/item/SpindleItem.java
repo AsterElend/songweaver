@@ -1,6 +1,6 @@
 package aster.songweaver.registry.physical.item;
 
-import aster.songweaver.registry.NoteHolderItem;
+import aster.songweaver.api.NoteHolderItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;

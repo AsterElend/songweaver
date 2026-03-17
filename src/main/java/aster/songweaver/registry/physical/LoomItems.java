@@ -1,7 +1,7 @@
 package aster.songweaver.registry.physical;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.registry.NoteHolderItem;
+import aster.songweaver.api.NoteHolderItem;
 import aster.songweaver.registry.physical.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
@@ -30,6 +30,7 @@ public class LoomItems {
 
 
     public static final Item SHEET_MUSIC = registerItem("sheet_music", new NoteHolderItem(new FabricItemSettings().maxCount(1)));
+    public static final Item THREAD = registerItem("thread", new AriadneThread(new FabricItemSettings().maxCount(1)));
 
 
 

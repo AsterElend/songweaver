@@ -1,4 +1,4 @@
-package aster.songweaver.registry;
+package aster.songweaver.api;
 
 import aster.songweaver.system.spell.definition.Note;
 import net.minecraft.client.item.TooltipContext;

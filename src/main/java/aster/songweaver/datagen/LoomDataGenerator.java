@@ -31,6 +31,12 @@ public class LoomDataGenerator implements DataGeneratorEntrypoint {
 	public void buildRegistry(RegistryBuilder builder){
 		builder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, LoomConfiguredFeatures::bootstrap);
 		builder.addRegistry(RegistryKeys.PLACED_FEATURE, LoomPlacedFeatures::bootstrap);
-		builder.addRegistry(RegistryKeys.DIMENSION_TYPE, LoomDimensions::boostrapType);
+		builder.addRegistry(RegistryKeys.CHUNK_GENERATOR_SETTINGS, LoomNoiseSettings::bootstrap);
+		builder.addRegistry(RegistryKeys.DIMENSION_TYPE, LoomDimensions::bootstrapType);
+		builder.addRegistry(RegistryKeys.BIOME, LoomDimensions::bootstrapBiome);
+		builder.addRegistry(RegistryKeys.DIMENSION, LoomDimensions::bootstrapOptions);
+
+
+
 	}
 }

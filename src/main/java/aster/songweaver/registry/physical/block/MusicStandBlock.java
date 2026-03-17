@@ -1,5 +1,6 @@
 package aster.songweaver.registry.physical.block;
 
+import aster.songweaver.api.PedestalLikeBlock;
 import aster.songweaver.registry.physical.be.MusicStandBlockEntity;
 import aster.songweaver.util.VoxelShapeUtil;
 import net.minecraft.block.*;
@@ -13,10 +14,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -29,7 +27,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
-public class MusicStandBlock extends BlockWithEntity {
+public class MusicStandBlock extends PedestalLikeBlock {
 
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
@@ -88,41 +86,7 @@ public class MusicStandBlock extends BlockWithEntity {
         );
     }
 
-    @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos,
-                              PlayerEntity player, Hand hand, BlockHitResult hit) {
 
-        if (state.get(HALF) == DoubleBlockHalf.LOWER) {
-            pos = pos.up();
-            state = world.getBlockState(pos);
-        }
-
-        BlockEntity be = world.getBlockEntity(pos);
-        if (!(be instanceof MusicStandBlockEntity stand)) {
-            return ActionResult.PASS;
-        }
-
-        // Same logic as before...
-
-
-        ItemStack held = player.getStackInHand(hand);
-
-        if (!world.isClient) {
-            // insert
-            if (!held.isEmpty() && stand.getStack(0).isEmpty()) {
-                stand.setStack(0, held.split(1));
-                return ActionResult.CONSUME;
-            }
-
-            // extract
-            if (held.isEmpty() && !stand.getStack(0).isEmpty()) {
-                player.setStackInHand(hand, stand.removeStack(0));
-                return ActionResult.CONSUME;
-            }
-        }
-
-        return ActionResult.SUCCESS;
-    }
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
@@ -143,8 +107,8 @@ public class MusicStandBlock extends BlockWithEntity {
         super.onBreak(world, pos, state, player);
     }
 
-    private static VoxelShape offsetDown(VoxelShape shape, double yOffset) {
-        return shape.offset(0, -yOffset, 0);
+    private static VoxelShape offsetDown(VoxelShape shape) {
+        return shape.offset(0, -1.0, 0);
     }
 
 
@@ -172,7 +136,7 @@ public class MusicStandBlock extends BlockWithEntity {
 
         if (state.get(HALF) == DoubleBlockHalf.UPPER) {
             // Shift the shape down by 1 so it visually matches the lower block
-            return offsetDown(shape, 1.0);
+            return offsetDown(shape);
         }
 
         return shape; // lower block: normal
@@ -186,27 +150,6 @@ public class MusicStandBlock extends BlockWithEntity {
                 : null;
     }
 
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state){
-        return BlockRenderType.MODEL;
-    }
-
-    @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos,
-                                BlockState newState, boolean moved) {
-
-        if (!state.isOf(newState.getBlock())) {
-            BlockEntity be = world.getBlockEntity(pos);
-
-            if (be instanceof MusicStandBlockEntity inventory) {
-                ItemScatterer.spawn(world, pos, inventory);
-                world.updateComparators(pos, this);
-            }
-        }
-
-        super.onStateReplaced(state, world, pos, newState, moved);
-    }
 
 
 }

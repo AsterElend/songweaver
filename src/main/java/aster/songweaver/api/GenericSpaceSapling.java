@@ -1,7 +1,7 @@
-package aster.songweaver.registry.physical;
+package aster.songweaver.api;
 
+import aster.songweaver.registry.physical.LoomBlockStuff;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LoomBlock;
 import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.util.math.BlockPos;

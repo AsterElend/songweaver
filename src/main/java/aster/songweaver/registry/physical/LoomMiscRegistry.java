@@ -1,7 +1,10 @@
 package aster.songweaver.registry.physical;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.registry.SilenceEffect;
+import aster.songweaver.registry.status.AmberStepsEffect;
+import aster.songweaver.registry.status.LightfootEffect;
+import aster.songweaver.registry.status.SilenceEffect;
+import aster.songweaver.registry.status.UnravelingEffect;
 import aster.songweaver.registry.world.ArbitraryGeodeFeature;
 import aster.songweaver.registry.world.ArbitraryGeodeFeatureConfig;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -29,6 +32,33 @@ public class LoomMiscRegistry {
                     new Identifier("songweaver", "song_silence"),
                     new SilenceEffect()
             );
+
+
+      public static final StatusEffect AMBER_STEPS =
+            Registry.register(
+                    Registries.STATUS_EFFECT,
+                    new Identifier("songweaver", "amber_steps"),
+                    new AmberStepsEffect()
+            );
+
+
+      public static final StatusEffect LIGHTFOOT =
+            Registry.register(
+                    Registries.STATUS_EFFECT,
+                    new Identifier("songweaver", "lightfoot"),
+                    new LightfootEffect()
+            );
+
+
+  public static final StatusEffect UNRAVELING =
+            Registry.register(
+                    Registries.STATUS_EFFECT,
+                    new Identifier("songweaver", "unraveling"),
+                    new UnravelingEffect()
+            );
+
+
+
 
     public static RegistryKey<DamageType> FRAY = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("songweaver:fray"));
 

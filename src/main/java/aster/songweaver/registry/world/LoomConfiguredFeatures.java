@@ -4,6 +4,7 @@ import aster.songweaver.Songweaver;
 import aster.songweaver.registry.physical.LoomBlockStuff;
 import aster.songweaver.registry.world.trees.FractalFoliagePlacer;
 import aster.songweaver.registry.world.trees.FractalTreeTrunkPlacer;
+import io.netty.util.Constant;
 import net.minecraft.block.LoomBlock;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
@@ -14,11 +15,16 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.trunk.DarkOakTrunkPlacer;
+
+import java.sql.Blob;
 
 public class LoomConfiguredFeatures {
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> FRACTAL_TREE_KEY = registerKey("fractal_tree");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> WATCHER_TREE_KEY = registerKey("watcher_tree");
 
 
     public static void bootstrap(Registerable<ConfiguredFeature<?,?>> context){
@@ -26,8 +32,16 @@ public class LoomConfiguredFeatures {
                 BlockStateProvider.of(LoomBlockStuff.FRACTAL_LOG),
                 new FractalTreeTrunkPlacer(2, 1, 0),
                 BlockStateProvider.of(LoomBlockStuff.FRACTAL_LEAVES),
-                new FractalFoliagePlacer(ConstantIntProvider.create(4), ConstantIntProvider.create(1)),
+                new BlobFoliagePlacer(ConstantIntProvider.create(4), ConstantIntProvider.create(1), 4),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
+
+        register(context, WATCHER_TREE_KEY, Feature.TREE, new TreeFeatureConfig.Builder(
+                BlockStateProvider.of(LoomBlockStuff.WATCHER_LOG),
+                new DarkOakTrunkPlacer(3, 4, 5),
+                BlockStateProvider.of(LoomBlockStuff.WATCHER_LEAVES),
+                new BlobFoliagePlacer(ConstantIntProvider.create(4), ConstantIntProvider.create(2), 3),
+                new TwoLayersFeatureSize(1, 0, 2)
+        ).build());
     }
 
 

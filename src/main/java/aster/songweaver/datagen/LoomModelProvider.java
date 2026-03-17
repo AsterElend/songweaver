@@ -25,6 +25,14 @@ public class LoomModelProvider extends FabricModelProvider {
         Bgenerator.registerLog(LoomBlockStuff.STRIPPED_FRACTAL_LOG).log(LoomBlockStuff.STRIPPED_FRACTAL_LOG).wood(LoomBlockStuff.STRIPPED_FRACTAL_WOOD);
         Bgenerator.registerTintableCross(LoomBlockStuff.FRACTAL_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
 
+         Bgenerator.registerSimpleCubeAll(LoomBlockStuff.WATCHER_PLANKS);
+        Bgenerator.registerSimpleCubeAll(LoomBlockStuff.WATCHER_LEAVES);
+        Bgenerator.registerLog(LoomBlockStuff.WATCHER_LOG).log(LoomBlockStuff.WATCHER_LOG).wood(LoomBlockStuff.WATCHER_WOOD);
+        Bgenerator.registerLog(LoomBlockStuff.STRIPPED_WATCHER_LOG).log(LoomBlockStuff.STRIPPED_WATCHER_LOG).wood(LoomBlockStuff.STRIPPED_WATCHER_WOOD);
+        Bgenerator.registerTintableCross(LoomBlockStuff.WATCHER_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
+
+
+
 
     }
 
@@ -39,6 +47,7 @@ public class LoomModelProvider extends FabricModelProvider {
         Igenerator.register(LoomItems.KHIPU, Models.GENERATED);
         Igenerator.register(LoomItems.SPINDLE, Models.GENERATED);
         Igenerator.register(LoomItems.BAGUETTE_MAGIQUE, Models.HANDHELD_ROD);
+        Igenerator.register(LoomItems.THREAD, Models.GENERATED);
 
 
     }

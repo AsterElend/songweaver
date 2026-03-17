@@ -1,8 +1,11 @@
 package aster.songweaver.registry.physical.block;
 
+import aster.songweaver.api.DimensionTravel;
 import aster.songweaver.registry.physical.LoomBlockStuff;
-import net.minecraft.block.Block;
+import aster.songweaver.registry.physical.be.EmptyBlockEntity;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -16,11 +19,16 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
-@SuppressWarnings("deprecation")
-public class TransitRelay extends Block {
+import org.jetbrains.annotations.Nullable;
 
-    public TransitRelay(Settings settings) {
+public class RiftBlock extends BlockWithEntity {
+    public RiftBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new EmptyBlockEntity(pos, state);
     }
 
     @Override
@@ -91,6 +99,8 @@ public class TransitRelay extends Block {
                 player.getYaw(),
                 player.getPitch()
         );
+
+        DimensionTravel.enterHighWilderness(player);
     }
 
     private BlockPos createSafetyPlatform(ServerWorld world, BlockPos center) {

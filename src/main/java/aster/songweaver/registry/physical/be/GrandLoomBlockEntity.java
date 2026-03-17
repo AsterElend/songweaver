@@ -190,7 +190,7 @@ private int ritualTicks;
                 ItemStack stack = bobbin.getStack();
 
                 if (ItemStack.areItemsEqual(stack, required)) {
-                    remaining -= bobbin.removeItems(remaining);
+                    remaining -= bobbin.removeCount(remaining);
                     if (remaining <= 0) break;
                 }
             }

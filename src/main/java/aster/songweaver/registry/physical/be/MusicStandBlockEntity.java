@@ -1,8 +1,9 @@
 package aster.songweaver.registry.physical.be;
 
-import aster.songweaver.registry.ImplementedInventory;
-import aster.songweaver.registry.NoteHolderItem;
+import aster.songweaver.api.ImplementedInventory;
+import aster.songweaver.api.NoteHolderItem;
 
+import aster.songweaver.api.PedestalLikeBlockEntity;
 import aster.songweaver.registry.physical.LoomBlockStuff;
 import aster.songweaver.system.spell.definition.Note;
 import net.minecraft.block.Block;
@@ -21,26 +22,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MusicStandBlockEntity extends BlockEntity implements ImplementedInventory {
+public class MusicStandBlockEntity extends PedestalLikeBlockEntity {
 
-    private final DefaultedList<ItemStack> items =
-            DefaultedList.ofSize(1, ItemStack.EMPTY);
+
 
     public MusicStandBlockEntity(BlockPos pos, BlockState state) {
         super(LoomBlockStuff.MUSIC_STAND_ENTITY, pos, state);
     }
-
-    /* ---------------- Inventory ---------------- */
-
-    public DefaultedList<ItemStack> getItems() {
-        return items;
-    }
-
-    public void setStack(int slot, ItemStack stack){
-        this.items.set(slot, stack);
-        markDirty();
-    }
-    /* ---------------- Ritual API ---------------- */
 
     /** Called by your ritual system */
     public List<Note> getNotes() {
@@ -52,46 +40,7 @@ public class MusicStandBlockEntity extends BlockEntity implements ImplementedInv
         return !items.isEmpty() && !NoteHolderItem.NotestoreUtil.notHasNotes(items.get(0));
     }
 
-    /* ---------------- Persistence ---------------- */
-
-    @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, items);
-    }
-
-    @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-        Inventories.readNbt(nbt, items);
-    }
-
-    @Override
-    public void markDirty() {
-        super.markDirty();
-        if (world != null && !world.isClient) {
-            world.updateListeners(
-                    pos,
-                    getCachedState(),
-                    getCachedState(),
-                    Block.NOTIFY_ALL
-            );
-
-            ServerWorld worldSer = (ServerWorld) world;
-
-            worldSer.getChunkManager().markForUpdate(pos);
-        }
-    }
 
 
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
-    }
 
-    @Nullable
-    @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
 }

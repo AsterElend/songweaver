@@ -39,7 +39,11 @@
 		"fabric-api": "*"
 	},
 	"custom": {
-		"cardinal-components": ["songweaver:halo"]
+		"cardinal-components": [
+			"songweaver:halo",
+			"songweaver:amber_steps",
+			"songweaver:unraveling_state"
+		]
 	}
 
 }
