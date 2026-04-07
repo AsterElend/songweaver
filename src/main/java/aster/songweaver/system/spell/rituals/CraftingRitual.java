@@ -1,7 +1,7 @@
 package aster.songweaver.system.spell.rituals;
 
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
-import aster.songweaver.system.spell.definition.Ritual;
+import aster.songweaver.api.weaving.Ritual;
 import aster.songweaver.util.SpellUtil;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.ItemEntity;
@@ -42,23 +42,9 @@ public class CraftingRitual implements Ritual {
         Item item = Registries.ITEM.get(id);
         ItemStack stack = new ItemStack(item, count);
 
-        BlockPos khipuPos = SpellUtil.getKhipuPosOrLoomPosIfAbsent(loom);
+        BlockPos summonPos = SpellUtil.getKhipuPosOrLoomPosIfAbsent(loom);
 
-        if (khipuPos != null){
-            summonTheItem(world, stack, khipuPos);
-        } else {
-            summonTheItem(world, stack, loom.getPos());
-        }
-
-
-
-
-
-
-
-
-
-
+        summonTheItem(world, stack, summonPos);
 
 
 

@@ -1,12 +1,15 @@
 package aster.songweaver.system.cast;
 
 
+import aster.songweaver.api.SongweaverPackets;
 import aster.songweaver.registry.MagicRegistry;
 import aster.songweaver.system.spell.loaders.DraftReloadListener;
 import aster.songweaver.util.ParticleHelper;
 import aster.songweaver.system.spell.loaders.RitualReloadListener;
-import aster.songweaver.system.spell.definition.*;
-import aster.songweaver.system.spell.definition.Draft;
+import aster.songweaver.api.weaving.*;
+import aster.songweaver.api.weaving.Draft;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 
@@ -27,13 +30,13 @@ public final class DraftExecutor {
 
 
         if (spell == null && possibleRitual == null) {
-            SongServerCasting.sendFeedback(
+            SongweaverPackets.sendFeedback(
                     player,
                     CastFeedback.UNKNOWN_SONG
             );
             return;
         } else if (spell == null) {
-            SongServerCasting.sendFeedback(
+            SongweaverPackets.sendFeedback(
                     player,
                     CastFeedback.INVALID_STRUCTURE
             );
@@ -52,17 +55,21 @@ public final class DraftExecutor {
                             DraftDefinition spell) {
 
         ServerWorld world = caster.getServerWorld();
-
-
-        // Spindle interception
-
+        PlayerInventory inventory = caster.getInventory();
+        CastFeedback noComponents = CastFeedback.NO_COMPONENTS;
+        for (ItemStack component: spell.components()){
+            if (!checkComponent(component, inventory)){
+                SongweaverPackets.sendFeedback(caster, noComponents);
+                return;
+            }
+        }
 
 
         // Requirements phase
         for (Requirement req : spell.requirements()) {
             CastFeedback failure = req.check(caster, null, false);
             if (failure != null) {
-                SongServerCasting.sendFeedback(
+                SongweaverPackets.sendFeedback(
                         caster,
                         failure
                 );
@@ -98,5 +105,14 @@ public final class DraftExecutor {
         for (Drawback drawback : spell.drawbacks()) {
             drawback.apply(caster);
         }
+
+        for (ItemStack stack: spell.components()){
+            inventory.removeOne(stack);
+        }
+    }
+
+    private static boolean checkComponent(ItemStack stack, PlayerInventory inv){
+        int count = inv.count(stack.getItem());
+        return count > stack.getCount();
     }
 }

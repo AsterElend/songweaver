@@ -1,11 +1,12 @@
 package aster.songweaver.system.spell.loaders;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.system.spell.definition.*;
+import aster.songweaver.api.weaving.*;
 import aster.songweaver.util.JsonParserUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.minecraft.item.ItemStack;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
@@ -80,11 +81,13 @@ public class DraftReloadListener implements SimpleSynchronousResourceReloadListe
                 List<Requirement> requirements = parseRequirements(json);
                 List<Drawback> drawbacks = parseDrawbacks(json);
                 JsonObject data = JsonParserUtil.getData(json);
+                List<ItemStack> components = JsonParserUtil.parseItems(json, "components");
 
 
                 DraftDefinition spell = new DraftDefinition(
                         pattern,
                         draft,
+                        components,
                         requirements,
                         drawbacks,
                         data

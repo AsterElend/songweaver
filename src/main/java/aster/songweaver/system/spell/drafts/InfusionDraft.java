@@ -1,8 +1,8 @@
 package aster.songweaver.system.spell.drafts;
 
-import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.CastFeedback;
-import aster.songweaver.system.spell.definition.Draft;
+import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.weaving.CastFeedback;
+import aster.songweaver.api.weaving.Draft;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -43,7 +43,7 @@ public class InfusionDraft implements Draft {
         Block input = Registries.BLOCK.get(inputId);
 
         if (state.getBlock() != input){
-            SongServerCasting.sendFeedback(caster, CastFeedback.NO_COMPONENTS);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.NO_COMPONENTS);
             return;
         }
 

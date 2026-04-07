@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "songweaver:block/watcher_log_top",
+    "side": "songweaver:block/watcher_log"
+  }
+}

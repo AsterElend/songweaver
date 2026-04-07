@@ -9,6 +9,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.world.World;
@@ -33,8 +34,15 @@ import java.util.List;
 import java.util.OptionalLong;
 
 public class LoomDimensions {
+
     public static final RegistryKey<DimensionOptions> HIGH_WILDERNESS_KEY = RegistryKey.of(RegistryKeys.DIMENSION,
             Songweaver.locate("high_wilderness"));
+
+
+ public static final RegistryKey<World> HIGH_WILDERNESS = RegistryKey.of(RegistryKeys.WORLD,
+            Songweaver.locate("high_wilderness"));
+
+
 
     public static final RegistryKey<DimensionType> HIGH_WILDERNESS_TYPE = RegistryKey.of(RegistryKeys.DIMENSION_TYPE,
             Songweaver.locate("high_wilderness_type"));

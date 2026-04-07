@@ -1,6 +1,5 @@
 package aster.songweaver.api;
 
-import aster.songweaver.registry.physical.be.BobbinBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -14,15 +13,15 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
-
 public abstract class PedestalLikeBlockEntity extends BlockEntity implements ImplementedInventory{
 
 
     public DefaultedList<ItemStack> items;
+    public int SIZE = 1;
 
     public PedestalLikeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state){
         super(type, pos, state);
-        this.items = DefaultedList.ofSize(1);
+        this.items = DefaultedList.ofSize(SIZE, ItemStack.EMPTY);
 
     }
 
@@ -96,23 +95,33 @@ public abstract class PedestalLikeBlockEntity extends BlockEntity implements Imp
         return cachedStack;
     }
 
+    @Override
+    public DefaultedList<ItemStack> getItems(){
+        return items;
+    }
 
-    public void updateInClientWorld(){
-        ((ServerWorld) world).getChunkManager().markForUpdate(pos);
+
+
+
+
+  //saving/sync stuff
+  public void updateInClientWorld() {
+      ((ServerWorld) world).getChunkManager().markForUpdate(pos);
+  }
+
+    @Override
+    public void inventoryChanged(){
+        this.markDirty();
+        if (world != null && !world.isClient){
+            world.updateListeners(pos, getCachedState(), getCachedState(), 3);
+            updateInClientWorld();
+        }
+
     }
 
     @Override
     public NbtCompound toInitialChunkDataNbt(){
-        NbtCompound compound = new NbtCompound();
-        this.writeNbt(compound);
-        return compound;
-    }
-
-    @Override
-    public void readNbt(NbtCompound compound){
-        super.readNbt(compound);
-        this.items = DefaultedList.ofSize(1, ItemStack.EMPTY);
-        Inventories.readNbt(compound, items);
+        return createNbt();
     }
 
     @Override
@@ -122,15 +131,16 @@ public abstract class PedestalLikeBlockEntity extends BlockEntity implements Imp
     }
 
     @Override
-    public void inventoryChanged(){
-        this.markDirty();
-        if (world != null && !world.isClient){
-            updateInClientWorld();
-        }
+    public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
+        this.items = DefaultedList.ofSize(SIZE, ItemStack.EMPTY);
+        Inventories.readNbt(nbt, items);
     }
 
     @Override
-    public DefaultedList<ItemStack> getItems(){
-        return items;
+    public void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
+        Inventories.writeNbt(nbt, items);
     }
+
 }

@@ -40,7 +40,7 @@ public class BobbinBlockEntityRenderer implements BlockEntityRenderer<BobbinBloc
         ItemStack stack = entity.getStack();
         if (stack.isEmpty()) return;
 
-        int renderCount = getRenderCount(stack);
+
         long time = entity.getWorld().getTime() % 36000;
         float speed = 0.03f ;
         float baseAngle = (time + tickDelta) * speed;
@@ -51,8 +51,8 @@ public class BobbinBlockEntityRenderer implements BlockEntityRenderer<BobbinBloc
 
 
 
-        for (int i = 0; i < renderCount; i++) {
-            float angle = baseAngle + (float)(2 * Math.PI * i / renderCount);
+        for (int i = 0; i < stack.getCount(); i++) {
+            float angle = baseAngle + (float)(2 * Math.PI * i / stack.getCount());
 
 
             float x = MathHelper.cos(angle) * radius;
@@ -82,17 +82,6 @@ public class BobbinBlockEntityRenderer implements BlockEntityRenderer<BobbinBloc
         }
     }
 
-    private static int getRenderCount(ItemStack stack) {
-        return stack.getCount();
 
-
-       /* int count = stack.getCount();
-
-        if (count > 48) return 5;
-        if (count > 32) return 4;
-        if (count > 16) return 3;
-        if (count > 1)  return 2;
-        return 1;*/
-    }
 
 }

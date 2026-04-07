@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "songweaver:block/watcher_log",
+    "side": "songweaver:block/watcher_log"
+  }
+}

@@ -1,6 +1,6 @@
 package aster.songweaver.system.spell.drawback;
 
-import aster.songweaver.system.spell.definition.Drawback;
+import aster.songweaver.api.weaving.Drawback;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;

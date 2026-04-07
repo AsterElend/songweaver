@@ -1,125 +1,113 @@
 package aster.songweaver.registry.physical.block;
 
-import aster.songweaver.api.PedestalLikeBlock;
 import aster.songweaver.api.PedestalLikeBlockEntity;
 import aster.songweaver.registry.physical.be.KhipuHookBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.enums.WallMountLocation;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.EnumProperty;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
-import java.util.Properties;
+@SuppressWarnings("deprecation")
 
-@SuppressWarnings("deprecation")public class KhipuHookBlock extends WallMountedBlock implements BlockEntityProvider {
+public class KhipuHookBlock extends HorizontalFacingBlock implements BlockEntityProvider {
+    public static final DirectionProperty FACING;
+
+    protected static final VoxelShape SOUTH_SHAPE;
+    protected static final VoxelShape NORTH_SHAPE;
+    protected static final VoxelShape EAST_SHAPE;
+    protected static final VoxelShape WEST_SHAPE;
+    
+    static {
+        FACING = HorizontalFacingBlock.FACING;
+        SOUTH_SHAPE = Block.createCuboidShape(5.0F, 0.0F, 10.0F, 11.0F, 10.0F, 16.0F);
+        NORTH_SHAPE = Block.createCuboidShape(5.0F, 0.0F, 0.0F, 11.0F, 10.0F, 6.0F);
+        EAST_SHAPE = Block.createCuboidShape(10.0F, 0.0F, 5.0F, 16.0F, 10.0F, 11.0F);
+        WEST_SHAPE = Block.createCuboidShape(0.0F, 0.0F, 5.0F, 6.0F, 10.0F, 11.0F);
+    }
+    
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
+    }
 
     public KhipuHookBlock(Settings settings) {
         super(settings);
-
         this.setDefaultState(
                 this.stateManager.getDefaultState()
                         .with(FACING, Direction.NORTH)
-                        .with(FACE, WallMountLocation.WALL)
         );
     }
 
-    /* ---------------- BLOCK ENTITY ---------------- */
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return switch (state.get(FACING)) {
+            case WEST -> EAST_SHAPE;
+            case SOUTH -> NORTH_SHAPE;
+            case NORTH -> SOUTH_SHAPE;
+            default -> WEST_SHAPE;
+        };
+    }
+
+  
+
+    
+
 
     @Override
     public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new KhipuHookBlockEntity(pos, state);
     }
-
-    /* ---------------- BLOCKSTATE ---------------- */
-
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING, FACE);
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        return direction.getOpposite() == state.get(FACING) && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    /* ---------------- PLACEMENT ---------------- */
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        Direction direction = state.get(FACING);
+        BlockPos blockPos = pos.offset(direction.getOpposite());
+        BlockState blockState = world.getBlockState(blockPos);
+        return direction.getAxis().isHorizontal() && blockState.isSideSolidFullSquare(world, blockPos, direction);
+    }
 
-    @Override
+
+
+    @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
+        BlockState blockState = this.getDefaultState().with(FACING, Direction.NORTH);
+        WorldView worldView = ctx.getWorld();
+        BlockPos blockPos = ctx.getBlockPos();
+        Direction[] directions = ctx.getPlacementDirections();
 
-        for (Direction direction : ctx.getPlacementDirections()) {
-
-            WallMountLocation face = direction.getAxis() == Direction.Axis.Y
-                    ? WallMountLocation.FLOOR
-                    : WallMountLocation.WALL;
-
-            Direction facing = direction.getAxis() == Direction.Axis.Y
-                    ? ctx.getHorizontalPlayerFacing()
-                    : direction.getOpposite();
-
-            BlockState state = this.getDefaultState()
-                    .with(FACE, face)
-                    .with(FACING, facing);
-
-            if (face == WallMountLocation.WALL &&
-                    state.canPlaceAt(ctx.getWorld(), ctx.getBlockPos())) {
-
-                return state;
+        for(Direction direction : directions) {
+            if (direction.getAxis().isHorizontal()) {
+                Direction direction2 = direction.getOpposite();
+                blockState = blockState.with(FACING, direction2);
+                if (blockState.canPlaceAt(worldView, blockPos)) {
+                    return blockState;
+                }
             }
         }
 
         return null;
     }
 
-    /* ---------------- SHAPES ---------------- */
 
-    private static final VoxelShape NORTH_SHAPE =
-            Block.createCuboidShape(6, 4, 14, 10, 12, 16);
 
-    private static final Map<Direction, VoxelShape> SHAPES = Map.of(
-            Direction.NORTH, NORTH_SHAPE,
-            Direction.SOUTH, rotateY(NORTH_SHAPE, 180),
-            Direction.WEST,  rotateY(NORTH_SHAPE, 270),
-            Direction.EAST,  rotateY(NORTH_SHAPE, 90)
-    );
-
-    @Override
-    public VoxelShape getOutlineShape(BlockState state,
-                                      BlockView world,
-                                      BlockPos pos,
-                                      ShapeContext context) {
-
-        if (state.get(FACE) != WallMountLocation.WALL) {
-            return VoxelShapes.empty();
-        }
-
-        return SHAPES.getOrDefault(state.get(FACING), NORTH_SHAPE);
-    }
-
-    @Override
-    public VoxelShape getCollisionShape(BlockState state,
-                                        BlockView world,
-                                        BlockPos pos,
-                                        ShapeContext context) {
-
-        if (state.get(FACE) != WallMountLocation.WALL) {
-            return VoxelShapes.empty();
-        }
-
-        return SHAPES.getOrDefault(state.get(FACING), NORTH_SHAPE);
-    }
-
-    /* ---------------- ROTATION ---------------- */
 
     @Override
     public BlockState rotate(BlockState state, BlockRotation rotation) {
@@ -131,35 +119,8 @@ import java.util.Properties;
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
-    /* ---------------- SHAPE ROTATION ---------------- */
 
-    private static VoxelShape rotateY(VoxelShape shape, int degrees) {
 
-        VoxelShape[] buffer = new VoxelShape[]{shape, VoxelShapes.empty()};
-        int times = (degrees / 90) % 4;
-
-        for (int i = 0; i < times; i++) {
-
-            buffer[0].forEachBox((minX, minY, minZ, maxX, maxY, maxZ) -> {
-
-                buffer[1] = VoxelShapes.union(
-                        buffer[1],
-                        Block.createCuboidShape(
-                                16 - maxZ, minY, minX,
-                                16 - minZ, maxY, maxX
-                        )
-                );
-
-            });
-
-            buffer[0] = buffer[1];
-            buffer[1] = VoxelShapes.empty();
-        }
-
-        return buffer[0];
-    }
-
-    //because of the cursed way that extend works, copy the methods from PedestalLikeBlock
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos,
                               PlayerEntity player, Hand hand, BlockHitResult hit) {
@@ -210,12 +171,11 @@ import java.util.Properties;
         }
     }
 
-
-
     @Override
     public boolean hasComparatorOutput(BlockState state) {
         return true;
     }
+    
 
     @Override
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {

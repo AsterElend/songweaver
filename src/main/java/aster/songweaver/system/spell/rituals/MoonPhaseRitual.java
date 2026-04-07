@@ -1,9 +1,9 @@
 package aster.songweaver.system.spell.rituals;
 
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
-import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.CastFeedback;
-import aster.songweaver.system.spell.definition.Ritual;
+import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.weaving.CastFeedback;
+import aster.songweaver.api.weaving.Ritual;
 import com.google.gson.JsonObject;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-import static aster.songweaver.system.cast.SongServerCasting.sendFeedback;
+import static aster.songweaver.api.SongweaverPackets.sendFeedback;
 
 public class MoonPhaseRitual implements Ritual {
     @Override
@@ -61,7 +61,7 @@ public class MoonPhaseRitual implements Ritual {
 
         // Preflight: would ritual execution pass midnight?
         if (currentTime + (stepsNeeded * 24000L) > newMoonMidnight) {
-            SongServerCasting.sendFeedback(caster, CastFeedback.SHOOT_THE_MOON);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.SHOOT_THE_MOON);
         }
 
         // Safe to advance

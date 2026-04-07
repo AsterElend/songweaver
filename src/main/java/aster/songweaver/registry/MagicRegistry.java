@@ -5,8 +5,8 @@ import aster.songweaver.system.spell.ambi.EffectMagic;
 import aster.songweaver.system.spell.ambi.FireworkMagic;
 import aster.songweaver.system.spell.ambi.FlagMagic;
 import aster.songweaver.system.spell.ambi.PseudoHarvestMagic;
-import aster.songweaver.system.spell.definition.Draft;
-import aster.songweaver.system.spell.definition.Ritual;
+import aster.songweaver.api.weaving.Draft;
+import aster.songweaver.api.weaving.Ritual;
 import aster.songweaver.system.spell.drafts.*;
 import aster.songweaver.system.spell.rituals.*;
 import net.minecraft.util.Identifier;
@@ -24,6 +24,7 @@ public class MagicRegistry {
         registerRitual(new Identifier("songweaver", "crafting"), new CraftingRitual());
         registerRitual(new Identifier("songweaver", "terraform"), new TerraformRitual());
         registerRitual(new Identifier("songweaver", "geode"), new GeodeRitual());
+        registerRitual(new Identifier("songweaver", "music_box"), new MusicBoxRitual());
 
 
 

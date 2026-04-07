@@ -1,9 +1,9 @@
 package aster.songweaver.system.spell.requirement;
 
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
-import aster.songweaver.system.spell.definition.CastFeedback;
-import aster.songweaver.system.spell.definition.Requirement;
-import aster.songweaver.system.spell.definition.Tier;
+import aster.songweaver.api.weaving.CastFeedback;
+import aster.songweaver.api.weaving.Requirement;
+import aster.songweaver.api.weaving.Tier;
 import aster.songweaver.util.TierCheckHelper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;

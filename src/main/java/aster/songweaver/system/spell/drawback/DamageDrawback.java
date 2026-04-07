@@ -1,7 +1,7 @@
 package aster.songweaver.system.spell.drawback;
 
 import aster.songweaver.registry.physical.LoomMiscRegistry;
-import aster.songweaver.system.spell.definition.Drawback;
+import aster.songweaver.api.weaving.Drawback;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class DamageDrawback implements Drawback {

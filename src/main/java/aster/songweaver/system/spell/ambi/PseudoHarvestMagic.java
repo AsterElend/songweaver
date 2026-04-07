@@ -2,10 +2,10 @@ package aster.songweaver.system.spell.ambi;
 
 import aster.songweaver.registry.physical.LoomMiscRegistry;
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
-import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.CastFeedback;
-import aster.songweaver.system.spell.definition.Draft;
-import aster.songweaver.system.spell.definition.Ritual;
+import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.weaving.CastFeedback;
+import aster.songweaver.api.weaving.Draft;
+import aster.songweaver.api.weaving.Ritual;
 import aster.songweaver.util.ParticleHelper;
 import aster.songweaver.util.SpellUtil;
 import com.google.gson.JsonObject;
@@ -30,7 +30,7 @@ public class PseudoHarvestMagic implements Draft, Ritual {
     public void cast(ServerWorld world, ServerPlayerEntity caster, @Nullable JsonObject data) {
 
         if (data == null){
-            SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
             return;
         }
 
@@ -38,7 +38,7 @@ public class PseudoHarvestMagic implements Draft, Ritual {
         LivingEntity target = SpellUtil.resolveTarget(caster, 16, false);
 
         if (target == null){
-            SongServerCasting.sendFeedback(caster, CastFeedback.NO_TARGET);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.NO_TARGET);
             return;
         }
 
@@ -47,7 +47,7 @@ public class PseudoHarvestMagic implements Draft, Ritual {
         }
 
         if (!allowedTargets.contains(target.getType()) || target.hasStatusEffect(LoomMiscRegistry.SONG_SILENCE)){
-            SongServerCasting.sendFeedback(caster, CastFeedback.WRONG_ENTITY);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.WRONG_ENTITY);
             return;
         }
 
@@ -67,7 +67,7 @@ public class PseudoHarvestMagic implements Draft, Ritual {
                            GrandLoomBlockEntity loom, @Nullable JsonObject data) {
 
       if (data == null){
-          SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+          SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
           return;
       }
 
@@ -77,7 +77,7 @@ public class PseudoHarvestMagic implements Draft, Ritual {
                 SpellUtil.radiusGetTargets(world, loom.getPos(), 16);
 
         if (targets == null || targets.isEmpty()) {
-            SongServerCasting.sendFeedback(caster, CastFeedback.NO_TARGET);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.NO_TARGET);
             return;
         }
 
@@ -124,7 +124,7 @@ public class PseudoHarvestMagic implements Draft, Ritual {
        spawnEntityDrops(world, target);
 
        if (data == null){
-           SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+           SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
            return;
        }
        int silenceTicks = data.get("cooldown").getAsInt();

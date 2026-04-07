@@ -5,8 +5,8 @@ import aster.songweaver.registry.LoomTags;
 import aster.songweaver.api.NoteHolderItem;
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
 import aster.songweaver.registry.physical.be.KhipuHookBlockEntity;
-import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.Note;
+import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.weaving.Note;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -42,13 +42,11 @@ public class SpellUtil {
 
     private static boolean hasValidKhipu(GrandLoomBlockEntity loom){
         KhipuHookBlockEntity hook = loom.getKhipuHook(loom.getPos());
-        //terrible joke
-        BlockPos possible = hook.getStoredPos();
 
-        return possible != null;
+        return hook != null;
 
     }
-@Nullable
+
    public static BlockPos getKhipuPosOrLoomPosIfAbsent(GrandLoomBlockEntity loom) {
         if (!hasValidKhipu(loom)){
             return loom.getPos();
@@ -59,7 +57,6 @@ public class SpellUtil {
 
         if (hook.getStoredPos() == null) {
             return loom.getPos();
-
         }
         return hook.getStoredPos();
 
@@ -162,7 +159,7 @@ public class SpellUtil {
             buf.writeEnumConstant(note);
         }
 
-        ClientPlayNetworking.send(SongServerCasting.CAST_DRAFT_PACKET, buf);
+        ClientPlayNetworking.send(SongweaverPackets.CAST_DRAFT_PACKET, buf);
         if (!spindle) {InputBuffer.clear();}
     }
 

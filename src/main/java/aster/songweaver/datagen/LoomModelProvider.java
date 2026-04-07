@@ -2,7 +2,6 @@ package aster.songweaver.datagen;
 
 import aster.songweaver.registry.physical.LoomBlockStuff;
 import aster.songweaver.registry.physical.LoomItems;
-import aster.songweaver.registry.physical.LoomMiscRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
@@ -18,7 +17,6 @@ public class LoomModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator Bgenerator) {
         Bgenerator.registerSimpleCubeAll(LoomBlockStuff.STARSTONE);
         Bgenerator.registerSimpleCubeAll(LoomBlockStuff.VOIDSTONE);
-        Bgenerator.registerSimpleCubeAll(LoomBlockStuff.TRANSIT_RELAY);
         Bgenerator.registerSimpleCubeAll(LoomBlockStuff.FRACTAL_PLANKS);
         Bgenerator.registerSimpleCubeAll(LoomBlockStuff.FRACTAL_LEAVES);
         Bgenerator.registerLog(LoomBlockStuff.FRACTAL_LOG).log(LoomBlockStuff.FRACTAL_LOG).wood(LoomBlockStuff.FRACTAL_WOOD);
@@ -30,6 +28,7 @@ public class LoomModelProvider extends FabricModelProvider {
         Bgenerator.registerLog(LoomBlockStuff.WATCHER_LOG).log(LoomBlockStuff.WATCHER_LOG).wood(LoomBlockStuff.WATCHER_WOOD);
         Bgenerator.registerLog(LoomBlockStuff.STRIPPED_WATCHER_LOG).log(LoomBlockStuff.STRIPPED_WATCHER_LOG).wood(LoomBlockStuff.STRIPPED_WATCHER_WOOD);
         Bgenerator.registerTintableCross(LoomBlockStuff.WATCHER_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
+
 
 
 
@@ -48,6 +47,9 @@ public class LoomModelProvider extends FabricModelProvider {
         Igenerator.register(LoomItems.SPINDLE, Models.GENERATED);
         Igenerator.register(LoomItems.BAGUETTE_MAGIQUE, Models.HANDHELD_ROD);
         Igenerator.register(LoomItems.THREAD, Models.GENERATED);
+        Igenerator.register(LoomItems.WARDING_PRISM, Models.GENERATED);
+        Igenerator.register(LoomItems.LETHEAN_WATER_BUCKET, Models.GENERATED);
+        Igenerator.register(LoomItems.MUSIC_BOX, Models.GENERATED);
 
 
     }

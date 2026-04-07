@@ -1,8 +1,9 @@
 package aster.songweaver.registry.physical.block;
 
-import aster.songweaver.api.DimensionTravel;
+import aster.songweaver.registry.SongweaverParticles;
+import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import aster.songweaver.registry.physical.LoomBlockStuff;
-import aster.songweaver.registry.physical.be.EmptyBlockEntity;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -17,18 +18,17 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("deprecation")
 public class RiftBlock extends BlockWithEntity {
+
     public RiftBlock(Settings settings) {
         super(settings);
-    }
-
-    @Override
-    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new EmptyBlockEntity(pos, state);
     }
 
     @Override
@@ -47,7 +47,26 @@ public class RiftBlock extends BlockWithEntity {
     }
 
 
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (random.nextFloat() < 0.7f) {
+            Vec3d dir = new Vec3d(
+                    random.nextDouble() - 0.5,
+                    random.nextDouble() - 0.5,
+                    random.nextDouble() - 0.5
+            ).normalize().multiply(0.1);
 
+            world.addParticle(
+                    SongweaverParticles.SILK_PARTICLE,
+                    pos.getX() + 0.5,
+                    pos.getY() + 0.5,
+                    pos.getZ() + 0.5,
+                    dir.x, dir.y, dir.z
+            );
+
+
+        }
+    }
     private void teleport(ServerPlayerEntity player) {
 
         MinecraftServer server = player.getServer();
@@ -100,7 +119,7 @@ public class RiftBlock extends BlockWithEntity {
                 player.getPitch()
         );
 
-        DimensionTravel.enterHighWilderness(player);
+
     }
 
     private BlockPos createSafetyPlatform(ServerWorld world, BlockPos center) {
@@ -116,5 +135,15 @@ public class RiftBlock extends BlockWithEntity {
         }
 
         return platformPos;
+    }
+
+    @Override
+    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return LoomBlockEntities.RIFT_BLOCK_ENTITY.instantiate(pos, state);
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state){
+        return BlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 }

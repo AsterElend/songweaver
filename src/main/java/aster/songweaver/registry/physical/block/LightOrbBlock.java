@@ -25,10 +25,6 @@ public class LightOrbBlock extends Block {
     }
 
 
-    @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context){
-        return SHAPE;
-    }
     // Client-side particles
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
@@ -42,7 +38,7 @@ public class LightOrbBlock extends Block {
 
 
 
-    // Optional: make it replaceable (so it can disappear if needed)
+ 
     @Override
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
         return true;

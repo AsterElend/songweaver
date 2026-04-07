@@ -1,14 +1,11 @@
 package aster.songweaver.system.spell.loaders;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.system.spell.definition.*;
+import aster.songweaver.api.weaving.*;
 import aster.songweaver.util.JsonParserUtil;
 import com.google.gson.*;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
@@ -16,7 +13,6 @@ import net.minecraft.util.Identifier;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +65,7 @@ public class RitualReloadListener implements SimpleSynchronousResourceReloadList
 
                 PatternKey pattern = JsonParserUtil.parsePattern(json);
                 Identifier ritualId = parseRitual(json);
-                List<ItemStack> ingredients = parseIngredients(json);
+                List<ItemStack> ingredients = parseItems(json, "ingredients");
                 List<Requirement> requirements = parseRequirements(json);
                 List<Drawback> drawbacks = parseDrawbacks(json);
                 JsonObject data = JsonParserUtil.getData(json);
@@ -113,31 +109,7 @@ public class RitualReloadListener implements SimpleSynchronousResourceReloadList
         return loaded != null ? loaded.ritual() : null;
     }
 
-    private static List<ItemStack> parseIngredients(JsonObject json) {
-        if (!json.has("ingredients")) return List.of();
 
-        List<ItemStack> list = new ArrayList<>();
-        JsonArray arr = json.getAsJsonArray("ingredients");
-
-        for (JsonElement el : arr) {
-            JsonObject obj = el.getAsJsonObject();
-            Identifier itemId = new Identifier(obj.get("item").getAsString());
-            int count = obj.has("count") ? obj.get("count").getAsInt() : 1;
-
-            Item item = Registries.ITEM.get(itemId);
-
-            if (item == Items.AIR) {
-                throw new JsonParseException("Unknown item in ritual ingredients: " + itemId);
-            }
-
-
-            list.add(new ItemStack(item, count));
-
-
-        }
-
-        return List.copyOf(list);
-    }
 
     private static int parseTicks(JsonObject json){
         if (!json.has("duration")) return 1;

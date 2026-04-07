@@ -1,7 +1,7 @@
 package aster.songweaver.system.spell.drafts;
 
-import aster.songweaver.system.spell.definition.CastFeedback;
-import aster.songweaver.system.spell.definition.Draft;
+import aster.songweaver.api.weaving.CastFeedback;
+import aster.songweaver.api.weaving.Draft;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -9,7 +9,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.Nullable;
 
-import static aster.songweaver.system.cast.SongServerCasting.sendFeedback;
+import static aster.songweaver.api.SongweaverPackets.sendFeedback;
 
 public class RepairDraft implements Draft {
     @Override

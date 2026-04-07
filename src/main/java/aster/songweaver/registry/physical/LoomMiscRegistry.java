@@ -1,6 +1,7 @@
 package aster.songweaver.registry.physical;
 
 import aster.songweaver.Songweaver;
+import aster.songweaver.registry.physical.entity.LightOrbProjectileEntity;
 import aster.songweaver.registry.status.AmberStepsEffect;
 import aster.songweaver.registry.status.LightfootEffect;
 import aster.songweaver.registry.status.SilenceEffect;

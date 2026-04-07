@@ -1,7 +1,7 @@
 package aster.songweaver.system.spell.drawback;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.system.spell.definition.Drawback;
+import aster.songweaver.api.weaving.Drawback;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.registry.RegistryKeys;

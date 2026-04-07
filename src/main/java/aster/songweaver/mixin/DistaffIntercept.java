@@ -1,6 +1,6 @@
 package aster.songweaver.mixin;
 
-import aster.songweaver.system.spell.definition.Note;
+import aster.songweaver.api.weaving.Note;
 import aster.songweaver.client.DistaffHelper;
 import aster.songweaver.client.InputBuffer;
 import net.minecraft.client.MinecraftClient;
@@ -30,9 +30,6 @@ public class DistaffIntercept {
                 if (note != null) {
                     InputBuffer.add(note);
                     DistaffHelper.playNote(client, note);
-
-
-
                 }
 
                 // Prevent vanilla hotbar switching

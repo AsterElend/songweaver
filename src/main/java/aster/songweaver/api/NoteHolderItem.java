@@ -1,6 +1,6 @@
 package aster.songweaver.api;
 
-import aster.songweaver.system.spell.definition.Note;
+import aster.songweaver.api.weaving.Note;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -43,7 +43,7 @@ public class NoteHolderItem extends Item {
     }
 
 
-    public final class NotestoreUtil {
+    public static final class NotestoreUtil {
 
         private static final String NOTES_KEY = "Notes";
 

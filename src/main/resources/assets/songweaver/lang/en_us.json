@@ -18,6 +18,19 @@
   "block.songweaver.light_orb": "Light Orb",
   "item.songweaver.khipu": "Khipu",
   "item.songweaver.baguette_magique": "Baguette Magique",
-  "block.songweaver.bobbin": "Bobbin"
+  "block.songweaver.bobbin": "Bobbin",
+  "songweaver.toast.forget_title": "Something has been lost",
+  "songweaver.toast.remember_title": "Fleeting Recollection:",
+
+  "item.songweaver.music_box.format": "%2$s of the %1$s",
+
+  "item.songweaver.music_box.affix.0": "Aria",
+  "item.songweaver.music_box.affix.1": "Song",
+  "item.songweaver.music_box.affix.2": "Melody",
+  "item.songweaver.music_box.affix.3": "Elegy",
+  "item.songweaver.music_box.affix.4": "Waltz",
+  "item.songweaver.music_box.affix.5": "Symphony",
+  "item.songweaver.music_box.affix.error": "Breath",
+  "item.songweaver.music_box.linker": " of the "
 
 }

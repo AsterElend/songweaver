@@ -15,7 +15,6 @@ public class LoomBlockLootProvider extends FabricBlockLootTableProvider {
     @Override
     public void generate() {
         addDrop(LoomBlockStuff.STARSTONE);
-        addDrop(LoomBlockStuff.TRANSIT_RELAY);
         addDrop(LoomBlockStuff.MUSIC_STAND);
         addDrop(LoomBlockStuff.KHIPU_HOOK);
         addDrop(LoomBlockStuff.BOBBIN);

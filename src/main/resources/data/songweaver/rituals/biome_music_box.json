@@ -1,0 +1,12 @@
+{
+  "pattern": ["D", "E", "REST", "D", "A"],
+"ritual":  "songweaver:music_box",
+  "duration": "1",
+  "interval": 1,
+  "ingredients": [
+    {
+      "item": "minecraft:oak_planks",
+      "count": 4
+    }
+  ]
+}

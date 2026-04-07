@@ -3,7 +3,9 @@
   "package": "aster.songweaver.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "DimensionTeleportCheckpoint",
     "DistaffIntercept",
+    "ExplosionWard",
     "LightfootStepIntercept",
     "LightfootTrampleIntercept",
     "UnravelingClearPrevention"
@@ -15,6 +17,7 @@
     "requireAnnotations": true
   },
   "client": [
+    "ForgottenAdvancementsScreen",
     "HaloMixin"
   ]
 }

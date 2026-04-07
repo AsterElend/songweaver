@@ -4,6 +4,7 @@ import aster.songweaver.Songweaver;
 import aster.songweaver.api.NoteHolderItem;
 import aster.songweaver.registry.physical.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -31,7 +32,10 @@ public class LoomItems {
 
     public static final Item SHEET_MUSIC = registerItem("sheet_music", new NoteHolderItem(new FabricItemSettings().maxCount(1)));
     public static final Item THREAD = registerItem("thread", new AriadneThread(new FabricItemSettings().maxCount(1)));
-
+    public static final Item WARDING_PRISM = registerItem("warding_prism", new WardingPrismItem(new FabricItemSettings().maxCount(1)));
+    public static final Item LETHEAN_WATER_BUCKET = registerItem("lethean_water_bucket", new BucketItem(LoomFluids.LETHEAN_WATER,
+            new FabricItemSettings().maxCount(1)));
+    public static final Item MUSIC_BOX = registerItem("music_box", new MusicBoxItem(new FabricItemSettings().maxCount(1)));
 
 
 

@@ -1,5 +1,6 @@
 package aster.songweaver.registry.status;
 
+import aster.songweaver.cca.SongweaverComponents;
 import aster.songweaver.registry.physical.LoomMiscRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
@@ -40,7 +41,7 @@ public class UnravelingEffect extends StatusEffect {
     @Override
     public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
 
-        if (entity.isDead()) return;
+        if (entity.isDead() || SongweaverComponents.UNRAVELING_STATE.get(entity).isClearable()) return;
 
         entity.addStatusEffect(new StatusEffectInstance(
                 LoomMiscRegistry.UNRAVELING,

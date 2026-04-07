@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "songweaver:block/watcher_sapling"
+  }
+}

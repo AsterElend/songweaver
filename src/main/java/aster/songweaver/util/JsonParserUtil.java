@@ -1,15 +1,18 @@
 package aster.songweaver.util;
 
-import aster.songweaver.Songweaver;
-import aster.songweaver.system.spell.definition.*;
-import aster.songweaver.system.spell.drawback.ConsumeItemDrawback;
+import aster.songweaver.api.weaving.*;
 import aster.songweaver.system.spell.drawback.DamageDrawback;
 import aster.songweaver.system.spell.drawback.EffectDrawback;
 import aster.songweaver.system.spell.requirement.*;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import vazkii.patchouli.api.PatchouliAPI;
@@ -95,12 +98,6 @@ public class JsonParserUtil {
                                 obj.get("percent").getAsFloat()
                         )
                 );
-                case "consume_item" -> list.add(
-                        new ConsumeItemDrawback(
-                                new Identifier(obj.get("item").getAsString()),
-                                obj.has("count") ? obj.get("count").getAsInt(): 1
-                        )
-                );
                 case "effect" -> list.add(
                         new EffectDrawback(
                                 new Identifier(obj.get("effect").getAsString()),
@@ -150,6 +147,30 @@ public class JsonParserUtil {
         return true;
     }
 
+    public static List<ItemStack> parseItems(JsonObject json, String field) {
+        if (!json.has(field)) return List.of();
 
+        List<ItemStack> list = new ArrayList<>();
+        JsonArray arr = json.getAsJsonArray(field);
+
+        for (JsonElement el : arr) {
+            JsonObject obj = el.getAsJsonObject();
+            Identifier itemId = new Identifier(obj.get("item").getAsString());
+            int count = obj.has("count") ? obj.get("count").getAsInt() : 1;
+
+            Item item = Registries.ITEM.get(itemId);
+
+            if (item == Items.AIR) {
+                throw new JsonParseException("Unknown item in spell ingredients: " + itemId);
+            }
+
+
+            list.add(new ItemStack(item, count));
+
+
+        }
+
+        return List.copyOf(list);
+    }
 
 }

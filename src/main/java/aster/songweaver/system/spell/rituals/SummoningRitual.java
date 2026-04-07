@@ -2,7 +2,7 @@ package aster.songweaver.system.spell.rituals;
 
 import aster.songweaver.util.ParticleHelper;
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
-import aster.songweaver.system.spell.definition.Ritual;
+import aster.songweaver.api.weaving.Ritual;
 import aster.songweaver.util.SpellUtil;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.Entity;

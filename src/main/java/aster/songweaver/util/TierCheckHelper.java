@@ -2,7 +2,7 @@ package aster.songweaver.util;
 
 import aster.songweaver.registry.physical.LoomItems;
 import aster.songweaver.registry.LoomTags;
-import aster.songweaver.system.spell.definition.Tier;
+import aster.songweaver.api.weaving.Tier;
 import net.minecraft.item.Item;
 import net.minecraft.server.network.ServerPlayerEntity;
 

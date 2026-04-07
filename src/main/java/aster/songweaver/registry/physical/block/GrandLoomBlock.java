@@ -1,13 +1,13 @@
 package aster.songweaver.registry.physical.block;
 
 import aster.songweaver.registry.LoomTags;
-import aster.songweaver.registry.physical.LoomBlockStuff;
+import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
 import aster.songweaver.registry.physical.be.MusicStandBlockEntity;
-import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.CastFeedback;
-import aster.songweaver.system.spell.definition.Note;
-import aster.songweaver.system.spell.definition.RitualDefinition;
+import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.weaving.CastFeedback;
+import aster.songweaver.api.weaving.Note;
+import aster.songweaver.api.weaving.RitualDefinition;
 import aster.songweaver.system.spell.loaders.RitualReloadListener;
 import aster.songweaver.util.TierCheckHelper;
 import net.minecraft.block.*;
@@ -64,14 +64,14 @@ public class GrandLoomBlock extends BlockWithEntity {
                     List<Note> sequence = stand.getNotes();
 
                     if (stand == null || sequence == null){
-                        SongServerCasting.sendFeedback(controller.lastCaster, CastFeedback.NO_STAND);
+                        SongweaverPackets.sendFeedback(controller.lastCaster, CastFeedback.NO_STAND);
                         return;
                     }
 
                     RitualDefinition ritual = RitualReloadListener.matchForRitual(sequence);
 
                     if (ritual == null){
-                        SongServerCasting.sendFeedback(controller.lastCaster, CastFeedback.UNKNOWN_SONG);
+                        SongweaverPackets.sendFeedback(controller.lastCaster, CastFeedback.UNKNOWN_SONG);
                         return;
                     }
 
@@ -156,7 +156,7 @@ public class GrandLoomBlock extends BlockWithEntity {
                 ? null
                 : checkType(
                 type,
-                LoomBlockStuff.RITUAL_ENTITY,
+                LoomBlockEntities.RITUAL_ENTITY,
                 (w, pos, s, be) -> be.tick()
         );
     }

@@ -1,8 +1,8 @@
 package aster.songweaver.system.spell.ambi;
 
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
-import aster.songweaver.system.spell.definition.Draft;
-import aster.songweaver.system.spell.definition.Ritual;
+import aster.songweaver.api.weaving.Draft;
+import aster.songweaver.api.weaving.Ritual;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.item.ItemStack;

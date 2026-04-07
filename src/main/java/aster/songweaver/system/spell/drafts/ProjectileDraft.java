@@ -1,8 +1,8 @@
 package aster.songweaver.system.spell.drafts;
 
-import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.CastFeedback;
-import aster.songweaver.system.spell.definition.Draft;
+import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.weaving.CastFeedback;
+import aster.songweaver.api.weaving.Draft;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -21,7 +21,7 @@ public class ProjectileDraft implements Draft {
         public void cast(ServerWorld world, ServerPlayerEntity caster, @Nullable JsonObject data) {
 
             if (data == null || !data.has("projectile")) {
-                SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+                SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
                 return;
             }
 
@@ -31,7 +31,7 @@ public class ProjectileDraft implements Draft {
             Entity entity = projectileType.create(world);
 
             if (!(entity instanceof ProjectileEntity toSummon)) {
-                SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+                SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
                 return;
             }
 

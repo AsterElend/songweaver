@@ -1,21 +1,25 @@
 package aster.songweaver;
 
 import aster.songweaver.client.*;
-import aster.songweaver.registry.physical.LightOrbProjectileEntity;
+import aster.songweaver.registry.SongweaverParticles;
+import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import aster.songweaver.registry.physical.LoomBlockStuff;
+import aster.songweaver.registry.physical.LoomFluids;
 import aster.songweaver.registry.physical.LoomMiscRegistry;
-import aster.songweaver.system.spell.definition.CastFeedback;
-import aster.songweaver.system.cast.SongServerCasting;
+import aster.songweaver.api.weaving.CastFeedback;
+import aster.songweaver.api.SongweaverPackets;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
+import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
+import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.MinecraftClient;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
-import net.minecraft.client.world.ClientEntityManager;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -33,21 +37,32 @@ public class SongweaverClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(LoomBlockStuff.FRACTAL_LEAVES, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(LoomBlockStuff.FRACTAL_SAPLING, RenderLayer.getCutout());
 
+        ParticleFactoryRegistry.getInstance().register(SongweaverParticles.SILK_PARTICLE, SongweaverParticles.SilkParticleFactory::new);
 
-
-        BlockEntityRendererFactories.register(LoomBlockStuff.BOBBIN_ENTITY, BobbinBlockEntityRenderer::new);
-        BlockEntityRendererFactories.register(LoomBlockStuff.MUSIC_STAND_ENTITY, MusicStandRenderer::new);
-        BlockEntityRendererFactories.register(LoomBlockStuff.KHIPU_HOOK_ENTITY, KhipuHookBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(LoomBlockEntities.BOBBIN_ENTITY, BobbinBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(LoomBlockEntities.MUSIC_STAND_ENTITY, MusicStandRenderer::new);
+        BlockEntityRendererFactories.register(LoomBlockEntities.KHIPU_HOOK_ENTITY, KhipuHookBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(LoomBlockEntities.RIFT_BLOCK_ENTITY, RiftBERenderer::new);
 
         EntityRendererRegistry.register(LoomMiscRegistry.LIGHT_ORB_PROJECTILE, LightOrbProjectileRenderer::new);
 
+        WorldRenderEvents.AFTER_TRANSLUCENT.register(WardedBlockRenderer::render);
+        SongweaverPackets.registerClient();
 
+        FluidRenderHandlerRegistry.INSTANCE.register(
+                LoomFluids.LETHEAN_WATER,
+                LoomFluids.LETHEAN_WATER_FLOWING,
+                new SimpleFluidRenderHandler(
+                        new Identifier("block/water_still"),
+                        new Identifier("block/water_flow")
+                )
+        );
 
-
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), LoomFluids.LETHEAN_WATER, LoomFluids.LETHEAN_WATER_FLOWING);
 
 
         ClientPlayNetworking.registerGlobalReceiver(
-                SongServerCasting.CAST_FAILURE_PACKET,
+                SongweaverPackets.CAST_FAILURE_PACKET,
                 (client, handler, buf, responseSender) -> {
 
                     CastFeedback reason = buf.readEnumConstant(CastFeedback.class);
@@ -62,6 +77,18 @@ public class SongweaverClient implements ClientModInitializer {
                     });
                 }
         );
+
+        WorldRenderEvents.AFTER_TRANSLUCENT.register(WardedBlockRenderer::render);
+
+
+        CoreShaderRegistrationCallback.EVENT.register(context -> {
+            context.register(
+                    new Identifier("songweaver", "tear_portal"),
+                    VertexFormats.POSITION_COLOR_TEXTURE,
+                    shader -> RiftBERenderer.SHADER = shader
+            );
+        });
+
 
     }
 }

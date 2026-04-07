@@ -1,6 +1,6 @@
 package aster.songweaver.system.spell.drafts;
 
-import aster.songweaver.system.spell.definition.Draft;
+import aster.songweaver.api.weaving.Draft;
 import com.google.gson.JsonObject;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,6 @@
 package aster.songweaver;
 
-import aster.songweaver.system.spell.definition.*;
+import aster.songweaver.api.weaving.*;
 import aster.songweaver.system.spell.loaders.DraftReloadListener;
 
 import aster.songweaver.system.spell.loaders.RitualReloadListener;

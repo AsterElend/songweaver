@@ -3,9 +3,9 @@ package aster.songweaver.system.spell.rituals;
 import aster.songweaver.registry.physical.LoomMiscRegistry;
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
 import aster.songweaver.registry.world.ArbitraryGeodeFeatureConfig;
-import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.CastFeedback;
-import aster.songweaver.system.spell.definition.Ritual;
+import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.weaving.CastFeedback;
+import aster.songweaver.api.weaving.Ritual;
 import com.google.gson.JsonObject;
 import net.minecraft.block.BlockState;
 import net.minecraft.registry.Registries;
@@ -24,7 +24,7 @@ public class GeodeRitual implements Ritual {
         BlockState buddingState = Registries.BLOCK.get(buddingBlock).getDefaultState();
 
         if (innerState.isAir() || buddingState.isAir()){
-            SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
             return;
         }
 

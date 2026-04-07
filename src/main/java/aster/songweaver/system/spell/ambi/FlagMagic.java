@@ -1,10 +1,10 @@
 package aster.songweaver.system.spell.ambi;
 
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
-import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.CastFeedback;
-import aster.songweaver.system.spell.definition.Draft;
-import aster.songweaver.system.spell.definition.Ritual;
+import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.weaving.CastFeedback;
+import aster.songweaver.api.weaving.Draft;
+import aster.songweaver.api.weaving.Ritual;
 import aster.songweaver.util.SpellUtil;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.EntityType;
@@ -22,7 +22,7 @@ public class FlagMagic implements Draft, Ritual {
     @Override
     public void cast(ServerWorld world, ServerPlayerEntity caster, @Nullable JsonObject data) {
         if (data == null){
-            SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
             return;
         }
 
@@ -30,7 +30,7 @@ public class FlagMagic implements Draft, Ritual {
         String flag = data.get("flag").getAsString();
 
         if (flag == null) {
-            SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
             return;
         }
 
@@ -46,19 +46,19 @@ public class FlagMagic implements Draft, Ritual {
         LivingEntity target = SpellUtil.resolveTarget(caster, 16, false);
 
         if (target == null){
-            SongServerCasting.sendFeedback(caster, CastFeedback.NO_TARGET);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.NO_TARGET);
             return;
         }
 
         if (!allowedTargets.contains(target.getType())){
-            SongServerCasting.sendFeedback(caster, CastFeedback.WRONG_ENTITY);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.WRONG_ENTITY);
             return;
         }
 
 
 
         if (!toggleFlag(flag, target)) {
-            SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
         }
 
 
@@ -70,7 +70,7 @@ public class FlagMagic implements Draft, Ritual {
     @Override
     public void ritualCast(ServerWorld world, ServerPlayerEntity caster, GrandLoomBlockEntity loom, @Nullable JsonObject data) {
         if (data == null){
-            SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
             return;
         }
 
@@ -82,14 +82,14 @@ public class FlagMagic implements Draft, Ritual {
         List<LivingEntity> targets = SpellUtil.radiusGetTargets(world, SpellUtil.getKhipuPosOrLoomPosIfAbsent(loom), 16);
 
         if (targets == null){
-            SongServerCasting.sendFeedback(caster, CastFeedback.NO_TARGET);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.NO_TARGET);
             return;
         }
 
         for (LivingEntity target: targets){
 
             if (!allowedTargets.contains(target.getType())){
-                SongServerCasting.sendFeedback(caster, CastFeedback.WRONG_ENTITY);
+                SongweaverPackets.sendFeedback(caster, CastFeedback.WRONG_ENTITY);
                 return;
             }
 
@@ -99,7 +99,7 @@ public class FlagMagic implements Draft, Ritual {
 
 
             if (flag == null) {
-                SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+                SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
                 return;
             }
 

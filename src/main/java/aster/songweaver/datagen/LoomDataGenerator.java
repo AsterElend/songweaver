@@ -1,7 +1,6 @@
 package aster.songweaver.datagen;
 
 import aster.songweaver.registry.dimension.LoomDimensions;
-import aster.songweaver.registry.physical.LoomBlockStuff;
 import aster.songweaver.registry.world.LoomConfiguredFeatures;
 import aster.songweaver.registry.world.trees.LoomPlacedFeatures;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -18,7 +17,7 @@ public class LoomDataGenerator implements DataGeneratorEntrypoint {
 
 		pack.addProvider(LoomModelProvider::new);
 		pack.addProvider(LoomItemTagGen::new);
-		pack.addProvider(RecipeGenerator::new);
+		pack.addProvider(LoomRecipeGenerator::new);
 		pack.addProvider(LoomBlockLootProvider::new);
 		pack.addProvider(LoomWorldGen::new);
 		pack.addProvider(LoomBlockTagGen::new);
@@ -35,6 +34,7 @@ public class LoomDataGenerator implements DataGeneratorEntrypoint {
 		builder.addRegistry(RegistryKeys.DIMENSION_TYPE, LoomDimensions::bootstrapType);
 		builder.addRegistry(RegistryKeys.BIOME, LoomDimensions::bootstrapBiome);
 		builder.addRegistry(RegistryKeys.DIMENSION, LoomDimensions::bootstrapOptions);
+
 
 
 

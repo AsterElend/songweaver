@@ -2,9 +2,9 @@ package aster.songweaver.system.spell.drafts;
 
 import aster.songweaver.cca.HaloComponent;
 import aster.songweaver.cca.SongweaverComponents;
-import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.CastFeedback;
-import aster.songweaver.system.spell.definition.Draft;
+import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.weaving.CastFeedback;
+import aster.songweaver.api.weaving.Draft;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.BlockItem;
@@ -28,7 +28,7 @@ public class HaloDraft implements Draft {
     public void cast(ServerWorld world, ServerPlayerEntity caster, @Nullable JsonObject data) {
 
         if (data == null || !data.has("op")) {
-            SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
             return;
         }
 
@@ -42,7 +42,7 @@ public class HaloDraft implements Draft {
             case "push": {
                 ItemStack offhand = caster.getOffHandStack();
                 if (offhand.isEmpty() || !(offhand.getItem() instanceof BlockItem)) {
-                    SongServerCasting.sendFeedback(caster, CastFeedback.WRONG_INPUT);
+                    SongweaverPackets.sendFeedback(caster, CastFeedback.WRONG_INPUT);
                     break;
                 }
 
@@ -71,7 +71,7 @@ public class HaloDraft implements Draft {
                 }
 
                 if (refs.isEmpty()) {
-                    SongServerCasting.sendFeedback(caster, CastFeedback.EMPTY_HALO);
+                    SongweaverPackets.sendFeedback(caster, CastFeedback.EMPTY_HALO);
                     break;
                 }
 
@@ -91,7 +91,7 @@ public class HaloDraft implements Draft {
                 }
 
                 if (slot < 0) {
-                    SongServerCasting.sendFeedback(caster, CastFeedback.NO_COMPONENTS);
+                    SongweaverPackets.sendFeedback(caster, CastFeedback.NO_COMPONENTS);
                     break;
                 }
 
@@ -120,7 +120,7 @@ public class HaloDraft implements Draft {
             }
 
             default: {
-                SongServerCasting.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
+                SongweaverPackets.sendFeedback(caster, CastFeedback.MALFORMED_JSON);
                 break;
             }
         }

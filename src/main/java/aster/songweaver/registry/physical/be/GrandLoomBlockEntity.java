@@ -1,9 +1,9 @@
 package aster.songweaver.registry.physical.be;
 
-import aster.songweaver.registry.physical.LoomBlockStuff;
+import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import aster.songweaver.registry.MagicRegistry;
-import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.*;
+import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.weaving.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -124,7 +124,7 @@ private int ritualTicks;
 
 
     public GrandLoomBlockEntity(BlockPos pos, BlockState state) {
-        super(LoomBlockStuff.RITUAL_ENTITY, pos, state);
+        super(LoomBlockEntities.RITUAL_ENTITY, pos, state);
     }
 
     public void tryStartRitual(ServerPlayerEntity player,
@@ -136,7 +136,7 @@ private int ritualTicks;
         for (Requirement req : ritual.requirements()) {
             CastFeedback failure = req.check(player, this, true);
             if (failure != null) {
-                SongServerCasting.sendFeedback(player, failure);
+                SongweaverPackets.sendFeedback(player, failure);
                 return;
             }
         }
@@ -144,7 +144,7 @@ private int ritualTicks;
         // Ingredient availability
         if (!consumeIngredients(ritual.ingredients())) {
 
-            SongServerCasting.sendFeedback(
+            SongweaverPackets.sendFeedback(
                     player,
                     CastFeedback.NO_COMPONENTS
             );

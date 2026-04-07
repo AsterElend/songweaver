@@ -2,7 +2,7 @@ package aster.songweaver.client;
 
 import aster.songweaver.registry.LoomTags;
 
-import aster.songweaver.system.spell.definition.Note;
+import aster.songweaver.api.weaving.Note;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;

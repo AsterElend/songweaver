@@ -1,10 +1,10 @@
 package aster.songweaver.system.spell.ambi;
 
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
-import aster.songweaver.system.cast.SongServerCasting;
-import aster.songweaver.system.spell.definition.CastFeedback;
-import aster.songweaver.system.spell.definition.Draft;
-import aster.songweaver.system.spell.definition.Ritual;
+import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.weaving.CastFeedback;
+import aster.songweaver.api.weaving.Draft;
+import aster.songweaver.api.weaving.Ritual;
 import aster.songweaver.util.ParticleHelper;
 import aster.songweaver.util.SpellUtil;
 import com.google.gson.JsonObject;
@@ -123,7 +123,7 @@ public class EffectMagic implements Ritual, Draft{
 
 
         if (targets == null){
-            SongServerCasting.sendFeedback(caster, CastFeedback.NO_TARGET);
+            SongweaverPackets.sendFeedback(caster, CastFeedback.NO_TARGET);
             return;
         }
 

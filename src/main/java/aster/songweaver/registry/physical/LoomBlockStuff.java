@@ -11,10 +11,12 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.resource.ResourceManager;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
@@ -32,8 +34,8 @@ public class LoomBlockStuff {
     public static final Block RITUAL_CONTROLLER = registerBlock("grand_loom", new GrandLoomBlock(FabricBlockSettings.copyOf(Blocks.WARPED_PLANKS)));
     public static final Block MUSIC_STAND = registerBlock("music_stand", new MusicStandBlock(FabricBlockSettings.copyOf(Blocks.WARPED_PLANKS)));
     public static final Block KHIPU_HOOK = registerBlock("khipu_hook", new KhipuHookBlock(FabricBlockSettings.copyOf(Blocks.TRIPWIRE_HOOK)));
-    public static final Block LIGHT_ORB = registerBlockWithNoItem("light_orb", new LightOrbBlock(FabricBlockSettings.copyOf(Blocks.LIGHT).luminance(15).breakInstantly()));
-    public static final Block RIFT_BLOCK = registerBlockWithNoItem("rift", new RiftBlock(FabricBlockSettings.copyOf(Blocks.LIGHT).luminance(15)));
+    public static final Block LIGHT_ORB = registerBlockWithNoItem("light_orb", new LightOrbBlock(FabricBlockSettings.copyOf(Blocks.LIGHT).luminance(15).breakInstantly().noCollision()));
+    public static final Block RIFT_BLOCK = registerBlock("rift", new RiftBlock(FabricBlockSettings.copyOf(Blocks.LIGHT).luminance(15)));
 
     public static final Block FRACTAL_LOG = registerBlock("fractal_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.CRIMSON_STEM)));
     public static final Block STRIPPED_FRACTAL_LOG = registerBlock("stripped_fractal_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_CRIMSON_STEM)));
@@ -64,41 +66,8 @@ public class LoomBlockStuff {
 
     public static final Block WATCHER_LEAVES = registerBlock("watcher_leaves", new LeavesBlock(FabricBlockSettings.copyOf(Blocks.BIRCH_LEAVES)));
 
+   public static final Block LETHEAN_WATER = registerBlockWithNoItem("lethean_water", new LetheanWaterBlock(LoomFluids.LETHEAN_WATER, FabricBlockSettings.copyOf(Blocks.WATER)));
 
-
-
-
-    public static final BlockEntityType<BobbinBlockEntity> BOBBIN_ENTITY =
-            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "bobbin_entity"),
-                    FabricBlockEntityTypeBuilder.create(BobbinBlockEntity::new,
-                            BOBBIN).build(null));
-
-
-    public static final BlockEntityType<GrandLoomBlockEntity> RITUAL_ENTITY =
-            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "ritual_entity"),
-                    FabricBlockEntityTypeBuilder.create(GrandLoomBlockEntity::new,
-                            RITUAL_CONTROLLER).build(null));
-
-
-
-
-    public static final BlockEntityType<MusicStandBlockEntity> MUSIC_STAND_ENTITY =
-            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "music_stand_entity"),
-                    FabricBlockEntityTypeBuilder.create(MusicStandBlockEntity::new,
-                            MUSIC_STAND).build(null));
-
-
-
-    public static final BlockEntityType<KhipuHookBlockEntity> KHIPU_HOOK_ENTITY =
-            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "khipu_entity"),
-                    FabricBlockEntityTypeBuilder.create(KhipuHookBlockEntity::new,
-                           KHIPU_HOOK).build(null));
-
-
-   public static final BlockEntityType<EmptyBlockEntity> BLANK_BLOCK_ENTITY =
-            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "blank_entity"),
-                    FabricBlockEntityTypeBuilder.create(EmptyBlockEntity::new,
-                           RIFT_BLOCK).build(null));
 
 
 
@@ -111,6 +80,8 @@ public class LoomBlockStuff {
         registerBlockItem(path, block);
         return Registry.register(Registries.BLOCK, new Identifier("songweaver", path), block);
     }
+
+
 
     public static Block registerBlockWithNoItem(String path, Block block){
         return Registry.register(Registries.BLOCK, Songweaver.locate(path), block);
