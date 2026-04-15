@@ -1,6 +1,5 @@
 package aster.songweaver.cca;
 
-import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -12,7 +11,7 @@ import net.minecraft.util.collection.DefaultedList;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
-import java.util.List;
+
 public class HaloComponent implements AutoSyncedComponent {
 
     private final PlayerEntity player;
@@ -40,14 +39,14 @@ public class HaloComponent implements AutoSyncedComponent {
         }
     }
 
-    public ItemStack pop(@Nullable Item preferred) {
+    public void pop(@Nullable Item preferred) {
         if (preferred != null) {
             for (int i = stacks.size() - 1; i >= 0; i--) {
                 ItemStack s = stacks.get(i);
                 if (!s.isEmpty() && s.isOf(preferred)) {
                     stacks.set(i, ItemStack.EMPTY);
                     SongweaverComponents.HALO.sync(player);
-                    return s;
+                    return;
                 }
             }
         }
@@ -58,12 +57,11 @@ public class HaloComponent implements AutoSyncedComponent {
             if (!s.isEmpty()) {
                 stacks.set(i, ItemStack.EMPTY);
                 SongweaverComponents.HALO.sync(player);
-                return s;
+                return;
             }
         }
 
         SongweaverComponents.HALO.sync(player);
-        return ItemStack.EMPTY;
     }
 
     public void purge() {

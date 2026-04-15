@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoomItems {
-    public static List<Item> LOOM_ITEMS = new ArrayList<>();
+    public static final List<Item> LOOM_ITEMS = new ArrayList<>();
 
     public static final Item DISTAFF_BASIC = registerItem("distaff_basic", new Distaff(new FabricItemSettings().maxCount(1)));
     public static final Item DISTAFF_IRON = registerItem("distaff_iron", new Distaff(new FabricItemSettings().maxCount(1)));
@@ -33,9 +33,11 @@ public class LoomItems {
     public static final Item SHEET_MUSIC = registerItem("sheet_music", new NoteHolderItem(new FabricItemSettings().maxCount(1)));
     public static final Item THREAD = registerItem("thread", new AriadneThread(new FabricItemSettings().maxCount(1)));
     public static final Item WARDING_PRISM = registerItem("warding_prism", new WardingPrismItem(new FabricItemSettings().maxCount(1)));
-    public static final Item LETHEAN_WATER_BUCKET = registerItem("lethean_water_bucket", new BucketItem(LoomFluids.LETHEAN_WATER,
+    public static final Item LETHEAN_WATER_BUCKET = registerItem("lethean_water_bucket", new BucketItem(LoomFluids.LETHEAN_WATER_STATIC,
             new FabricItemSettings().maxCount(1)));
     public static final Item MUSIC_BOX = registerItem("music_box", new MusicBoxItem(new FabricItemSettings().maxCount(1)));
+    public static final Item LETHEAN_WATER_BOTTLE = registerItem("lethean_water_bottle", new LetheanWaterBottle(new FabricItemSettings().maxCount(16)));
+    public static final Item WORLD_SALTS = registerItem("world_salts", new WorldSaltsItem(new FabricItemSettings().maxCount(16)));
 
 
 
@@ -43,6 +45,7 @@ public class LoomItems {
 
 
     public static void registerItems(){
+        LOOM_ITEMS.remove(TREE_TESTING_AXE);
         Songweaver.LOGGER.info("Registering Items for Loom");
     }
 

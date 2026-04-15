@@ -1,10 +1,8 @@
 package aster.songweaver.cca;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;

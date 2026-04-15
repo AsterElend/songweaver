@@ -16,7 +16,7 @@ public class LightOrbBlock extends Block {
     public LightOrbBlock(Settings settings) {
         super(settings);
     }
-    public VoxelShape SHAPE = Block.createCuboidShape(4, 4, 4, 12, 12, 12); // 8x8x8 cube in center
+    public final VoxelShape SHAPE = Block.createCuboidShape(4, 4, 4, 12, 12, 12); // 8x8x8 cube in center
 
     // Smaller-than-full-block shape, centered
     @Override

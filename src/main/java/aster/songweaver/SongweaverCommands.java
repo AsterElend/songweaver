@@ -1,9 +1,9 @@
 package aster.songweaver;
 
 import aster.songweaver.api.weaving.*;
-import aster.songweaver.system.spell.loaders.DraftReloadListener;
+import aster.songweaver.api.spell.loaders.DraftReloadListener;
 
-import aster.songweaver.system.spell.loaders.RitualReloadListener;
+import aster.songweaver.api.spell.loaders.RitualReloadListener;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -49,7 +49,7 @@ public class SongweaverCommands {
         );
 
         drafts.forEach((pattern, loaded) -> {
-            Identifier jsonId = loaded.sourceId();
+            Identifier jsonId = loaded.id();
             String patternText = formatPattern(pattern);
             String trimJson = jsonId.getPath().replace("drafts/", "").replace(".json", "");
 
@@ -81,7 +81,7 @@ public class SongweaverCommands {
         );
 
         rituals.forEach((pattern, loaded) -> {
-            Identifier jsonId = loaded.sourceId();
+            Identifier jsonId = loaded.id();
             String patternText = formatPattern(pattern);
             String trimJson = jsonId.getPath().replace("rituals/", "").replace(".json", "");
 

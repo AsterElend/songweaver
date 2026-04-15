@@ -21,6 +21,7 @@ public class LoomModelProvider extends FabricModelProvider {
         Bgenerator.registerSimpleCubeAll(LoomBlockStuff.FRACTAL_LEAVES);
         Bgenerator.registerLog(LoomBlockStuff.FRACTAL_LOG).log(LoomBlockStuff.FRACTAL_LOG).wood(LoomBlockStuff.FRACTAL_WOOD);
         Bgenerator.registerLog(LoomBlockStuff.STRIPPED_FRACTAL_LOG).log(LoomBlockStuff.STRIPPED_FRACTAL_LOG).wood(LoomBlockStuff.STRIPPED_FRACTAL_WOOD);
+
         Bgenerator.registerTintableCross(LoomBlockStuff.FRACTAL_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
 
          Bgenerator.registerSimpleCubeAll(LoomBlockStuff.WATCHER_PLANKS);
@@ -28,6 +29,7 @@ public class LoomModelProvider extends FabricModelProvider {
         Bgenerator.registerLog(LoomBlockStuff.WATCHER_LOG).log(LoomBlockStuff.WATCHER_LOG).wood(LoomBlockStuff.WATCHER_WOOD);
         Bgenerator.registerLog(LoomBlockStuff.STRIPPED_WATCHER_LOG).log(LoomBlockStuff.STRIPPED_WATCHER_LOG).wood(LoomBlockStuff.STRIPPED_WATCHER_WOOD);
         Bgenerator.registerTintableCross(LoomBlockStuff.WATCHER_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
+
 
 
 
@@ -50,6 +52,8 @@ public class LoomModelProvider extends FabricModelProvider {
         Igenerator.register(LoomItems.WARDING_PRISM, Models.GENERATED);
         Igenerator.register(LoomItems.LETHEAN_WATER_BUCKET, Models.GENERATED);
         Igenerator.register(LoomItems.MUSIC_BOX, Models.GENERATED);
+        Igenerator.register(LoomItems.LETHEAN_WATER_BOTTLE, Models.GENERATED);
+        Igenerator.register(LoomItems.WORLD_SALTS, Models.GENERATED);
 
 
     }

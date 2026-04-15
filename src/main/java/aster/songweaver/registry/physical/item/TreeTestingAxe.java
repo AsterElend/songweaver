@@ -1,6 +1,5 @@
 package aster.songweaver.registry.physical.item;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SaplingBlock;

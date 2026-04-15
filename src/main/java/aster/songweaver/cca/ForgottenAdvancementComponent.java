@@ -1,6 +1,7 @@
 package aster.songweaver.cca;
 
-import aster.songweaver.api.NadirToast;
+import aster.songweaver.Songweaver;
+import aster.songweaver.api.renderNonsense.NadirToast;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.PlayerAdvancementTracker;
@@ -16,8 +17,11 @@ import java.util.*;
 
 public class ForgottenAdvancementComponent implements AutoSyncedComponent {
     private final PlayerEntity player;
-    private final Set<Identifier> forgotten = new HashSet<>();
+    private final List<Identifier> forgotten = new ArrayList<>();
 
+    public boolean isAnyForgotten(){
+        return !forgotten.isEmpty();
+    }
     public ForgottenAdvancementComponent(PlayerEntity player) {
         this.player = player;
     }
@@ -26,25 +30,33 @@ public class ForgottenAdvancementComponent implements AutoSyncedComponent {
         return forgotten.contains(id);
     }
 
-    public Set<Identifier> getAll() {
+    public List<Identifier> getAll() {
         return forgotten;
+    }
+
+    public void reset(){
+        forgotten.clear();
+        SongweaverComponents.FORGOTTEN.sync(player);
+        Identifier id = Songweaver.locate("everything");
+        NadirToast.sendPacket(id, false, player);
     }
 
     public void forget(Identifier id) {
         forgotten.add(id);
         SongweaverComponents.FORGOTTEN.sync(player);
-        NadirToast.sendPacket(id, true);
+        NadirToast.sendPacket(id, true, player);
     }
 
     public void remember(Identifier id) {
         forgotten.remove(id);
         SongweaverComponents.FORGOTTEN.sync(player);
-        NadirToast.sendPacket(id, false);
+        NadirToast.sendPacket(id, false, player);
     }
 
     public void rememberRandom(ServerPlayerEntity player){
-       Optional<Identifier> chosen = forgotten.stream().skip(player.getRandom().nextInt(forgotten.size())).findFirst();
-        chosen.ifPresent(this::remember);
+        if (!isAnyForgotten()) return;
+       Identifier fetched = forgotten.get(player.getRandom().nextInt(forgotten.size()));
+        remember(fetched);
     }
 
 
@@ -55,7 +67,9 @@ public class ForgottenAdvancementComponent implements AutoSyncedComponent {
         List<Advancement> completed = new ArrayList<>();
 
         for (Advancement adv : player.server.getAdvancementLoader().getAdvancements()) {
-            if (tracker.getProgress(adv).isDone() && !isForgotten(adv.getId())) {
+            if (tracker.getProgress(adv).isDone()
+                    && !isForgotten(adv.getId())
+                    && !adv.getId().getPath().startsWith("recipes/")) {
                 completed.add(adv);
             }
         }

@@ -5,15 +5,11 @@ import aster.songweaver.registry.physical.LoomBlockStuff;
 import com.mojang.serialization.Lifecycle;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registerable;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.chunk.GenerationShapeConfig;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
-import net.minecraft.world.gen.densityfunction.DensityFunctions;
 import net.minecraft.world.gen.noise.NoiseRouter;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
 

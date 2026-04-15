@@ -1,4 +1,5 @@
 {
   "pattern": ["E", "C", "F", "C_HIGH"],
+  "displayItem": "minecraft:slime_block",
   "draft": "songweaver:redirect"
 }

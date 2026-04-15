@@ -61,7 +61,7 @@ public class LoomMiscRegistry {
 
 
 
-    public static RegistryKey<DamageType> FRAY = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("songweaver:fray"));
+    public static final RegistryKey<DamageType> FRAY = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("songweaver:fray"));
 
     public static DamageSource fray(World world) {
         return new DamageSource(

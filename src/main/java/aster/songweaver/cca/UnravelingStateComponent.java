@@ -6,7 +6,7 @@ import net.minecraft.nbt.NbtCompound;
 
 public class UnravelingStateComponent implements AutoSyncedComponent {
     public boolean clearable = false;
-    public LivingEntity entity;
+    public final LivingEntity entity;
     public UnravelingStateComponent(LivingEntity entity){
         this.entity = entity;
     }

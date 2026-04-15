@@ -17,7 +17,7 @@ public abstract class PedestalLikeBlockEntity extends BlockEntity implements Imp
 
 
     public DefaultedList<ItemStack> items;
-    public int SIZE = 1;
+    public final int SIZE = 1;
 
     public PedestalLikeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state){
         super(type, pos, state);
@@ -41,6 +41,12 @@ public abstract class PedestalLikeBlockEntity extends BlockEntity implements Imp
     public void setCount(int count){
         items.get(0).setCount(count);
         inventoryChanged();
+    }
+    public int getCount(){
+        return items.get(0).getCount();
+    }
+    public int getMaxCount(){
+        return items.get(0).getMaxCount();
     }
 
 
@@ -135,12 +141,21 @@ public abstract class PedestalLikeBlockEntity extends BlockEntity implements Imp
         super.readNbt(nbt);
         this.items = DefaultedList.ofSize(SIZE, ItemStack.EMPTY);
         Inventories.readNbt(nbt, items);
+        readAdditionalData(nbt);
     }
 
     @Override
     public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, items);
+        storeAdditionalData(nbt);
     }
 
+    public void storeAdditionalData(NbtCompound nbt){
+
+    }
+
+    public void readAdditionalData(NbtCompound nbt){
+
+    }
 }

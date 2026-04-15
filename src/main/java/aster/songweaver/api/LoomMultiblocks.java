@@ -11,7 +11,7 @@ import vazkii.patchouli.api.PatchouliAPI;
 
 public class LoomMultiblocks {
     public static IMultiblock LOOM_HALL;
-    public static String[][] LOOM_PATTERN = new String[][] {
+    public static final String[][] LOOM_PATTERN = new String[][] {
 
         {
             "       ",
@@ -200,7 +200,7 @@ public class LoomMultiblocks {
                 'P', api.predicateMatcher(Blocks.POLISHED_DEEPSLATE, state -> state.isIn(LoomTags.POLISHED_STONE) ),
                 'L', api.predicateMatcher(Blocks.POLISHED_BASALT, state -> state.isIn(BlockTags.LOGS)|| state.isOf(Blocks.POLISHED_BASALT)),
                 'G', Blocks.GLOWSTONE,
-                'S', LoomBlockStuff.RITUAL_CONTROLLER,
+                'S', LoomBlockStuff.GRAND_LOOM,
                 '0', api.predicateMatcher(Blocks.POLISHED_DEEPSLATE, state -> state.isIn(LoomTags.POLISHED_STONE))
         );
 

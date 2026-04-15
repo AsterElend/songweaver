@@ -1,6 +1,7 @@
 {
   "pattern": ["A", "C", "E", "C"],
   "draft": "songweaver:distill_effects",
+  "displayItem": "minecraft:brewing_stand",
  "components": [{
    "item": "minecraft:blaze_powder",
    "count": 1

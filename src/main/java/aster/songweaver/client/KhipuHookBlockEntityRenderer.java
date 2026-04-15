@@ -1,8 +1,5 @@
 package aster.songweaver.client;
 
-import aster.songweaver.api.weaving.Note;
-import aster.songweaver.registry.physical.be.MusicStandBlockEntity;
-import aster.songweaver.registry.physical.block.KhipuHookBlock;
 import aster.songweaver.registry.physical.be.KhipuHookBlockEntity;
 import aster.songweaver.registry.physical.block.MusicStandBlock;
 import net.fabricmc.api.EnvType;
@@ -22,8 +19,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class KhipuHookBlockEntityRenderer

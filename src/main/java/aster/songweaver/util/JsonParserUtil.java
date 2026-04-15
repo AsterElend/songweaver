@@ -1,9 +1,9 @@
 package aster.songweaver.util;
 
 import aster.songweaver.api.weaving.*;
-import aster.songweaver.system.spell.drawback.DamageDrawback;
-import aster.songweaver.system.spell.drawback.EffectDrawback;
-import aster.songweaver.system.spell.requirement.*;
+import aster.songweaver.api.spell.drawback.DamageDrawback;
+import aster.songweaver.api.spell.drawback.EffectDrawback;
+import aster.songweaver.api.spell.requirement.*;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -173,4 +173,17 @@ public class JsonParserUtil {
         return List.copyOf(list);
     }
 
+    @Nullable
+    public static ItemStack parseDisplayItem(JsonObject json) {
+        if (!json.has("displayItem")) return null;
+
+        Identifier itemId = new Identifier(json.get("displayItem").getAsString());
+        Item item = Registries.ITEM.get(itemId);
+
+        if (item == Items.AIR) {
+            throw new JsonParseException("Unknown displayItem: " + itemId);
+        }
+
+        return new ItemStack(item);
+    }
 }

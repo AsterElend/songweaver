@@ -1,17 +1,12 @@
 package aster.songweaver.registry.world.trees;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.registry.physical.LoomBlockStuff;
-import aster.songweaver.registry.world.LoomConfiguredFeatures;
 import net.minecraft.registry.Registerable;
-import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.PlacedFeatures;
-import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 
 import java.util.List;

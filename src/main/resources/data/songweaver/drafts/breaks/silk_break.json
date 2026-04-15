@@ -1,6 +1,7 @@
 {
   "pattern": ["C", "D", "G"],
   "draft": "songweaver:enchant_break",
+  "displayItem": "minecraft:white_wool",
   "requirements": [
     {
       "type": "advancement",

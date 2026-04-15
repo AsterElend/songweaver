@@ -5,7 +5,6 @@ import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import aster.songweaver.registry.physical.item.KhipuItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.Nullable;
 
 public class KhipuHookBlockEntity extends PedestalLikeBlockEntity {
 

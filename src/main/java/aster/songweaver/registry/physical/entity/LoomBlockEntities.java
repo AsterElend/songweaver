@@ -20,7 +20,7 @@ public class LoomBlockEntities {
     public static final BlockEntityType<GrandLoomBlockEntity> RITUAL_ENTITY =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "ritual_entity"),
                     FabricBlockEntityTypeBuilder.create(GrandLoomBlockEntity::new,
-                            RITUAL_CONTROLLER).build(null));
+                            GRAND_LOOM).build(null));
 
 
 

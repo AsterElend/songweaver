@@ -1,6 +1,7 @@
 {
   "pattern": ["E", "F", "B"],
   "draft": "songweaver:lodestone_teleport",
+  "displayItem": "minecraft:lodestone",
   "requirements": [
     {
       "type": "item",

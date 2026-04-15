@@ -1,4 +1,5 @@
 {
   "pattern": ["C", "C_HIGH"],
-  "draft": "songweaver:firework"
+  "draft": "songweaver:firework",
+  "displayItem": "minecraft:firework_rocket"
 }

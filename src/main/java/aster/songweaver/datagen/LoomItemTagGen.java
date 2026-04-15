@@ -1,6 +1,5 @@
 package aster.songweaver.datagen;
 
-import aster.songweaver.registry.physical.LoomBlockStuff;
 import aster.songweaver.registry.physical.LoomItems;
 import aster.songweaver.registry.LoomTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -8,7 +7,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
 
 import java.util.concurrent.CompletableFuture;
 

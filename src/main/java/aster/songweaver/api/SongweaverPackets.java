@@ -1,12 +1,13 @@
 package aster.songweaver.api;
 
 import aster.songweaver.Songweaver;
+import aster.songweaver.api.renderNonsense.NadirToast;
 import aster.songweaver.client.ClientWardedState;
 import aster.songweaver.registry.LoomTags;
 import aster.songweaver.registry.physical.LoomMiscRegistry;
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
-import aster.songweaver.system.cast.DraftExecutor;
-import aster.songweaver.system.spell.loaders.RitualReloadListener;
+import aster.songweaver.api.cast.DraftExecutor;
+import aster.songweaver.api.spell.loaders.RitualReloadListener;
 import aster.songweaver.api.weaving.CastFeedback;
 import aster.songweaver.api.weaving.Note;
 import aster.songweaver.api.weaving.RitualDefinition;
@@ -156,7 +157,10 @@ public class SongweaverPackets {
                   client.getToastManager().add(NadirToast.buildForgetToast(advancement));
               });
            } else {
-               client.getToastManager().add( NadirToast.buildRememberToast(advancement));
+              client.execute(()->{
+                  client.getToastManager().add(NadirToast.buildRememberToast(advancement));
+              });
+
            }
         });
     }

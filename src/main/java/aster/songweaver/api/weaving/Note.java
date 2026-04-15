@@ -1,5 +1,7 @@
 package aster.songweaver.api.weaving;
 
+import net.minecraft.util.Identifier;
+
 public enum Note {
 
     C(0),
@@ -42,9 +44,26 @@ public enum Note {
     }
 
     private final int semitone;
+
     public float pitch() {
         return (float) Math.pow(2.0, (semitone - 12) / 12.0);
     }
+    public static String noteTextureId(Note note) {
+        return switch (note) {
+            case C -> "emic";
+            case D -> "emid";
+            case E -> "emie";
+            case F -> "emif";
+            case G -> "emig";
+            case A -> "emia";
+            case B -> "emib";
+            case C_HIGH -> "emichigh";
+            case REST -> "emirest";
+        };
+    }
 
+    public static Identifier noteTexture(Note note) {
+        return new Identifier("songweaver", "textures/gui/" + noteTextureId(note) + ".png");
+    }
 
 }

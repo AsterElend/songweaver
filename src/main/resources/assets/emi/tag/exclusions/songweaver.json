@@ -1,0 +1,11 @@
+{
+  "block": [
+    "songweaver:terraform_whitelist"
+  ],
+  "fluid": [
+    "songweaver:lethe"
+  ],
+  "item": [
+    "songweaver:intercept_items"
+  ]
+}

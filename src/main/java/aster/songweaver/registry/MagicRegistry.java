@@ -1,14 +1,14 @@
 package aster.songweaver.registry;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.system.spell.ambi.EffectMagic;
-import aster.songweaver.system.spell.ambi.FireworkMagic;
-import aster.songweaver.system.spell.ambi.FlagMagic;
-import aster.songweaver.system.spell.ambi.PseudoHarvestMagic;
+import aster.songweaver.api.spell.ambi.EffectMagic;
+import aster.songweaver.api.spell.ambi.FireworkMagic;
+import aster.songweaver.api.spell.ambi.FlagMagic;
+import aster.songweaver.api.spell.ambi.PseudoHarvestMagic;
 import aster.songweaver.api.weaving.Draft;
 import aster.songweaver.api.weaving.Ritual;
-import aster.songweaver.system.spell.drafts.*;
-import aster.songweaver.system.spell.rituals.*;
+import aster.songweaver.api.spell.drafts.*;
+import aster.songweaver.api.spell.rituals.*;
 import net.minecraft.util.Identifier;
 
 import java.util.HashMap;

@@ -13,7 +13,7 @@ import vazkii.patchouli.api.PatchouliAPI;
 
 public class PatternBookItem extends Item {
 
-    public static Identifier PATTERN_BOOK_ID = Songweaver.locate("book_of_patterns");
+    public static final Identifier PATTERN_BOOK_ID = Songweaver.locate("book_of_patterns");
 
     public PatternBookItem(Settings settings) {
         super(settings);

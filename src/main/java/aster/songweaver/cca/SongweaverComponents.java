@@ -10,10 +10,10 @@ import net.minecraft.util.Identifier;
 
 public class SongweaverComponents implements EntityComponentInitializer {
 
-    public static ComponentKey<HaloComponent> HALO = ComponentRegistry.getOrCreate(new Identifier("songweaver", "halo"), HaloComponent.class);
-    public static ComponentKey<AmberComponent> AMBER_STEPS = ComponentRegistry.getOrCreate(new Identifier("songweaver", "amber_steps"), AmberComponent.class);
-    public static ComponentKey<UnravelingStateComponent> UNRAVELING_STATE = ComponentRegistry.getOrCreate(new Identifier("songweaver", "unraveling_state"), UnravelingStateComponent.class);
-    public static ComponentKey<ForgottenAdvancementComponent> FORGOTTEN = ComponentRegistry.getOrCreate(new Identifier("songweaver", "forgotten"), ForgottenAdvancementComponent.class);
+    public static final ComponentKey<HaloComponent> HALO = ComponentRegistry.getOrCreate(new Identifier("songweaver", "halo"), HaloComponent.class);
+    public static final ComponentKey<AmberComponent> AMBER_STEPS = ComponentRegistry.getOrCreate(new Identifier("songweaver", "amber_steps"), AmberComponent.class);
+    public static final ComponentKey<UnravelingStateComponent> UNRAVELING_STATE = ComponentRegistry.getOrCreate(new Identifier("songweaver", "unraveling_state"), UnravelingStateComponent.class);
+    public static final ComponentKey<ForgottenAdvancementComponent> FORGOTTEN = ComponentRegistry.getOrCreate(new Identifier("songweaver", "forgotten"), ForgottenAdvancementComponent.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {

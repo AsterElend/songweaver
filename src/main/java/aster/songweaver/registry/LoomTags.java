@@ -1,6 +1,8 @@
 package aster.songweaver.registry;
 
+import aster.songweaver.Songweaver;
 import net.minecraft.block.Block;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
@@ -36,7 +38,7 @@ public static final TagKey<Item> CASTING_ITEMS =
                     RegistryKeys.ITEM,
                     new Identifier("songweaver", "casting_items")
             );
-
+    public static final TagKey<Fluid> LETHE = TagKey.of(RegistryKeys.FLUID, Songweaver.locate("lethe"));
 
 
 

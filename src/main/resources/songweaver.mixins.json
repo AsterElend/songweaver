@@ -3,11 +3,14 @@
   "package": "aster.songweaver.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ActuallySwimCheck",
     "DimensionTeleportCheckpoint",
     "DistaffIntercept",
+    "EntityApplyFluidsMixin",
     "ExplosionWard",
     "LightfootStepIntercept",
     "LightfootTrampleIntercept",
+    "PlayerLetheanCheck",
     "UnravelingClearPrevention"
   ],
   "injectors": {
@@ -18,6 +21,9 @@
   },
   "client": [
     "ForgottenAdvancementsScreen",
-    "HaloMixin"
+    "HaloMixin",
+    "LetheFog",
+    "SpriteAccessor",
+    "SpriteContentsAccessor"
   ]
 }

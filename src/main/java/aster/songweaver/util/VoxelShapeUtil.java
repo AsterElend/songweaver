@@ -1,6 +1,5 @@
 package aster.songweaver.util;
 
-import net.minecraft.block.Block;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;

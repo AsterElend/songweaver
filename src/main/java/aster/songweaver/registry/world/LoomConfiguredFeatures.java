@@ -2,10 +2,7 @@ package aster.songweaver.registry.world;
 
 import aster.songweaver.Songweaver;
 import aster.songweaver.registry.physical.LoomBlockStuff;
-import aster.songweaver.registry.world.trees.FractalFoliagePlacer;
 import aster.songweaver.registry.world.trees.FractalTreeTrunkPlacer;
-import io.netty.util.Constant;
-import net.minecraft.block.LoomBlock;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -18,8 +15,6 @@ import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.trunk.DarkOakTrunkPlacer;
-
-import java.sql.Blob;
 
 public class LoomConfiguredFeatures {
 

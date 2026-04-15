@@ -1,36 +1,24 @@
 package aster.songweaver.registry.dimension;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.datagen.LoomNoiseSettings;
-import aster.songweaver.registry.physical.LoomBlockStuff;
 import com.mojang.serialization.Lifecycle;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
-import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.biome.source.FixedBiomeSource;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.dimension.DimensionTypes;
-import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
-import net.minecraft.world.gen.densityfunction.DensityFunction;
-import net.minecraft.world.gen.noise.NoiseRouter;
 
-import java.util.List;
 import java.util.OptionalLong;
 
 public class LoomDimensions {

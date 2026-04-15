@@ -5,10 +5,13 @@
     "type": "advancement",
     "id": "minecraft:nether/brew_potion"
   },
+
     {
       "type": "item",
       "item": "minecraft:glistering_melon_slice"
     }],
+
+  "displayItem": "minecraft:ghast_tear",
   "data": {
     "effect": "minecraft:regeneration",
     "duration": 200,

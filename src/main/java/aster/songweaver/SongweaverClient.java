@@ -1,13 +1,13 @@
 package aster.songweaver;
 
+import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.weaving.CastFeedback;
 import aster.songweaver.client.*;
 import aster.songweaver.registry.SongweaverParticles;
-import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import aster.songweaver.registry.physical.LoomBlockStuff;
 import aster.songweaver.registry.physical.LoomFluids;
 import aster.songweaver.registry.physical.LoomMiscRegistry;
-import aster.songweaver.api.weaving.CastFeedback;
-import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -26,6 +26,7 @@ import net.minecraft.util.Identifier;
 
 @SuppressWarnings("deprecation")
 public class SongweaverClient implements ClientModInitializer {
+
     @Override
     public void onInitializeClient() {
         BufferReset.init();
@@ -33,7 +34,7 @@ public class SongweaverClient implements ClientModInitializer {
         BonusBackspaceIntercept.init();
 
         BlockRenderLayerMap.INSTANCE.putBlock(LoomBlockStuff.BOBBIN, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(LoomBlockStuff.RITUAL_CONTROLLER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(LoomBlockStuff.GRAND_LOOM, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(LoomBlockStuff.FRACTAL_LEAVES, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(LoomBlockStuff.FRACTAL_SAPLING, RenderLayer.getCutout());
 
@@ -49,16 +50,9 @@ public class SongweaverClient implements ClientModInitializer {
         WorldRenderEvents.AFTER_TRANSLUCENT.register(WardedBlockRenderer::render);
         SongweaverPackets.registerClient();
 
-        FluidRenderHandlerRegistry.INSTANCE.register(
-                LoomFluids.LETHEAN_WATER,
-                LoomFluids.LETHEAN_WATER_FLOWING,
-                new SimpleFluidRenderHandler(
-                        new Identifier("block/water_still"),
-                        new Identifier("block/water_flow")
-                )
-        );
 
-        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), LoomFluids.LETHEAN_WATER, LoomFluids.LETHEAN_WATER_FLOWING);
+
+
 
 
         ClientPlayNetworking.registerGlobalReceiver(
@@ -88,6 +82,12 @@ public class SongweaverClient implements ClientModInitializer {
                     shader -> RiftBERenderer.SHADER = shader
             );
         });
+
+
+        FluidRenderHandlerRegistry.INSTANCE.register(LoomFluids.LETHEAN_WATER_STATIC, LoomFluids.LETHEAN_WATER_FLOWING, SimpleFluidRenderHandler.coloredWater(0xff209f));
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), LoomFluids.LETHEAN_WATER_STATIC, LoomFluids.LETHEAN_WATER_FLOWING);
+
+
 
 
     }

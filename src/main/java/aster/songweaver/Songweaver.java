@@ -10,10 +10,10 @@ import aster.songweaver.registry.physical.*;
 import aster.songweaver.registry.world.DimensionStuff;
 import aster.songweaver.registry.world.trees.LoomFoliagePlacers;
 import aster.songweaver.registry.world.trees.LoomTrunkPlacers;
-import aster.songweaver.system.LoomRuleTests;
+import aster.songweaver.api.LoomRuleTests;
 import aster.songweaver.api.SongweaverPackets;
-import aster.songweaver.system.spell.loaders.DraftReloadListener;
-import aster.songweaver.system.spell.loaders.RitualReloadListener;
+import aster.songweaver.api.spell.loaders.DraftReloadListener;
+import aster.songweaver.api.spell.loaders.RitualReloadListener;
 import aster.songweaver.util.SpellUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -64,11 +64,13 @@ public class Songweaver implements ModInitializer {
 
 		MagicRegistry.init();
 		LoomMiscRegistry.init();
+		LoomFluids.invoke();
+
 		LoomBlockStuff.init();
 		LoomTrunkPlacers.init();
 		LoomFoliagePlacers.init();
 
-		LoomFluids.invoke();
+
 
 		SongweaverPackets.registerServer();
 

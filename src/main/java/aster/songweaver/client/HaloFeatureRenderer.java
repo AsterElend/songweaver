@@ -15,7 +15,6 @@ import net.minecraft.client.util.math.MatrixStack;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RotationAxis;
-import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
 

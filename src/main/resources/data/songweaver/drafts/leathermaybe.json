@@ -1,5 +1,6 @@
 {
   "pattern": ["C", "A", "B", "B"],
+  "guiItem": "minecraft:shears",
   "draft": "songweaver:pseudo_harvest",
   "data": {
     "entities": [ "minecraft:cow", "minecraft:horse", "minecraft:donkey", "minecraft:mule"

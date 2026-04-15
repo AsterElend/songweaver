@@ -1,6 +1,7 @@
 {
   "pattern": ["E", "E", "E", "G"],
   "draft": "songweaver:effect",
+  "displayItem": "minecraft:shulker_shell",
   "requirements": [{
     "type": "advancement",
     "id": "minecraft:story/obtain_armor"

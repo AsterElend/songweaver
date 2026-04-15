@@ -1,11 +1,9 @@
 package aster.songweaver.registry.world.trees;
 
-import aster.songweaver.registry.physical.LoomBlockStuff;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;

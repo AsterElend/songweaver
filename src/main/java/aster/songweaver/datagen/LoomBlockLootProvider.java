@@ -1,8 +1,6 @@
 package aster.songweaver.datagen;
 
 import aster.songweaver.registry.physical.LoomBlockStuff;
-import aster.songweaver.registry.physical.LoomItems;
-import aster.songweaver.registry.physical.LoomMiscRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 

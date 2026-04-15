@@ -19,6 +19,42 @@
   "item.songweaver.khipu": "Khipu",
   "item.songweaver.baguette_magique": "Baguette Magique",
   "block.songweaver.bobbin": "Bobbin",
+  "item.songweaver.thread": "Thread of Ariadne",
+  "item.songweaver.warding_prism": "Warding Prism",
+  "item.songweaver.lethean_water_bucket": "Bucket of Lethean Water",
+  "item.songweaver.music_box": "Music Box",
+  "item.songweaver.world_salts": "World Salts",
+  "item.songweaver.lethean_water_bottle": "Bottle of Lethean Water",
+
+  "block.songweaver.lethean_water": "Lethean Water",
+
+  "block.songweaver.watcher_leaves": "Watcher Leaves",
+  "block.songweaver.watcher_sapling": "Watcher Sapling",
+  "block.songweaver.watcher_planks": "Watcher Planks",
+  "block.songweaver.watcher_wood": "Watcher Wood",
+  "block.songweaver.stripped_watcher_wood": "Stripped Watcher Wood",
+  "block.songweaver.stripped_watcher_log": "Stripped Watcher Log",
+  "block.songweaver.watcher_log": "Watcher Log",
+
+
+  "block.songweaver.fractal_leaves": "Fractal Leaves",
+  "block.songweaver.fractal_sapling": "Fractal Sapling",
+  "block.songweaver.fractal_planks": "Fractal Planks",
+  "block.songweaver.fractal_wood": "Fractal Wood",
+  "block.songweaver.stripped_fractal_wood": "Stripped Fractal Wood",
+  "block.songweaver.stripped_fractal_log": "Stripped Fractal Log",
+  "block.songweaver.fractal_log": "Fractal Log",
+
+  "block.songweaver.rift": "Rift",
+  "block.songweaver.starstone": "Starstone",
+  "block.songweaver.voidstone": "Voidstone",
+
+
+  "tag.item.songweaver.distaffs": "Distaffs",
+  "tag.block.songweaver.polished_stone": "Polished Stone",
+  "tag.item.songweaver.casting_items": "Casting Items",
+
+
   "songweaver.toast.forget_title": "Something has been lost",
   "songweaver.toast.remember_title": "Fleeting Recollection:",
 
@@ -31,6 +67,43 @@
   "item.songweaver.music_box.affix.4": "Waltz",
   "item.songweaver.music_box.affix.5": "Symphony",
   "item.songweaver.music_box.affix.error": "Breath",
-  "item.songweaver.music_box.linker": " of the "
+  "item.songweaver.music_box.linker": " of the ",
+  "songweaver.toast.everything": "debug: total recall",
+  "songweaver.emi.infuses": "Infuses to:",
+  "emi.category.songweaver.emi_draft": "Drafts",
+  "emi.category.songweaver.emi_ritual": "Rituals",
+
+  "songweaver.draft.infuse_grand_loom.json": "Infuse Grand Loom",
+  "songweaver.draft.breaks.silk_break.json": "Silken Extraction",
+  "songweaver.draft.leathermaybe.json": "Questionably Vegan Leather",
+  "songweaver.draft.arrow.json": "Fling Arrow",
+  "songweaver.draft.lodestone_tp.json": "Return to Anchorpoint",
+  "songweaver.draft.light_orb.json": "Fling Light",
+  "songweaver.draft.effect.distill.json": "Extract Effects",
+  "songweaver.draft.repair.json": "Mend",
+  "songweaver.draft.halo.push.json": "Scan into Halo",
+  "songweaver.draft.halo.place.json": "Place matching Halo",
+  "songweaver.draft.halo.pop.json": "Drop from Halo",
+  "songweaver.draft.halo.purge.json": "Clear Halo",
+  "songweaver.draft.breaks.fortune_break.json": "Lucky Exctraction",
+  "songweaver.draft.breaks.break.json": "Break Block",
+  "songweaver.draft.effect.regen.json": "Bestow Healing Factor",
+  "songweaver.draft.firework.json": "Conjure Random Firework",
+  "songweaver.draft.redirect.json": "Redirect Motion",
+  "songweaver.draft.effect.resistance.json": "Stoneskin",
+  "songweaver.draft.music_stand.json": "Create Music Stand",
+  "songweaver.draft.khipu_hook.json": "Create Khipu Hook",
+
+  "songweaver.ritual.firework.json": "Conjure Random Firework",
+  "songweaver.ritual.terraform.json": "Flatten Area",
+  "songweaver.ritual.amethyst_geode.json": "Great Invocation of Amethyst",
+  "songweaver.ritual.khipu.json": "Craft Khipu",
+  "songweaver.ritual.pulsatewither.json": "Circle of Decay",
+  "songweaver.ritual.spindle.json": "Craft Spindle",
+  "songweaver.ritual.summonspider.json": "Summon Spider",
+  "songweaver.ritual.biome_music_box.json": "Music Box Infusion"
+
+
+
 
 }

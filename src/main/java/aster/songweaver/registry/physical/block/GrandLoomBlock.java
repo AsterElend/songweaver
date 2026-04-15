@@ -8,12 +8,13 @@ import aster.songweaver.api.SongweaverPackets;
 import aster.songweaver.api.weaving.CastFeedback;
 import aster.songweaver.api.weaving.Note;
 import aster.songweaver.api.weaving.RitualDefinition;
-import aster.songweaver.system.spell.loaders.RitualReloadListener;
+import aster.songweaver.api.spell.loaders.RitualReloadListener;
 import aster.songweaver.util.TierCheckHelper;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -31,6 +32,16 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class GrandLoomBlock extends BlockWithEntity {
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if (world.isClient)return;
+        BlockEntity entity = world.getBlockEntity(pos);
+        if (!(entity instanceof GrandLoomBlockEntity loom) || !(placer instanceof ServerPlayerEntity player)){
+            return;
+        }
+        loom.lastCaster = player;
+    }
 
     @Override
     public boolean hasComparatorOutput(BlockState state){
