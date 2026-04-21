@@ -7,8 +7,7 @@
     "canPickUp": false
   },
   "drawbacks": [{
-    "type": "effect",
-    "effect": "songweaver:song_silence",
+    "type": "silence",
     "ticks": 200
   }]
 }

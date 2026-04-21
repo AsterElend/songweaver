@@ -1,7 +1,8 @@
 {
   "variants": {
-    "": {
-      "model": "songweaver:block/grand_loom"
-    }
+    "facing=north": { "model": "songweaver:block/grand_loom" },
+    "facing=east":  { "model": "songweaver:block/grand_loom", "y": 90 },
+    "facing=south": { "model": "songweaver:block/grand_loom", "y": 180 },
+    "facing=west":  { "model": "songweaver:block/grand_loom", "y": 270 }
   }
 }

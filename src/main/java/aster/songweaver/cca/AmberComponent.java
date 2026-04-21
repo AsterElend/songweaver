@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+@SuppressWarnings("ALL")
 public class AmberComponent implements AutoSyncedComponent {
     private final LivingEntity entity;
 

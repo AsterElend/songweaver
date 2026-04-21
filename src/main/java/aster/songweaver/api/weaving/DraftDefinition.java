@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.util.List;
 
 public record DraftDefinition(

@@ -1,13 +1,14 @@
 package aster.songweaver.registry.physical.be;
 
-import aster.songweaver.registry.physical.entity.LoomBlockEntities;
-import aster.songweaver.registry.MagicRegistry;
-import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.cast.SongweaverPackets;
 import aster.songweaver.api.weaving.*;
+import aster.songweaver.api.weaving.loaders.RitualReloadListener;
+import aster.songweaver.registry.MagicRegistry;
+import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -16,27 +17,25 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 public class GrandLoomBlockEntity extends BlockEntity {
-    public ServerPlayerEntity lastCaster;
-    public Tier stockpiledTier;
-
+    public Tier stockpiledTier = Tier.WOOD;
+    public UUID redstonePlayer = UUID.randomUUID();
 @Nullable
-   private RitualInstance activeRitual;
+   private RitualDefinition activeRitual;
 private int ritualTicks;
 
-    public record RitualInstance(
-            RitualDefinition definition,
-            ServerPlayerEntity caster
-    ){}
+
 
     public boolean hasActiveRitual(){
         return activeRitual != null;
     }
 
-
-
+    public GrandLoomBlockEntity(BlockPos pos, BlockState state ) {
+        super(LoomBlockEntities.GRAND_LOOM_BLOCK_ENTITY, pos, state);
+    }
 
 
 
@@ -106,10 +105,9 @@ private int ritualTicks;
         return null; // none found
     }
 
-    public boolean cancelRitual(PlayerEntity player) {
+    public boolean cancelRitual() {
         if (activeRitual == null) return false;
 
-        if (player != activeRitual.caster()) return false;
 
         activeRitual = null;
         ritualTicks = 0;
@@ -123,9 +121,7 @@ private int ritualTicks;
 
 
 
-    public GrandLoomBlockEntity(BlockPos pos, BlockState state) {
-        super(LoomBlockEntities.RITUAL_ENTITY, pos, state);
-    }
+
 
     public void tryStartRitual(ServerPlayerEntity player,
                                RitualDefinition ritual) {
@@ -151,12 +147,15 @@ private int ritualTicks;
             return;
         }
 
+        this.activeRitual = ritual;
 
-
-        this.activeRitual =
-                new RitualInstance(ritual, player);
 
         this.ritualTicks = 0;
+
+
+        for (Drawback drawback : ritual.drawbacks()) {
+            drawback.apply(player);
+        }
 
         markDirty();
     }
@@ -179,10 +178,11 @@ private int ritualTicks;
     }
 
     private boolean consumeIngredients(List<ItemStack> ingredients) {
-        if (ingredients == null || ingredients.isEmpty()) return false;
+        if (ingredients == null || ingredients.isEmpty()) return true;
 
         List<BobbinBlockEntity> bobbins = findNearbyBobbins();
 
+        // --- Phase 1: dry run to verify all ingredients are available ---
         for (ItemStack required : ingredients) {
             int remaining = required.getCount();
 
@@ -190,39 +190,58 @@ private int ritualTicks;
                 ItemStack stack = bobbin.getStack();
 
                 if (ItemStack.areItemsEqual(stack, required)) {
-                    remaining -= bobbin.removeCount(remaining);
+                    remaining -= Math.min(stack.getCount(), remaining);
                     if (remaining <= 0) break;
                 }
             }
 
-            if (remaining > 0) return false; // failed to find enough
+            if (remaining > 0) return false; // not enough — nothing consumed yet
         }
 
-        return true; // all ingredients satisfied
+        // --- Phase 2: all ingredients confirmed, now actually consume ---
+        for (ItemStack required : ingredients) {
+            int remaining = required.getCount(); // fresh count per ingredient
+
+            for (BobbinBlockEntity bobbin : bobbins) {
+                if (remaining <= 0) break; // <-- make sure this is here
+                ItemStack stack = bobbin.getStack();
+
+                if (ItemStack.areItemsEqual(stack, required)) {
+                    int toTake = Math.min(stack.getCount(), remaining); // cap it
+                    remaining -= bobbin.removeCountForRitual(toTake, this.getPos());
+                }
+            }
+        }
+
+        return true;
     }
 
 
     public void tick() {
 
         if (!(world instanceof ServerWorld serverWorld)) return;
+
         if (activeRitual == null) return;
+
 
         ritualTicks++;
 
         // Optional per-tick logic
-        int interval = activeRitual.definition.tickInterval();
-        if (interval > 0 && ritualTicks % interval == 0) {
+        int interval = activeRitual.tickInterval();
+        if (interval > 0 && ritualTicks % interval == 0 && ritualTicks >= 0) {
             onRitualTick(serverWorld);
         }
 
         // Finish ritual
-        if (ritualTicks >= activeRitual.definition.duration()) {
-            completeRitual(serverWorld);
+        if (ritualTicks >= activeRitual.duration()) {
+            clearRitual();
         }
     }
 
     private void onRitualTick(ServerWorld world) {
-        // Example: ambient particles
+        Ritual running = MagicRegistry.getRitual(activeRitual.ritualId());
+        running.ritualCast(world, getRedstoneOrClosestPlayer(world), this, activeRitual.data());
+
         world.spawnParticles(
                 ParticleTypes.ENCHANT,
                 pos.getX() + 0.5,
@@ -234,28 +253,61 @@ private int ritualTicks;
         );
     }
 
-
-    private void completeRitual(ServerWorld world) {
-
-        Ritual ritual = MagicRegistry.getRitual(activeRitual.definition().ritualId());
-        ServerPlayerEntity caster = activeRitual.caster;
-        if (ritual != null) {
-            ritual.ritualCast(world, caster, this , activeRitual.definition.data());
+    public ServerPlayerEntity getRedstoneOrClosestPlayer(ServerWorld world){
+        BlockPos pos = this.getPos();
+        ServerPlayerEntity entity = world.getServer().getPlayerManager().getPlayer(redstonePlayer);
+        if (entity != null){
+            return entity;
         }
+        return (ServerPlayerEntity) world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 64, false);
 
-        // Apply drawbacks AFTER completion
-        for (Drawback drawback : activeRitual.definition.drawbacks()) {
-            drawback.apply(caster);
-        }
-
-        clearRitual();
     }
 
+
     private void clearRitual() {
-        lastCaster = activeRitual.caster;
         activeRitual = null;
         ritualTicks = 0;
         markDirty();
     }
+
+    @Override
+    public void writeNbt(NbtCompound nbt){
+        NbtCompound compound = new NbtCompound();
+        compound.putInt("ritualTicks", ritualTicks);
+        compound.putInt("tier", stockpiledTier.ordinal());
+        List<Integer> notesForNbt = new ArrayList<>();
+        if (activeRitual != null){
+            for (Note note: activeRitual.pattern().notes()){
+                notesForNbt.add(note.ordinal());
+            }
+        } else {
+            notesForNbt = List.of();
+        }
+
+        compound.putIntArray("notes", notesForNbt);
+
+
+    }
+
+
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
+
+        ritualTicks = nbt.getInt("ritualTicks");
+        stockpiledTier = Tier.values()[nbt.getInt("tier")];
+        int[] noteOrdinals = nbt.getIntArray("notes");
+        List<Note> notes = new ArrayList<>();
+        for (int ordinal: noteOrdinals){
+            notes.add(Note.values()[ordinal]);
+        }
+
+        if (notes.isEmpty()) return;
+
+        activeRitual = RitualReloadListener.matchForRitual(notes);
+
+
+    }
+
 
 }

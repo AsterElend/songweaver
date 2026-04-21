@@ -1,8 +1,8 @@
 package aster.songweaver.registry.physical.block;
 
 import aster.songweaver.registry.SongweaverParticles;
-import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import aster.songweaver.registry.physical.LoomBlockStuff;
+import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;

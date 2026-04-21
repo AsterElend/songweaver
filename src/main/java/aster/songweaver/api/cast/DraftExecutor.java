@@ -1,12 +1,11 @@
 package aster.songweaver.api.cast;
 
 
-import aster.songweaver.api.SongweaverPackets;
-import aster.songweaver.registry.MagicRegistry;
-import aster.songweaver.api.spell.loaders.DraftReloadListener;
-import aster.songweaver.util.ParticleHelper;
-import aster.songweaver.api.spell.loaders.RitualReloadListener;
 import aster.songweaver.api.weaving.*;
+import aster.songweaver.api.weaving.loaders.DraftReloadListener;
+import aster.songweaver.api.weaving.loaders.RitualReloadListener;
+import aster.songweaver.registry.MagicRegistry;
+import aster.songweaver.util.ParticleHelper;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;

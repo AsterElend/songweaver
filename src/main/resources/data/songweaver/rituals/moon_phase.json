@@ -23,10 +23,8 @@
 
   "drawbacks": [
     {
-      "type": "effect",
-      "effect": "songweaver:song_silence",
-      "ticks": 20000,
-      "amplifier": 0
+      "type": "silence",
+      "ticks": 20000
     }
   ],
   "data": {

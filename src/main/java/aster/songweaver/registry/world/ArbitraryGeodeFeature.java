@@ -1,157 +1,93 @@
 package aster.songweaver.registry.world;
 
 import aster.songweaver.registry.LoomTags;
-import net.minecraft.block.Block;
+import com.mojang.serialization.Codec;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+public class ArbitraryGeodeFeature extends Feature<ArbitraryGeodeFeatureConfig> {
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ArbitraryGeodeFeature
-        extends Feature<ArbitraryGeodeFeatureConfig> {
-
-    public ArbitraryGeodeFeature() {
-        super(ArbitraryGeodeFeatureConfig.CODEC);
+    private static final float INNER_RADIUS       = 4.5f;
+    private static final float INNER_SHELL_RADIUS = 5.5f;
+    private static final float OUTER_SHELL_RADIUS = 6.5f;
+    private static final float INNER_BLOCK_SHELL_THICKNESS = 1.2f;
+    public ArbitraryGeodeFeature(Codec<ArbitraryGeodeFeatureConfig> codec) {
+        super(codec);
     }
 
     @Override
-    public boolean generate(FeatureContext<ArbitraryGeodeFeatureConfig> context) {
+    public boolean generate(FeatureContext<ArbitraryGeodeFeatureConfig> ctx) {
+        ArbitraryGeodeFeatureConfig config = ctx.getConfig();
+        WorldAccess world  = ctx.getWorld();
+        BlockPos    origin = ctx.getOrigin();
+        Random      random = ctx.getRandom();
 
-        StructureWorldAccess world = context.getWorld();
-        BlockPos origin = context.getOrigin();
-        Random random = context.getRandom();
-        ArbitraryGeodeFeatureConfig config = context.getConfig();
+        double noiseX = random.nextDouble() * 2.0 - 1.0;
+        double noiseY = random.nextDouble() * 2.0 - 1.0;
+        double noiseZ = random.nextDouble() * 2.0 - 1.0;
 
-        int distributionPoints = 3 + random.nextInt(3);
-        int outerWallDistance = 4;
-        int middleWallDistance = 3;
-        int innerWallDistance = 2;
-        int crackChance = 5;
+        int range = (int) OUTER_SHELL_RADIUS + 1;
 
-        List<BlockPos> points = new ArrayList<>();
+        // ── 1. Shell pass ─────────────────────────────────────────────────────
+        for (int dx = -range; dx <= range; dx++) {
+            for (int dy = -range; dy <= range; dy++) {
+                for (int dz = -range; dz <= range; dz++) {
+                    double dist = distorted(dx, dy * 1.2, dz, noiseX, noiseY, noiseZ);
+                    BlockPos pos = origin.add(dx, dy, dz);
 
-        for (int i = 0; i < distributionPoints; ++i) {
-            points.add(origin.add(
-                    random.nextInt(8) - 4,
-                    random.nextInt(8) - 4,
-                    random.nextInt(8) - 4
-            ));
-        }
+                    if (dist <= INNER_SHELL_RADIUS) {
+                        if (canReplace(world, pos))
+                            world.setBlockState(pos, config.innerShellBlock(), 3);
 
-        BlockPos.Mutable mutable = new BlockPos.Mutable();
-        int radius = 10;
-
-        // ===============================
-        // Main Geode Body Placement
-        // ===============================
-
-        for (BlockPos pos : BlockPos.iterate(
-                origin.add(-radius, -radius, -radius),
-                origin.add(radius, radius, radius))) {
-
-            // 🔥 Whitelist protection
-            if (!world.getBlockState(pos).isIn(LoomTags.TERRAFORM_WHITELIST)
-                    && !world.getBlockState(pos).isAir()) {
-                continue;
-            }
-
-            double density = 0.0D;
-
-            for (BlockPos point : points) {
-                density += 1.0D / point.getSquaredDistance(pos);
-            }
-
-            mutable.set(pos);
-
-            if (density >= 1.0D / outerWallDistance) {
-
-                world.setBlockState(
-                        mutable,
-                        Blocks.SMOOTH_BASALT.getDefaultState(),
-                        Block.NOTIFY_LISTENERS
-                );
-
-            } else if (density >= 1.0D / middleWallDistance) {
-
-                world.setBlockState(
-                        mutable,
-                        Blocks.CALCITE.getDefaultState(),
-                        Block.NOTIFY_LISTENERS
-                );
-
-            } else if (density >= 1.0D / innerWallDistance) {
-
-                world.setBlockState(
-                        mutable,
-                        config.innerBlock(),
-                        Block.NOTIFY_LISTENERS
-                );
-
-            } else {
-
-                world.setBlockState(
-                        mutable,
-                        Blocks.AIR.getDefaultState(),
-                        Block.NOTIFY_LISTENERS
-                );
-            }
-        }
-
-        // ===============================
-        // Crack Generation (Vanilla-Like)
-        // ===============================
-
-        if (random.nextInt(crackChance) == 0) {
-
-            Direction crackDirection = Direction.random(random);
-
-            for (BlockPos pos : BlockPos.iterate(
-                    origin.add(-radius, -radius, -radius),
-                    origin.add(radius, radius, radius))) {
-
-                if (!world.getBlockState(pos).isIn(LoomTags.TERRAFORM_WHITELIST)
-                        && !world.getBlockState(pos).isAir()) {
-                    continue;
-                }
-
-                if (pos.getManhattanDistance(origin) < 4) {
-
-                    world.setBlockState(
-                            pos.offset(crackDirection),
-                            Blocks.AIR.getDefaultState(),
-                            Block.NOTIFY_LISTENERS
-                    );
+                    } else if (dist <= OUTER_SHELL_RADIUS) {
+                        if (canReplace(world, pos))
+                            world.setBlockState(pos, config.outerShellBlock(), 3);
+                    }
                 }
             }
         }
+        // tweak to taste
 
-        // ===============================
-        // Budding Placement Pass
-        // ===============================
+        for (int dx = -range; dx <= range; dx++) {
+            for (int dy = -range; dy <= range; dy++) {
+                for (int dz = -range; dz <= range; dz++) {
+                    double dist = distorted(dx, dy * 1.2, dz, noiseX, noiseY, noiseZ);
+                    if (dist > INNER_RADIUS) continue;
 
-        for (BlockPos pos : BlockPos.iterate(
-                origin.add(-6, -6, -6),
-                origin.add(6, 6, 6))) {
+                    BlockPos pos = origin.add(dx, dy, dz);
 
-            if (world.getBlockState(pos).equals(config.innerBlock())
-                    && random.nextFloat() < 0.08f) {
-
-                world.setBlockState(
-                        pos,
-                        config.buddingBlock(),
-                        Block.NOTIFY_LISTENERS
-                );
+                    if (dist > INNER_RADIUS - INNER_BLOCK_SHELL_THICKNESS) {
+                        // Surface ring — amethyst / budding blocks
+                        world.setBlockState(pos,
+                                random.nextInt(12) == 0
+                                        ? config.buddingBlock()
+                                        : config.innerBlock(), 3);
+                    } else {
+                        // True interior — hollow it out
+                        world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+                    }
+                }
             }
         }
 
         return true;
     }
 
+    private static double distorted(double dx, double dy, double dz,
+                                    double nx, double ny, double nz) {
+        return Math.sqrt(
+                (dx - nx) * (dx - nx) +
+                        (dy - ny) * (dy - ny) +
+                        (dz - nz) * (dz - nz)
+        );
+    }
 
+    private static boolean canReplace(WorldAccess world, BlockPos pos) {
+        BlockState state = world.getBlockState(pos);
+        return state.isAir() || state.isIn(LoomTags.TERRAFORM_WHITELIST);
+    }
 }

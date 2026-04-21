@@ -1,8 +1,8 @@
 package aster.songweaver.util;
 
-import aster.songweaver.registry.physical.LoomItems;
-import aster.songweaver.registry.LoomTags;
 import aster.songweaver.api.weaving.Tier;
+import aster.songweaver.registry.LoomTags;
+import aster.songweaver.registry.physical.LoomItems;
 import net.minecraft.item.Item;
 import net.minecraft.server.network.ServerPlayerEntity;
 
@@ -11,7 +11,7 @@ public class TierCheckHelper {
     public static Tier getHeldTier(ServerPlayerEntity player) {
         Item item = player.getMainHandStack().getItem();
 
-        if (!player.getMainHandStack().isIn(LoomTags.DISTAFFS)){return null;}
+        if (!player.getMainHandStack().isIn(LoomTags.CASTING_ITEMS)){return null;}
 
         if (item == LoomItems.DISTAFF_BASIC) return Tier.WOOD;
         if (item == LoomItems.DISTAFF_IRON) return Tier.IRON;

@@ -17,14 +17,19 @@
 
   "drawbacks": [
     {
-      "type": "effect",
-      "effect": "songweaver:song_silence",
-      "ticks": 20000,
-      "amplifier": 0
+      "type": "silence",
+      "ticks": 2000
+
+    },
+    {
+      "type": "damage",
+      "percent": 0.9
     }
   ],
   "data": {
-    "inner": "minecraft:amethyst_block",
-    "budding": "minecraft:budding_amethyst"
+    "innerBlock": "minecraft:amethyst_block",
+    "buddingBlock": "minecraft:budding_amethyst",
+    "outerShellBlock": "minecraft:smooth_basalt",
+    "innerShellBlock": "minecraft:calcite"
   }
 }

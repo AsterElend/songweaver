@@ -28,11 +28,9 @@ public class SongweaverRenderLayers extends RenderLayer{
             false,
             false,
             RenderLayer.MultiPhaseParameters.builder()
-                    .program(new RenderPhase.ShaderProgram(() -> {
-                        return RiftBERenderer.SHADER != null
-                                ? RiftBERenderer.SHADER
-                                : GameRenderer.getPositionTexProgram();
-                    }))
+                    .program(new RenderPhase.ShaderProgram(() -> RiftBERenderer.SHADER != null
+                            ? RiftBERenderer.SHADER
+                            : GameRenderer.getPositionTexProgram()))
                     .texture(new RenderPhase.Texture(
                             new Identifier("songweaver", "textures/entity/rift_texture.png"),
                             false,

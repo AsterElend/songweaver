@@ -1,9 +1,16 @@
 package aster.songweaver.registry.physical.block;
 
 import aster.songweaver.api.PedestalLikeBlock;
+import aster.songweaver.api.PedestalLikeBlockEntity;
 import aster.songweaver.registry.physical.be.BobbinBlockEntity;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -32,5 +39,12 @@ public class BobbinBlock extends PedestalLikeBlock {
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
-  
+
+    @Override
+    public void doSneakInteractions(PedestalLikeBlockEntity entity, PlayerEntity player, Hand hand) {
+        ItemStack stack = player.getStackInHand(hand);
+        if (stack.getItem() instanceof DyeItem dye && entity instanceof BobbinBlockEntity bobbin) {
+            bobbin.setColor(dye.getColor().getId());
+        }
+    }
 }

@@ -16,6 +16,7 @@ import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.trunk.DarkOakTrunkPlacer;
 
+@SuppressWarnings("SameParameterValue")
 public class LoomConfiguredFeatures {
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> FRACTAL_TREE_KEY = registerKey("fractal_tree");

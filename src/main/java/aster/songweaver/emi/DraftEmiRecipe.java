@@ -29,7 +29,6 @@ import java.util.List;public class DraftEmiRecipe implements EmiRecipe {
     private final List<EmiStack> outputs;
 
     @Nullable private final Item infusionInput;
-    @Nullable private final Item infusionOutput;
 
     private static final int PADDING = 4;
     private static final int INGREDIENT_ROW_H = 20;
@@ -71,7 +70,7 @@ import java.util.List;public class DraftEmiRecipe implements EmiRecipe {
 
         this.outputs = List.copyOf(parsedOutputs);
         this.infusionInput = parsedInfusionInput;
-        this.infusionOutput = parsedInfusionOutput;
+        @Nullable Item infusionOutput = parsedInfusionOutput;
     }
 
     @Override public EmiRecipeCategory getCategory() { return SongweaverEmiPlugin.DRAFT_CATEGORY; }

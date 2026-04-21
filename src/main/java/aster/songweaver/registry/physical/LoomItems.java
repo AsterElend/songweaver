@@ -38,6 +38,7 @@ public class LoomItems {
     public static final Item MUSIC_BOX = registerItem("music_box", new MusicBoxItem(new FabricItemSettings().maxCount(1)));
     public static final Item LETHEAN_WATER_BOTTLE = registerItem("lethean_water_bottle", new LetheanWaterBottle(new FabricItemSettings().maxCount(16)));
     public static final Item WORLD_SALTS = registerItem("world_salts", new WorldSaltsItem(new FabricItemSettings().maxCount(16)));
+    public static final Item THROAT_SPRAY = registerItem("throat_spray", new ThroatSprayItem( new FabricItemSettings()));
 
 
 

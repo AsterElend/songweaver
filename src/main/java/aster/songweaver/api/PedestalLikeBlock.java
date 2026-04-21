@@ -33,15 +33,23 @@ public abstract class PedestalLikeBlock extends BlockWithEntity {
             return ActionResult.PASS;
         }
 
+        if (player.isSneaking()){
+            doSneakInteractions(pedestal, player, hand);
+            return ActionResult.SUCCESS;
+        }
+
         ItemStack held = player.getStackInHand(hand);
 
 
        ItemStack mutatedHeld = pedestal.stackInteractionAttempt(held);
-
-        player.setStackInHand(hand, mutatedHeld);
-
+        if (!player.isCreative()) {
+            player.setStackInHand(hand, mutatedHeld);
+        }
 
         return ActionResult.CONSUME;
+    }
+    public void doSneakInteractions(PedestalLikeBlockEntity entity, PlayerEntity player, Hand hand) {
+        // base no-op
     }
 
     @Override

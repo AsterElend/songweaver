@@ -23,6 +23,8 @@
     "ForgottenAdvancementsScreen",
     "HaloMixin",
     "LetheFog",
+    "SilenceInHudMixin",
+    "SilenceInInventoryMixin",
     "SpriteAccessor",
     "SpriteContentsAccessor"
   ]

@@ -54,6 +54,7 @@ public class LoomModelProvider extends FabricModelProvider {
         Igenerator.register(LoomItems.MUSIC_BOX, Models.GENERATED);
         Igenerator.register(LoomItems.LETHEAN_WATER_BOTTLE, Models.GENERATED);
         Igenerator.register(LoomItems.WORLD_SALTS, Models.GENERATED);
+        Igenerator.register(LoomItems.THROAT_SPRAY, Models.GENERATED);
 
 
     }

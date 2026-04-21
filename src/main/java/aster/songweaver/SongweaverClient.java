@@ -1,6 +1,7 @@
 package aster.songweaver;
 
-import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.cast.SongweaverPackets;
+import aster.songweaver.api.renderNonsense.SiphonRenderState;
 import aster.songweaver.api.weaving.CastFeedback;
 import aster.songweaver.client.*;
 import aster.songweaver.registry.SongweaverParticles;
@@ -10,6 +11,7 @@ import aster.songweaver.registry.physical.LoomMiscRegistry;
 import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
@@ -24,7 +26,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
-@SuppressWarnings("deprecation")
 public class SongweaverClient implements ClientModInitializer {
 
     @Override
@@ -48,9 +49,10 @@ public class SongweaverClient implements ClientModInitializer {
         EntityRendererRegistry.register(LoomMiscRegistry.LIGHT_ORB_PROJECTILE, LightOrbProjectileRenderer::new);
 
         WorldRenderEvents.AFTER_TRANSLUCENT.register(WardedBlockRenderer::render);
+        WorldRenderEvents.AFTER_TRANSLUCENT.register(SiphonRenderer::render);
         SongweaverPackets.registerClient();
 
-
+        ClientTickEvents.END_WORLD_TICK.register(SiphonRenderState::tickCleanup);
 
 
 
@@ -75,13 +77,11 @@ public class SongweaverClient implements ClientModInitializer {
         WorldRenderEvents.AFTER_TRANSLUCENT.register(WardedBlockRenderer::render);
 
 
-        CoreShaderRegistrationCallback.EVENT.register(context -> {
-            context.register(
-                    new Identifier("songweaver", "tear_portal"),
-                    VertexFormats.POSITION_COLOR_TEXTURE,
-                    shader -> RiftBERenderer.SHADER = shader
-            );
-        });
+        CoreShaderRegistrationCallback.EVENT.register(context -> context.register(
+                new Identifier("songweaver", "tear_portal"),
+                VertexFormats.POSITION_COLOR_TEXTURE,
+                shader -> RiftBERenderer.SHADER = shader
+        ));
 
 
         FluidRenderHandlerRegistry.INSTANCE.register(LoomFluids.LETHEAN_WATER_STATIC, LoomFluids.LETHEAN_WATER_FLOWING, SimpleFluidRenderHandler.coloredWater(0xff209f));

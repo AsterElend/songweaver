@@ -1,9 +1,10 @@
 package aster.songweaver.util;
 
 import aster.songweaver.api.weaving.*;
-import aster.songweaver.api.spell.drawback.DamageDrawback;
-import aster.songweaver.api.spell.drawback.EffectDrawback;
-import aster.songweaver.api.spell.requirement.*;
+import aster.songweaver.api.weaving.drawback.DamageDrawback;
+import aster.songweaver.api.weaving.drawback.EffectDrawback;
+import aster.songweaver.api.weaving.drawback.SilenceDrawback;
+import aster.songweaver.api.weaving.requirement.*;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -105,6 +106,13 @@ public class JsonParserUtil {
                                 obj.has("amplifier") ? obj.get("amplifier").getAsInt() : 0
                         )
                 );
+
+                case "silence" -> list.add(
+                        new SilenceDrawback(
+                                obj.get("ticks").getAsInt()
+                        )
+                );
+
                 default -> throw new IllegalArgumentException(
                         "Unknown drawback type: " + type
                 );
@@ -123,6 +131,7 @@ public class JsonParserUtil {
 
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean shouldLoad(JsonObject json) {
         if (!json.has("modLoaded")) {
             return true;

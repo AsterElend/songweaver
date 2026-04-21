@@ -1,19 +1,20 @@
 package aster.songweaver;
 
 
-import aster.songweaver.api.LoomMultiblocks;
+import aster.songweaver.api.LoomRuleTests;
 import aster.songweaver.api.WardedBlocksState;
+import aster.songweaver.api.cast.SongweaverPackets;
+import aster.songweaver.api.weaving.loaders.DraftReloadListener;
+import aster.songweaver.api.weaving.loaders.RitualReloadListener;
 import aster.songweaver.cca.HaloComponent;
 import aster.songweaver.cca.SongweaverComponents;
-import aster.songweaver.registry.*;
+import aster.songweaver.registry.MagicRegistry;
+import aster.songweaver.registry.SongweaverParticles;
 import aster.songweaver.registry.physical.*;
 import aster.songweaver.registry.world.DimensionStuff;
+import aster.songweaver.registry.world.LoomMultiblocks;
 import aster.songweaver.registry.world.trees.LoomFoliagePlacers;
 import aster.songweaver.registry.world.trees.LoomTrunkPlacers;
-import aster.songweaver.api.LoomRuleTests;
-import aster.songweaver.api.SongweaverPackets;
-import aster.songweaver.api.spell.loaders.DraftReloadListener;
-import aster.songweaver.api.spell.loaders.RitualReloadListener;
 import aster.songweaver.util.SpellUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -146,17 +147,15 @@ public class Songweaver implements ModInitializer {
 				SongweaverComponents.HALO.sync(player);
 			}
 
-			server.execute(() -> {
-				server.execute(() -> { // 1 tick delay (important)
+			server.execute(() -> server.execute(() -> { // 1 tick delay (important)
 
-					ServerWorld world = player.getServerWorld();
+                ServerWorld world = player.getServerWorld();
 
-					WardedBlocksState state = WardedBlocksState.get(world);
+                WardedBlocksState state = WardedBlocksState.get(world);
 
-					syncToPlayer(player, state.getAllPositions());
+                syncToPlayer(player, state.getAllPositions());
 
-				});
-			});
+            }));
 		});
 
 		PlayerBlockBreakEvents.BEFORE.register((world, player, pos, state, blockEntity) ->{
@@ -165,9 +164,7 @@ public class Songweaver implements ModInitializer {
 		});
 
 
-		ServerTickEvents.END_WORLD_TICK.register(world -> {
-			WardedBlocksState.get(world).validate(world);
-		});
+		ServerTickEvents.END_WORLD_TICK.register(world -> WardedBlocksState.get(world).validate(world));
 
 
 		SongweaverParticles.register();

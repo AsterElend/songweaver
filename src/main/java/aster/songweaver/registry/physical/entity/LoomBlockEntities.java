@@ -17,8 +17,8 @@ public class LoomBlockEntities {
                             BOBBIN).build(null));
 
 
-    public static final BlockEntityType<GrandLoomBlockEntity> RITUAL_ENTITY =
-            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "ritual_entity"),
+    public static final BlockEntityType<GrandLoomBlockEntity> GRAND_LOOM_BLOCK_ENTITY =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "grand_loom_block_entity"),
                     FabricBlockEntityTypeBuilder.create(GrandLoomBlockEntity::new,
                             GRAND_LOOM).build(null));
 

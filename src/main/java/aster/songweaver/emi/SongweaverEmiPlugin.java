@@ -1,11 +1,11 @@
 package aster.songweaver.emi;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.api.spell.loaders.DraftReloadListener;
-import aster.songweaver.api.spell.loaders.RitualReloadListener;
 import aster.songweaver.api.weaving.LoadedDraft;
 import aster.songweaver.api.weaving.LoadedRitual;
 import aster.songweaver.api.weaving.PatternKey;
+import aster.songweaver.api.weaving.loaders.DraftReloadListener;
+import aster.songweaver.api.weaving.loaders.RitualReloadListener;
 import aster.songweaver.registry.physical.LoomBlockStuff;
 import aster.songweaver.registry.physical.LoomItems;
 import dev.emi.emi.api.EmiEntrypoint;

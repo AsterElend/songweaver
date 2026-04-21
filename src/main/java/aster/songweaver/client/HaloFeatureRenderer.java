@@ -1,7 +1,6 @@
 package aster.songweaver.client;
 
 import aster.songweaver.cca.SongweaverComponents;
-
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -12,7 +11,6 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RotationAxis;
 

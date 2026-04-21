@@ -1,7 +1,7 @@
 package aster.songweaver.datagen;
 
-import aster.songweaver.registry.physical.LoomItems;
 import aster.songweaver.registry.LoomTags;
+import aster.songweaver.registry.physical.LoomItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Item;

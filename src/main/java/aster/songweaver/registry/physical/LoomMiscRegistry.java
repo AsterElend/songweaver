@@ -4,7 +4,6 @@ import aster.songweaver.Songweaver;
 import aster.songweaver.registry.physical.entity.LightOrbProjectileEntity;
 import aster.songweaver.registry.status.AmberStepsEffect;
 import aster.songweaver.registry.status.LightfootEffect;
-import aster.songweaver.registry.status.SilenceEffect;
 import aster.songweaver.registry.status.UnravelingEffect;
 import aster.songweaver.registry.world.ArbitraryGeodeFeature;
 import aster.songweaver.registry.world.ArbitraryGeodeFeatureConfig;
@@ -27,12 +26,7 @@ public class LoomMiscRegistry {
 
 
 
-    public static final StatusEffect SONG_SILENCE =
-            Registry.register(
-                    Registries.STATUS_EFFECT,
-                    new Identifier("songweaver", "song_silence"),
-                    new SilenceEffect()
-            );
+
 
 
       public static final StatusEffect AMBER_STEPS =
@@ -84,7 +78,7 @@ public class LoomMiscRegistry {
     public static final Feature<ArbitraryGeodeFeatureConfig> ARBITRARY_GEODE = Registry.register(
             Registries.FEATURE,
             Songweaver.locate("arbitrary_geode"),
-            new ArbitraryGeodeFeature()
+            new ArbitraryGeodeFeature(ArbitraryGeodeFeatureConfig.CODEC)
     );
 
 

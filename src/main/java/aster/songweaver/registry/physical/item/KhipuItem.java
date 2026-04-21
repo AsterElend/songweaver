@@ -57,6 +57,7 @@ public class KhipuItem extends Item {
     }
 
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean hasCoords(ItemStack stack) {
         return stack.hasNbt()
                 && stack.getNbt().contains(COORD_KEY, NbtElement.COMPOUND_TYPE);

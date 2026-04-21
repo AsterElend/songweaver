@@ -18,7 +18,6 @@ import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RotationAxis;
-import net.minecraft.util.math.random.Random;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
@@ -39,10 +38,7 @@ import org.joml.Matrix4f;
     private static final float WOOL_MIN_Y = 2f / 16f;
     private static final float WOOL_MAX_Y = 16f / 16f;
 
-    private final BlockEntityRendererFactory.Context context;
-
     public BobbinBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
-        this.context = context;
     }
 
     @Override
@@ -62,10 +58,7 @@ import org.joml.Matrix4f;
         float minZ = lerp(PILLAR_MIN_Z, BASE_MIN_Z, t);
         float maxZ = lerp(PILLAR_MAX_Z, BASE_MAX_Z, t);
 
-        float minY = WOOL_MIN_Y;
-        float maxY = WOOL_MAX_Y;
-
-        Block renderFetch = switch (entity.color){
+        Block renderFetch = switch (entity.getColor()){
             case 0 -> Blocks.WHITE_WOOL;
             case 1 -> Blocks.ORANGE_WOOL;
             case 2 -> Blocks.MAGENTA_WOOL;
@@ -96,7 +89,7 @@ import org.joml.Matrix4f;
 
         matrices.push();
 
-        renderCuboid(matrices, consumer, minX, minY, minZ, maxX, maxY, maxZ, sprite, light, overlay);
+        renderCuboid(matrices, consumer, minX, WOOL_MIN_Y, minZ, maxX, WOOL_MAX_Y, maxZ, sprite, light, overlay);
 
         matrices.pop();
         ItemStack stack = entity.getStack();

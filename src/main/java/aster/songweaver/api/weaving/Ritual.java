@@ -7,5 +7,5 @@ import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.Nullable;
 
 public interface Ritual {
-    void ritualCast(ServerWorld world, ServerPlayerEntity caster, GrandLoomBlockEntity loom, @Nullable JsonObject data);
+    void ritualCast(ServerWorld world, @Nullable ServerPlayerEntity caster, GrandLoomBlockEntity loom, @Nullable JsonObject data);
 }

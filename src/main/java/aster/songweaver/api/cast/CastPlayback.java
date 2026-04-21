@@ -64,16 +64,14 @@ public class CastPlayback {
                     int echoDelay = e * 3;
 
                     int finalE = e;
-                    schedule(world, world.getTime() + echoDelay, () -> {
-                        world.playSound(
-                                null,
-                                pos.x, pos.y, pos.z,
-                                HARP,
-                                SoundCategory.PLAYERS,
-                                3.0f * (0.6f / finalE),        // quieter each echo
-                                note.pitch() * (1.0f - finalE * 0.03f) // slight pitch drop
-                        );
-                    });
+                    schedule(world, world.getTime() + echoDelay, () -> world.playSound(
+                            null,
+                            pos.x, pos.y, pos.z,
+                            HARP,
+                            SoundCategory.PLAYERS,
+                            3.0f * (0.6f / finalE),        // quieter each echo
+                            note.pitch() * (1.0f - finalE * 0.03f) // slight pitch drop
+                    ));
                 }
             });
         }

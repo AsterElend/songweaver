@@ -17,7 +17,7 @@ public class CellularSpriteContents extends SpriteContents {
                 new NativeImage(size, size, false),
                 AnimationResourceMetadata.EMPTY);
 
-        this.image = ((SpriteContentsAccessor) (Object) this).getImage();
+        this.image = ((SpriteContentsAccessor) this).getImage();
         this.automaton = new CellularStaticAnimator(size, size, flowing);
     }
 

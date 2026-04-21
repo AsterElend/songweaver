@@ -25,6 +25,8 @@
   "item.songweaver.music_box": "Music Box",
   "item.songweaver.world_salts": "World Salts",
   "item.songweaver.lethean_water_bottle": "Bottle of Lethean Water",
+  "item.songweaver.throat_spray": "Throat Spray",
+
 
   "block.songweaver.lethean_water": "Lethean Water",
 
@@ -85,7 +87,7 @@
   "songweaver.draft.halo.place.json": "Place matching Halo",
   "songweaver.draft.halo.pop.json": "Drop from Halo",
   "songweaver.draft.halo.purge.json": "Clear Halo",
-  "songweaver.draft.breaks.fortune_break.json": "Lucky Exctraction",
+  "songweaver.draft.breaks.fortune_break.json": "Lucky Extraction",
   "songweaver.draft.breaks.break.json": "Break Block",
   "songweaver.draft.effect.regen.json": "Bestow Healing Factor",
   "songweaver.draft.firework.json": "Conjure Random Firework",

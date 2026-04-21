@@ -65,6 +65,7 @@ public class LetheFog {
         ci.cancel();
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     @Unique
     private static boolean isInCustomFluid(Camera camera) {
         Entity entity = camera.getFocusedEntity();

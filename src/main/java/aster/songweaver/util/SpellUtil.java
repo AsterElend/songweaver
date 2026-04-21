@@ -1,12 +1,12 @@
 package aster.songweaver.util;
 
+import aster.songweaver.api.NoteHolderItem;
+import aster.songweaver.api.cast.SongweaverPackets;
+import aster.songweaver.api.weaving.Note;
 import aster.songweaver.client.InputBuffer;
 import aster.songweaver.registry.LoomTags;
-import aster.songweaver.api.NoteHolderItem;
 import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
 import aster.songweaver.registry.physical.be.KhipuHookBlockEntity;
-import aster.songweaver.api.SongweaverPackets;
-import aster.songweaver.api.weaving.Note;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

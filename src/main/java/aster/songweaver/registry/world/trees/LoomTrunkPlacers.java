@@ -13,5 +13,5 @@ public class LoomTrunkPlacers {
                     new TrunkPlacerType<>(FractalTreeTrunkPlacer.CODEC)
             );
 
-    public static void init(){};
+    public static void init(){}
 }

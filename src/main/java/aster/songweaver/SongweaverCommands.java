@@ -1,17 +1,23 @@
 package aster.songweaver;
 
-import aster.songweaver.api.weaving.*;
-import aster.songweaver.api.spell.loaders.DraftReloadListener;
-
-import aster.songweaver.api.spell.loaders.RitualReloadListener;
+import aster.songweaver.api.weaving.LoadedDraft;
+import aster.songweaver.api.weaving.LoadedRitual;
+import aster.songweaver.api.weaving.Note;
+import aster.songweaver.api.weaving.PatternKey;
+import aster.songweaver.api.weaving.loaders.DraftReloadListener;
+import aster.songweaver.api.weaving.loaders.RitualReloadListener;
+import aster.songweaver.cca.SongweaverComponents;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.entity.Entity;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.util.Map;
 
-import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.server.command.ServerCommandSource;
-
+import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 
@@ -29,6 +35,26 @@ public class SongweaverCommands {
                                 )
                         )
         );
+        dispatcher.register(
+                literal("songweaver")
+                        .requires((ServerCommandSource sec) -> sec.hasPermissionLevel(1))
+                        .then(literal("silence")
+                                .then(argument("target", EntityArgumentType.entity())
+                                        .then(literal("set").then(argument("ticks", IntegerArgumentType.integer()).executes(ctx -> {
+                                           Entity target = EntityArgumentType.getEntity(ctx, "target");
+                                           int ticks = IntegerArgumentType.getInteger(ctx, "ticks");
+                                            SongweaverComponents.SILENCE.get(target).setSilence(ticks);
+                                            return 1;
+                                        })).then(literal("get").executes(ctx -> {
+                                                    Entity target = EntityArgumentType.getEntity(ctx, "target");
+
+                                                    ctx.getSource().sendFeedback(() -> Text.literal("Silence Ticks: " + SongweaverComponents.SILENCE.get(target).getSilenceDuration()), false);
+                                                    return 1;
+                                                }))
+
+                        )
+        )));
+
     }
 
 

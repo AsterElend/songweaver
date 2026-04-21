@@ -12,5 +12,5 @@ public class LoomFoliagePlacers {
                     Songweaver.locate("fractal_leaves"),
                             new FoliagePlacerType<>(FractalFoliagePlacer.CODEC)
             );
-public static void init(){};
+public static void init(){}
 }

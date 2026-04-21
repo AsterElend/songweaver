@@ -1,10 +1,9 @@
 package aster.songweaver.registry.physical.be;
 
 import aster.songweaver.api.NoteHolderItem;
-
 import aster.songweaver.api.PedestalLikeBlockEntity;
-import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import aster.songweaver.api.weaving.Note;
+import aster.songweaver.registry.physical.entity.LoomBlockEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 

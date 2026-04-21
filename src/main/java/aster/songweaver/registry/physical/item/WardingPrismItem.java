@@ -1,7 +1,7 @@
 package aster.songweaver.registry.physical.item;
 
 import aster.songweaver.api.WardedBlocksState;
-import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.cast.SongweaverPackets;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;

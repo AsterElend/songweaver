@@ -1,0 +1,83 @@
+package aster.songweaver.api.weaving.rituals;
+
+import aster.songweaver.api.weaving.Ritual;
+import aster.songweaver.registry.physical.be.GrandLoomBlockEntity;
+import aster.songweaver.util.SpellUtil;
+import com.google.gson.JsonObject;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registries;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.Nullable;
+
+public class CraftingRitual implements Ritual {
+    @Override
+    public void ritualCast(ServerWorld world, @Nullable ServerPlayerEntity caster, GrandLoomBlockEntity loom, @Nullable JsonObject data) {
+        if (data == null ){
+            if (caster != null){
+                caster.sendMessage(
+                        Text.literal("crafting ritual requires data."),
+                        true
+                );
+            }
+
+            return;
+        }
+
+        int count = getCountOrDefaultOne(data);
+
+        if (!data.has("item")){
+
+            if (caster != null){
+                caster.sendMessage(
+                        Text.literal("Crafting ritual requires item."),
+                        true
+                );
+            }
+
+            return;
+        }
+
+
+        Identifier id = new Identifier(data.get("item").getAsString());
+        Item item = Registries.ITEM.get(id);
+        ItemStack stack = new ItemStack(item, count);
+
+        BlockPos summonPos = SpellUtil.getKhipuPosOrLoomPosIfAbsent(loom);
+
+        summonTheItem(world, stack, summonPos);
+
+
+
+    }
+
+
+
+    public int getCountOrDefaultOne(JsonObject json) {
+        // Return the "count" field, or 1 if it's missing
+        return json.has("count") ? json.get("count").getAsInt() : 1;
+    }
+
+    public void summonTheItem(ServerWorld world, ItemStack summon, BlockPos pos){
+        ItemEntity output = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 2, pos.getZ()+0.5, summon );
+
+        world.spawnEntity(output);
+        world.spawnParticles(
+                ParticleTypes.END_ROD,
+                pos.getX() + 0.5,
+                pos.getY() + 1.2,
+                pos.getZ() + 0.5,
+                6,
+                0.4, 0.2, 0.4,
+                0.01
+        );
+    }
+
+
+}

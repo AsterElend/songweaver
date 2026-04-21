@@ -1,7 +1,7 @@
 package aster.songweaver.api.renderNonsense;
 
 import aster.songweaver.Songweaver;
-import aster.songweaver.api.SongweaverPackets;
+import aster.songweaver.api.cast.SongweaverPackets;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.gui.DrawContext;

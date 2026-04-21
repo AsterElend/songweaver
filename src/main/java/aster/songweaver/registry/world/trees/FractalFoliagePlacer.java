@@ -120,10 +120,7 @@ public class FractalFoliagePlacer extends FoliagePlacer {
         if (dist > radius * radius) return true;
 
         // Random sparse interior pockets
-        if (dist < radius * radius / 2 && random.nextFloat() < 0.1f)
-            return true;
-
-        return false;
+        return dist < radius * radius / 2 && random.nextFloat() < 0.1f;
     }
 
     private void placeSupportLog(

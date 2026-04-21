@@ -1,5 +1,6 @@
 package aster.songweaver.cca;
 
+import aster.songweaver.Songweaver;
 import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
@@ -10,10 +11,17 @@ import net.minecraft.util.Identifier;
 
 public class SongweaverComponents implements EntityComponentInitializer {
 
-    public static final ComponentKey<HaloComponent> HALO = ComponentRegistry.getOrCreate(new Identifier("songweaver", "halo"), HaloComponent.class);
-    public static final ComponentKey<AmberComponent> AMBER_STEPS = ComponentRegistry.getOrCreate(new Identifier("songweaver", "amber_steps"), AmberComponent.class);
-    public static final ComponentKey<UnravelingStateComponent> UNRAVELING_STATE = ComponentRegistry.getOrCreate(new Identifier("songweaver", "unraveling_state"), UnravelingStateComponent.class);
-    public static final ComponentKey<ForgottenAdvancementComponent> FORGOTTEN = ComponentRegistry.getOrCreate(new Identifier("songweaver", "forgotten"), ForgottenAdvancementComponent.class);
+    public static final ComponentKey<HaloComponent> HALO = ComponentRegistry.getOrCreate(
+            new Identifier("songweaver", "halo"), HaloComponent.class);
+    public static final ComponentKey<AmberComponent> AMBER_STEPS = ComponentRegistry.getOrCreate(
+            new Identifier("songweaver", "amber_steps"), AmberComponent.class);
+    public static final ComponentKey<UnravelingStateComponent> UNRAVELING_STATE = ComponentRegistry.getOrCreate(
+            new Identifier("songweaver", "unraveling_state"), UnravelingStateComponent.class);
+    public static final ComponentKey<ForgottenAdvancementComponent> FORGOTTEN = ComponentRegistry.getOrCreate(
+            new Identifier("songweaver", "forgotten"), ForgottenAdvancementComponent.class);
+    public static final ComponentKey<SilenceComponent> SILENCE = ComponentRegistry.getOrCreate(
+            Songweaver.locate("silence"), SilenceComponent.class
+    );
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
@@ -21,6 +29,6 @@ public class SongweaverComponents implements EntityComponentInitializer {
         registry.registerForPlayers(FORGOTTEN, ForgottenAdvancementComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerFor(LivingEntity.class, AMBER_STEPS, AmberComponent::new);
         registry.registerForPlayers(UNRAVELING_STATE, UnravelingStateComponent::new, RespawnCopyStrategy.NEVER_COPY);
-
+        registry.registerFor(LivingEntity.class, SILENCE, SilenceComponent::new);
     }
 }

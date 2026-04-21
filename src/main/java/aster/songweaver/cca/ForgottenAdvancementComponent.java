@@ -13,7 +13,8 @@ import net.minecraft.nbt.NbtString;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ForgottenAdvancementComponent implements AutoSyncedComponent {
     private final PlayerEntity player;
