@@ -1,4 +1,4 @@
-package aster.songweaver.registry.world;
+package aster.songweaver.datagen;
 
 import aster.songweaver.Songweaver;
 import aster.songweaver.registry.physical.LoomBlockStuff;

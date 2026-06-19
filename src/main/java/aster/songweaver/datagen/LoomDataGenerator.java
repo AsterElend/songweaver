@@ -1,7 +1,6 @@
 package aster.songweaver.datagen;
 
 import aster.songweaver.registry.dimension.LoomDimensions;
-import aster.songweaver.registry.world.LoomConfiguredFeatures;
 import aster.songweaver.registry.world.trees.LoomPlacedFeatures;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;

@@ -57,7 +57,7 @@ public class Songweaver implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
-
+		//todo steal the high wilderness for welkin and just add integrations
 
 
 		LOGGER.info("Hello Fabric world!");

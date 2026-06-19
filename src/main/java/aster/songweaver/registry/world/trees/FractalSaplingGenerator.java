@@ -1,6 +1,7 @@
 package aster.songweaver.registry.world.trees;
 
-import aster.songweaver.registry.world.LoomConfiguredFeatures;
+
+import aster.songweaver.datagen.LoomConfiguredFeatures;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.math.random.Random;
